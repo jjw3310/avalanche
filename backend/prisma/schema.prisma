@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+//우리가 사용하는 데이터 특징 때문에 사용하는데 정확히 mysql이 아닌 확장 프로그램이기 때문에 relationMode 사용해줘야 함.
+  relationMode = "prisma"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  account String @unique
+  name String?
+  nft Nft[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Nft {
+  id Int @id @default(autoincrement())
+  tokenId String
+  buy Boolean
+  user User @relation(fields: [userId], references: [id])
+  review Review[]
+  userId Int
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+//mysql의 경우 검색 효율을 증가시키는 방식
+  @@index([userId])
+}
+
+model Review {
+  id Int @id @default(autoincrement())
+  // user User @relation(fields: [userId], references: [id])
+  userId Int
+  content String?
+  view Boolean
+  like Int
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+}
