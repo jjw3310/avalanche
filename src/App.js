@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-
+import "./App.css";
 import { ChakraProvider, Box, Heading, Text, Button } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./pages/main";
@@ -9,6 +9,7 @@ import { useState, useRef } from "react";
 // import "./App.css";
 import BoxCompo from "@components/BoxCompo";
 import Nfts from "@components/Nfts";
+
 function App() {
   const [account, setAccount] = useState("");
 
