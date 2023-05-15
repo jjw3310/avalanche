@@ -30,13 +30,14 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box 
-      pos={"fixed"} 
-      // top={0} 
-      width={"100%"} 
+      // pos={"fixed"} 
+      top={0} 
+      width={"100%"}
+      bgGradient={"linear(to-l,#8c1eaa,#272842)"}
       // zIndex={999}
     >
       <Flex
-        backdropFilter={"saturate(50%) blur(7px)"}
+        // backdropFilter={"saturate(50%) blur(7px)"}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}

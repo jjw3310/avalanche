@@ -13,8 +13,9 @@ import {
 import { forwardRef } from "react";
 
 import rocket from "@assets/images/rocket.png";
-import { ReactComponent as arrowRightSolid } from "@assets/images/arrowRightSolid.svg";
-
+// import { ReactComponent as arrowRight } from "@assets/images/arrowRightSolid.svg";
+import arrow from "@assets/images/arrow.png";
+import mainPageClock  from "@assets/images/mainPageClock.png";
 
 const Introduce = forwardRef((props, ref) => {
   return (
@@ -22,45 +23,64 @@ const Introduce = forwardRef((props, ref) => {
       <Box 
         ref={ref} 
         w={"100%"} 
-        h={"600px"} 
+        h={"550px"} 
         py={"50px"} 
         bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
         <Flex
-          alignItems={"flex-start"}
           direction={{ base: "column-reverse", md: "row" }}
+          alignItems={"flex-start"}
           justify={"flex-end"}
           px={{ base: "20px", sm: "30px", lg: "50px" }}
-          align={"center"}
           h="100%"
           pt={5}
           pb={5}
         >
-        <Box 
-          borderRadius={"30px"} 
-          h="100%" 
-          // bg="tomato" 
-          mr={"20px"} 
-          flex="2"
-          justifyContent={"center"} 
-          alignItems={"center"} 
-        >
-          <Flex direction={"row"} justify={"space-around"}>
-            <Text
-              fontWeight={"700"}
-              fontStyle={"normal"}
-              fontSize={{ base: "30px", md: "48px" }}
-              lineHeight={"57px"}
-              color={"white"}
-              mt={"100px"}
-            >
-              Own the Moments <br/>
-              that Matter Most
-            </Text>
-          </Flex>
-        </Box>
+          <Box 
+            borderRadius={"30px"} 
+            h="100%" 
+            // bg="tomato" 
+            mr={"20px"} 
+            flex="2"
+            justifyContent={"center"} 
+            alignItems={"center"} 
+          >
+            <Flex direction={"row"} >
+              <Text
+                fontWeight={"400"}
+                fontStyle={"normal"}
+                fontSize={{ base: "30px", md: "70px" }}
+                lineHeight={"94px"}
+                color={"#FFFFFF"}
+                mt={"30px"}
+                position={"relative"}
+                font-family="Roboto"
+              >
+                Own the Moments <br/>
+                that Matter Most
+                <Image
+                  width={"200px"}
+                  height={"200px"}
+                  src={mainPageClock}
+                  position={"absolute"}
+                  // backgroundColor={"tomato"}
+                  // width={"40px"}
+                  // height={"20px"}
+                  // borderRadius={"10px"}
+                  // display={"flex"}
+                  // justifyContent={"center"}
+                  // alignItems={"center"}
+                  // color={"white"}
+                  // fontWeight={"600"}
+                  left={"480px"}
+                  bottom={"60px"}
+                  // fontSize={"10px"}
+              />
+              </Text>
+            </Flex>
+          </Box>
         
         <Box 
           borderRadius={"30px"} 
@@ -125,7 +145,9 @@ const Introduce = forwardRef((props, ref) => {
               >
                 Buy Your Date
               </Text>
-                <arrowRightSolid width={200} height={200} fill="#dd9c4f" />
+              <Box> 
+                <Image src={arrow} width={50} height={50} />
+              </Box>
             </Button>
           </Flex>
         </Box>
