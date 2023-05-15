@@ -68,7 +68,6 @@ const Main = ({ account }) => {
         onSelectDate={setSelectedDate}
       />
       <Nfts page={page} mintedNft={mintedNft} />
-      <Pinata />
     </>
   );
 };

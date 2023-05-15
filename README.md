@@ -64,3 +64,9 @@ pscale database create to-do-list --region ap-northeast
 npx prisma studio
 
 npm run dev
+
+- 20230 추가 설치패키지 +
+
+npm i @chakra-ui/icons
+npm i @fortawesome/fontawesome-svg-core
+npm i @fortawesome/react-fontawesome
