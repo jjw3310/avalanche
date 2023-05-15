@@ -20,6 +20,8 @@ npx hardhat balances --network local
 
 
 
-+ 추가 설치패키지 +
++ 20230 추가 설치패키지 +
 
 npm i @chakra-ui/icons
+npm i @fortawesome/fontawesome-svg-core
+npm i @fortawesome/react-fontawesome

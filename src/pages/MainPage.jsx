@@ -1,8 +1,8 @@
 import NavBar from "@components/templates/NavBar";
 
-import Main from "@components/templates/Main";
 import Introduce from "@components/templates/Introduce";
 import Calender from "@components/templates/Calender";
+import Description from "@components/templates/Description";
 
 import Faq from "@components/templates/Faq";
 import Footer from "@components/templates/Footer";
@@ -20,7 +20,7 @@ return (
     />
     <Introduce />
     <Calender />
-    <Main />
+    <Description />
     <Faq /> 
     <Footer />
     </>

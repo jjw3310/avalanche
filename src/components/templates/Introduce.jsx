@@ -19,6 +19,7 @@ const Introduce = forwardRef((props, ref) => {
       // borderBottom={"solid 1px #C1C1C1"} 
       py={"10px"} 
       bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+      
     >
       <SimpleGrid columns={{ base: 1, lg: 2 }} spacing="20" m={"80px"} marginBottom={"100px"}>
         <Box 
