@@ -50,40 +50,45 @@ const Faq = forwardRef((props, ref) => {
     return (
     <Flex 
         bgGradient={"linear(to-l,#8c1eaa,#272842)"}
-        color={"Black"}
+        color={"white"}
+        fontFamily={"Raleway"}
+        fontStyle={"normal"}
+        fontWeight={"700"}
+        fontSize={"16px"}
+        lineHeight={"23px"}
     >
     <Section ref={ref} >
         <Title>Faq</Title>
         <Container>
             <Box>
-                <Accordion title="Date's 란?">
+                <Accordion title="What is Date's ?">
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>
                 </Accordion>
-                <Accordion title="민팅플랜?">
+                <Accordion title="What would Minting Plan be for the project?">
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>
                 </Accordion>
-                <Accordion title="로드맵?" >
+                <Accordion title="What is your roadmap?" >
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>
                 </Accordion>
             </Box>
             <Box>
-                <Accordion title="NFT로 할 수 있는 Contents들은 무엇이 있나요?">
+                <Accordion title="What can we do with NFTs for Contents?">
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>
                 </Accordion>
-                <Accordion title="Selling point는 무엇이라고 생각하나요?">
+                <Accordion title="What do you think of Selling point?">
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>
                 </Accordion>
-                <Accordion title="NFT Benefit 어떻게 활용할 수 있나요?">
+                <Accordion title="How we utilize the NFT for Benefit?">
                     <FaqText>
                         이러한 질문을 통해 새로운 프로젝트의 concept이 어떤 점에서 기존의 프로젝트와 다르며, 어떤 장단점이 있는지 파악할 수 있습니다. 이에 따라 프로젝트에 대한 이해도를 높일 수 있고, 향후 프로젝트에 대한 기대와 관심을 가지게 될 가능성이 높아집니다.
                     </FaqText>

@@ -63,6 +63,8 @@ const Introduce = forwardRef((props, ref) => {
                 <Image
                   width={"200px"}
                   height={"200px"}
+                  left={"480px"}
+                  bottom={"60px"}
                   src={mainPageClock}
                   position={"absolute"}
                   // backgroundColor={"tomato"}
@@ -74,8 +76,6 @@ const Introduce = forwardRef((props, ref) => {
                   // alignItems={"center"}
                   // color={"white"}
                   // fontWeight={"600"}
-                  left={"480px"}
-                  bottom={"60px"}
                   // fontSize={"10px"}
               />
               </Text>
@@ -96,7 +96,7 @@ const Introduce = forwardRef((props, ref) => {
             <Text
               fontWeight={"400"}
               fontStyle={"normal"}
-              fontSize={{ base: "10px", md: "15px" }}
+              fontSize={{ base: "10px", md: "16px" }}
               lineHeight={"28px"}
               font-weight={"400"}
               // position: absolute;
@@ -119,10 +119,10 @@ const Introduce = forwardRef((props, ref) => {
               <Text
                 fontWeight={"500"}
                 fontStyle={"normal"}
-                fontSize={{ base: "10px", md: "15px" }}
+                fontSize={{ base: "10px", md: "16px" }}
                 // lineHeight={"30px"}
                 mb={"58px"}
-                ml={"10px"}
+                ml={"20px"}
                 justifyContent={"center"} 
                 alignItems={"center"}
                 color={"white"}
@@ -132,13 +132,13 @@ const Introduce = forwardRef((props, ref) => {
             </Flex>
 
             <Button
-              w={"150px"}
+              w={"160px"}
               borderRadius={"50px"}
             >
               <Text
                 fontWeight={"500"}
                 fontStyle={"normal"}
-                fontSize={{ base: "10px", md: "15px" }}
+                fontSize={{ base: "10px", md: "16px" }}
                 lineHeight={"30px"}
                 justifyContent={"center"} 
                 alignItems={"center"}
