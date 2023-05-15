@@ -2,11 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@data/*": ["./src/data/*"],
       "@config/*": ["./src/config/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@contexts/*": ["./src/@contexts/*"]
+      "@mock/*": ["./src/@mock/*"],
+      "@contexts/*": ["./src/@contexts/*"],
+      "@styles/*": ["./src/@styles/*"],
     }
   },
   "exclude": ["node_modules", "build"]

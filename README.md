@@ -16,3 +16,10 @@ npx hardhat node
 npx hardhat accounts
 
 npx hardhat balances --network local
+
+
+
+
++ 추가 설치패키지 +
+
+npm i @chakra-ui/icons
