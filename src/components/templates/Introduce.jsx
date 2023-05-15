@@ -13,7 +13,8 @@ import {
 import { forwardRef } from "react";
 
 import rocket from "@assets/images/rocket.png";
-import arrowIcon from "@assets/images/arrowIcon.png";
+import { ReactComponent as arrowRightSolid } from "@assets/images/arrowRightSolid.svg";
+
 
 const Introduce = forwardRef((props, ref) => {
   return (
@@ -80,7 +81,7 @@ const Introduce = forwardRef((props, ref) => {
               font-weight={"400"}
               // position: absolute;
               font-family={"Raleway"}
-              color={"FFFFFF"}
+              color={"white"}
               mb={"58px"}
             >
               Create unforgettable experiences on our web3 platform.  <br/>
@@ -104,6 +105,7 @@ const Introduce = forwardRef((props, ref) => {
                 ml={"10px"}
                 justifyContent={"center"} 
                 alignItems={"center"}
+                color={"white"}
               >
                 Buy Your First Date Today
               </Text>  
@@ -123,7 +125,7 @@ const Introduce = forwardRef((props, ref) => {
               >
                 Buy Your Date
               </Text>
-              <Image src={arrowIcon} />
+                <arrowRightSolid width={200} height={200} fill="#dd9c4f" />
             </Button>
           </Flex>
         </Box>

@@ -7,7 +7,7 @@ import {
   Collapse,
   // Icon,
   Link,
-  // Image,
+  Image,
   Button,
   Popover,
   PopoverTrigger,
@@ -22,7 +22,8 @@ import {
   // ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import userProfileWhite from "@assets/images/userProfileWhite.png";
+
 
 
 export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
@@ -30,9 +31,9 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   return (
     <Box 
       pos={"fixed"} 
-      top={0} 
+      // top={0} 
       width={"100%"} 
-      zIndex={999}
+      // zIndex={999}
     >
       <Flex
         backdropFilter={"saturate(50%) blur(7px)"}
@@ -44,17 +45,20 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
         // borderStyle={"solid"}
         // borderColor={"gray.200"}
       >
-        <Flex flex={{ base: 1 }} justify={{ base: "start", md: "start" }}>
+        <Flex 
+          flex={{ base: 1 }}
+          ml={"12px"} 
+          // justifyContent={"center"} 
+          alignItems={"center"}
+        >
           <a href="/">
             <Box 
               // height={30} 
               width={70} 
               cursor={"pointer"}
-              color={"white"}
-            >
+              >
               <Text
-                justify={"center"}
-                align={"center"}
+                color={"white"}
               >              
                 Date's
               </Text>
@@ -83,8 +87,11 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
             </PopoverTrigger>
           </Popover>
         </Button>
-        <Flex>   
-          <FontAwesomeIcon icon="fa-regular fa-user" />
+        <Flex
+          ml={"20px"}
+          mr={"40px"}
+        >   
+          <Image src={userProfileWhite} width={10} height={10} fill="#dd9c4f" />
         </Flex>
         {/* 
           <Flex display={{ base: "none", md: "flex" }}>
