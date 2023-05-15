@@ -17,7 +17,7 @@ const Calender = forwardRef((props, ref) => {
       <Box 
         ref={ref} 
         w={"100%"} 
-        h={"500px"} 
+        h={"600px"} 
         bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
@@ -32,8 +32,8 @@ const Calender = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          <Box h="100%" bg="tomato" flex="2">TotalCalender</Box>
-          <Box h="100%" bg="white" flex="1">MyCalender</Box>
+          <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2"></Box>
+          <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"} flex="1"></Box>
         </Flex>
       </Box>
     </>
