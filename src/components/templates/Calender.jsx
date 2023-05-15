@@ -1,59 +1,42 @@
 import {
   Box,
-  SimpleGrid,
+  // SimpleGrid,
   Flex,
-  chakra,
+  // chakra,
   Text,
-  Divider,
   Image,
+  Stack,
+  Heading,
+  VStack,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
-// import jiminNFT from "@assets/images/jimin.png";
-// import BasicNFT from "@assets/images/BasicLion.png";
 
 const Calender = forwardRef((props, ref) => {
   return (
-    <Box 
-      ref={ref} 
-      // borderBottom={"solid 1px #C1C1C1"} 
-      py={"10px"} 
-      bgGradient={"linear(to-l,#8c1eaa,#272842)"}
-    >
-      <SimpleGrid columns={{ base: 1, lg: 2 }} spacing="20" m={"40px"} marginBottom={"200px"}>
-        <Box 
-          display={"flex"} 
-          justifyContent={"center"} 
-          alignItems={"center"} 
-          background="tomato"
+    <>
+      <Box 
+        ref={ref} 
+        w={"100%"} 
+        h={"500px"} 
+        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+        // paddingBottom={"200px"}
+      >
+        {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
+        <Flex
+          alignItems={"flex-start"}
+          direction={{ base: "column-reverse", md: "row" }}
+          justify={"flex-end"}
+          px={{ base: "20px", sm: "30px", lg: "50px" }}
+          align={"center"}
+          h="100%"
+          pt={5}
+          pb={5}
         >
-          <Flex direction={"column"} justify={"center"}>
-            <Box
-              pw={"800px"}
-              py={"200px"} 
-            >
-            TotalCalender 
-            </Box>
-          </Flex>
-        </Box>
-
-        <Box 
-          display={"flex"} 
-          justifyContent={"center"} 
-          alignItems={"center"} 
-          pw={"200px"}
-          py={"200px"} 
-          background="tomato"
-        >
-          <Flex direction={"column"} justify={"center"}>
-            <Box
-              
-            >
-            MyCalender  
-            </Box>
-          </Flex>
-        </Box>
-      </SimpleGrid>
-    </Box>
+          <Box h="100%" bg="tomato" flex="2">TotalCalender</Box>
+          <Box h="100%" bg="white" flex="1">MyCalender</Box>
+        </Flex>
+      </Box>
+    </>
   );
 });
 
