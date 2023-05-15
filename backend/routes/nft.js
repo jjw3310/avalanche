@@ -1,6 +1,7 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const { ClientRequest } = require("http");
+/* global deletedTodo */
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.post("/", async (req, res) => {
     const { nft, userId } = req.body;
 
     //받아온 값이 없을 경우 400에러
-    if (!todo || !userId) {
+    if (!nft || !userId) {
       return res.status(400).json({
         ok: false,
         error: "error!",
@@ -30,7 +31,7 @@ router.post("/", async (req, res) => {
     }
     const newTodo = await client.todo.create({
       data: {
-        todo,
+        nft,
         isDone: false,
         userId: user.id,
       },
