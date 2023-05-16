@@ -27,3 +27,6 @@ yarn-error.log*
 .history
 
 avalanche-smart-contract-quickstart
+
+/contract/artifacts
+/.deps
