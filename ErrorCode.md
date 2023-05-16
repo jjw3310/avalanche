@@ -1,11 +1,11 @@
-userData.sol
+[userData.sol]
 To User
 "\_ERR[1000]:ID Already Exists"
 "\_ERR[1001]:Check Your ID or Password"
 "\_ERR[1002]:ID Doesn't Exist"
 "\_ERR[1003]:Check Your Input Values"
 
-dateData.sol
+[dateData.sol]
 To Developer
 "\_ERR[0001]:\_name is necessary"
 "\_ERR[0002]:\_totalcnt between 1~366"
