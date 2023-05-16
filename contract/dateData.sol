@@ -7,15 +7,25 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 //ERR0000 5 To DEVELOPER
-//ERR1000 7 To USER
+//ERR1000 8 To USER
 
 contract DateData is ERC721Enumerable, Ownable {
     string public metadataUri;
     uint public openedNftCnt;
     uint public mintedNftCnt;
     uint public seasonOpened;
+    address public adminAddress;    
 
-
+    constructor(string memory _name, string memory _symbol, string memory _metadataUri, address _adminAddress)
+    ERC721(_name, _symbol) {
+        metadataUri = _metadataUri;
+        openedNftCnt = 1;
+        seasonOpened = 0; // Genesis Season
+        _mint(msg.sender, 0); // Genesis Date NFT
+        mintedNftCnt = 1;
+        adminAddress = _adminAddress;
+    }
+    
 // seasonal minting part
     struct season {
         uint256 startDate;
@@ -26,15 +36,6 @@ contract DateData is ERC721Enumerable, Ownable {
 
     mapping(string => uint) seasonNameToNum;
     season[] public seasonList;
-
-    constructor(string memory _name, string memory _symbol, string memory _metadataUri)
-    ERC721(_name, _symbol) {
-        metadataUri = _metadataUri;
-        openedNftCnt = 1;
-        seasonOpened = 0; // Genesis Season
-        _mint(msg.sender, 0); // Genesis Date NFT
-        mintedNftCnt = 1;
-    }
 
     //open new season
     function openSeason(string memory _name, uint256 _startDate, uint256 _endDate, uint256 _totalcnt)
@@ -55,6 +56,7 @@ contract DateData is ERC721Enumerable, Ownable {
     function mintCommon(uint256 _season, string memory _seasonName, uint256 _yyyymmdd, address _owner )
      private
     {
+        require(ownerOf(_yyyymmdd)==address(0),"_ERR[1008]:This date NFT is already minted");
         uint256 seasonNum;
 
         if(_season > 0 && bytes(_seasonName).length > 0) {
@@ -155,6 +157,10 @@ contract DateData is ERC721Enumerable, Ownable {
         require(mm >= 1 && mm <= 12,"_ERR[1005]:Check your mm(month) value");
 
         uint256 dd = mmdd % 100;
+        bool ddflag = false;
+        if(mm < 10 && mm % 2 == 1) {
+            if(dd)
+        }
         require(dd >= 1 && dd <= 31,"_ERR[1004]:Check your dd(day) value");        
         _;
     }
