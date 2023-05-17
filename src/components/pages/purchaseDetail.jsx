@@ -34,8 +34,8 @@ const PurchaseDetail = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          <Box borderRadius={"30px"} h="100%" bg="white" mr={"20px"} flex="1"></Box>
-          <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"} flex="2"></Box>
+          <Box borderRadius={"30px"} h="100%" bg="white" mr={"20px"} flex="2"></Box>
+          <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"} flex="1"></Box>
         </Flex>
       </Box>
     </>
