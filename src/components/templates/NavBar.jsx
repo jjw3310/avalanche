@@ -29,7 +29,7 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   };
 
   return (
-    <Box top={0} width={"100%"} bgGradient={"linear(to-l,#8c1eaa,#272842)"}>
+    <Box z-index={"999"} top={0} width={"100%"} bgGradient={"linear(to-l,#8c1eaa,#272842)"}>
       <Flex minH={"60px"} py={{ base: 2 }} px={{ base: 4 }} align={"space-around"}>
         <Flex flex={{ base: 1 }} ml={"12px"} alignItems={"center"}>
           <a href="/">

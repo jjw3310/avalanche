@@ -46,7 +46,7 @@ import {
 } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useRef } from "react";
-import IntroducePage from "@components/pages/IntroducePage";
+import IntroducePage from "@components/pages/purchaseDetail";
 
 import MainPage from "./components/pages/MainPage";
 
