@@ -11,6 +11,10 @@ import {
   Input,
   label,
   Textarea,
+  Button,
+  Popover,
+  PopoverTrigger,
+
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import NavBar from "@components/templates/NavBar";
@@ -37,7 +41,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
       <Box 
         ref={ref} 
         w={"100%"} 
-        h={"600px"} 
+        h={"1000px"} 
         bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
@@ -52,7 +56,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
           pb={5}
         >
           
-          <Box borderRadius={"30px"} h="100%" bg="gray.600" mr={"20px"} flex="3">
+          <Box borderRadius={"30px"} h="100%" mr={"20px"} flex="3">
             <Box
               position="relative"
               zIndex={1}
@@ -133,7 +137,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
           <Box 
             borderRadius={"30px"} 
             h="100%" 
-            bg="gray.600" 
             ml={"20px"} 
             flex="4"
             direction={{ base: "column-reverse", md: "row" }}
@@ -156,6 +159,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               </Text>
               <Input 
                 mt={"20px"}
+                color="black"
                 type="text" 
                 placeholder="yy/mm/dd" 
                 width="283px"
@@ -178,6 +182,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               </Text>
               <Input 
                 mt={"20px"}
+                color="black"
                 type="text" 
                 placeholder="My Birthday !! " 
                 width="600px"
@@ -189,6 +194,9 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 justify="flex-end"
                 align="flex-end"
                 ml={"565px"}
+                fontFamily="sans-serif"
+                fontSize="14px"
+                color="gray.500"
               >
                 0/30
               </Text>
@@ -208,6 +216,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               </Text>
               <Textarea
                 mt="20px"
+                color="black"
                 placeholder="Write a long sentence..."
                 width="600px"
                 height="200px"
@@ -225,7 +234,34 @@ const PurchaseDetail = forwardRef((props, ref) => {
               >
                 0/500
               </Text>
-            </Box>
+            
+            <Button borderRadius={"20px"} _hover={{ bg: "purple.500" }} mt={"100px"}>
+              <Popover trigger={"hover"} placement={"bottom-start"}>
+                <PopoverTrigger>
+                  <Box
+                    p={1}
+                    // mt={"164px"}
+                    fontWeight={"500"}
+                    color="black"
+                    fontStyle={"normal"}
+                    fontSize={{ base: "10px", md: "16px" }}
+                    lineHeight={"30px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    _hover={{
+                      textDecoration: "none",
+                      color: "linkHoverColor",
+                    }}
+                    href="/"
+                    target="_blank"
+                  >
+                      Submit
+                  </Box>
+                </PopoverTrigger>
+              </Popover>
+            </Button>
+
+          </Box>
         </Flex>
       </Box>
     </>
