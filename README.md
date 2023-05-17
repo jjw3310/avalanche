@@ -70,3 +70,4 @@ npm run dev
 npm i @chakra-ui/icons
 npm i @fortawesome/fontawesome-svg-core
 npm i @fortawesome/react-fontawesome
+npm install @fortawesome/free-regular-svg-icons

@@ -47,7 +47,7 @@ import {
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useRef } from "react";
 import MainPage from "./components/pages/MainPage";
-import PurchaseDetail from "./components/pages/PurchaseDetail";
+import PurchaseDetail from "@components/pages/purchaseDetail";
 
 function App() {
   const [account, setAccount] = useState("");
