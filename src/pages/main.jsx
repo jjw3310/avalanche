@@ -66,6 +66,9 @@ const Main = ({ account }) => {
       <CalendarComponent
         selected={selectedDate}
         onSelectDate={setSelectedDate}
+        totalNft={totalNft}
+        mintedNft={mintedNft}
+        myNft={myNft}
       />
       <Nfts page={page} mintedNft={mintedNft} />
     </>

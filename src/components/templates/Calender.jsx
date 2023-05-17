@@ -48,10 +48,11 @@ const Calender = forwardRef((props, ref) => {
     /* margin: auto; */
     /* margin-top: 20px; */
     background-color: white;
-    padding: 10px;
+    // padding: 10px;
     border-radius: 30px;
     height: 100%;
   `;
+
   const web3 = require("web3");
   const { ethers } = require("ethers");
 
@@ -71,6 +72,7 @@ const Calender = forwardRef((props, ref) => {
   useEffect(() => {
     getNfts();
   }, []);
+
   return (
     <>
       <Box
@@ -93,14 +95,16 @@ const Calender = forwardRef((props, ref) => {
         >
           <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2">
             <div style={{ height: "100%" }}>
-              <CalendarContainer>
+              <CalendarContainer
+                style={{ height: "100%", backgroundColor: "white" }}
+              >
                 <Calendar
                   selected={selectedDate}
                   calendarType="US"
                   minDetail="decade"
                   onSelectDate={setSelectedDate}
                   className="react-calendar"
-                  style={{ backgroundColor: "black" }}
+                  style={{ backgroundColor: "white" }}
                   // style={{ "background-color": "black" }}
                 />
               </CalendarContainer>
