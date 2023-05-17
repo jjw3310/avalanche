@@ -11,11 +11,22 @@ import {
   PopoverTrigger,
   PopoverContent,
   useDisclosure,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { useState } from "react";
 
 export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   const { isOpen, onToggle } = useDisclosure();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    // 클릭 시 이동할 페이지 경로
+    // 예시: "/profile"
+    const destination = "/Introduce";
+    // 페이지 이동
+    window.location.href = destination;
+  };
 
   return (
     <Box top={0} width={"100%"} bgGradient={"linear(to-l,#8c1eaa,#272842)"}>
@@ -27,7 +38,6 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
             </Box>
           </a>
         </Flex>
-
         <Button borderRadius={"50px"} _hover={{ bg: "purple.500" }} mt={"20px"}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -52,39 +62,31 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
             </PopoverTrigger>
           </Popover>
         </Button>
-
         <Flex
           ml={"20px"}
           mr={"40px"}
           mt={"10px"}
+          position="relative"
+          cursor="pointer"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={handleClick}
+
           justifyContent={"center"}
           alignItems={"center"}
-          position={"relative"}
-          transition="transform 0.3s ease-in-out"
-          transform={
-            isOpen
-              ? "translateY(0)"
-              : "translateY(5px)"
-          }
-          _hover={{
-            transform: "translateY(-5px)",
-          }}
+          transform={isOpen ? "translateY(5)" : "translateY(5px)"}
         >
-          <IoPersonCircleOutline color="white" size={40} />
-          <IoPersonCircleOutline
-            color="#dd9c4f"
-            size={40}
-            position="absolute"
-            top={0}
-            left={0}
-            opacity={0}
-            transition="top 0.3s ease-in-out, opacity 0.3s ease-in-out"
-            _groupHover={{
-              opacity: 1,
-              top: "5px",
-              transition: "top 0.3s ease-in-out, opacity 0.3s ease-in-out",
-            }}
-          />
+          <Link to="/Introduce" textDecoration="none">
+            <Flex
+              justifyContent={"center"}
+              alignItems={"center"}
+              transition="transform 0.3s ease-in-out"
+              transform={isHovered ? "translateY(-10px)" : "translateY(0)"}
+              position="relative"
+            >
+              <IoPersonCircleOutline color="white" size={40} />
+            </Flex>
+          </Link>
         </Flex>
       </Flex>
       <Collapse in={isOpen} animateOpacity></Collapse>
