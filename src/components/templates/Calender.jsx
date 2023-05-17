@@ -17,6 +17,8 @@ import { forwardRef } from "react";
 import previousMonth from "@assets/images/previousMonth.svg";
 import nextMonth  from "@assets/images/nextMonth.svg";
 import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
+import { IoPersonCircleOutline } from "react-icons/io5";
+import emptyHeart from "@assets/images/emptyHeart.png";
 
 const Calender = forwardRef((props, ref) => {
   return (
@@ -44,14 +46,42 @@ const Calender = forwardRef((props, ref) => {
 
           {/* 작은 캘린더 민팅 이후 */}
           <Box borderRadius={"30px"} h="100%" bg="gray.600" ml={"20px"} flex="1">
-            <Box
-              
-            >
+            <Box>
               {/* #upper box */}
               <Flex direction={"column"} justify={"flex-start"} align={"flex-start"} w={"100%"} h="200px" >
                 {/* #1 */}
-                <Flex>
-                  
+                <Flex direction={"row"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
+                  <IoPersonCircleOutline color="white" size={40} />
+                  <Text>buyyourdate</Text>
+                  <Button
+                    // position={"relative"}
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    padding="5px 12px"
+                    gap="10px"
+                    width="66px"
+                    height="30px"
+                    background="#FFFFFF"
+                    borderRadius="50px"
+                    flex="none"
+                    order={1}
+                    flexGrow={0}
+                  >
+                    <Image 
+                      ml={"5px"}
+                      src={emptyHeart}
+                      // position={"absolute"}
+                    />
+                    <Text 
+                      mr={"5px"}
+                      color={"black"}
+                      // position={"absolute"}
+                    >
+                      42
+                    </Text>
+                  </Button>
                 </Flex>
                 <Flex
                   ml={"20px"}
@@ -115,7 +145,6 @@ const Calender = forwardRef((props, ref) => {
             <Box 
               background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
               boxSizing="border-box"
-              border="1px solid #ADADAD"
               borderTopLeftRadius="0px"
               borderTopRightRadius="0px"
               borderBottomRightRadius="30px"
@@ -144,29 +173,7 @@ const Calender = forwardRef((props, ref) => {
 
                 
 
-                <Button mt={"5px"} ml={"120px"} w={"120px"} h={"30px"} borderRadius={"20px"} _hover={{ bg: "purple.500" }} >
-                <Popover trigger={"hover"} placement={"bottom-start"}>
-                  <PopoverTrigger>
-                    <Box
-                      fontWeight={"500"}
-                      color="black"
-                      fontStyle={"normal"}
-                      fontSize={{ base: "10px", md: "15px" }}
-                      lineHeight={"30px"}
-                      justifyContent={"flex-end"}
-                      alignItems={"flex-end"}
-                      _hover={{
-                        textDecoration: "none",
-                        color: "linkHoverColor",
-                      }}
-                      href="/"
-                      target="_blank"
-                    >
-                        Mint the date
-                    </Box>
-                  </PopoverTrigger>
-                </Popover>
-              </Button>
+                
               </Flex>
             </Box>
             
