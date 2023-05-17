@@ -8,21 +8,21 @@ import Faq from "@components/templates/Faq";
 import Footer from "@components/templates/Footer";
 
 import { useState } from "react";
-
+// import { useGasless } from "@hooks/useGasless";
 
 export default function MainPage() {
-
-return (
+  //   useGasless();
+  return (
     <>
-    <NavBar
-    // currentVisibleIndex={currentVisibleIndex}
-    // onClickNavLink={handleClickNavLink}
-    />
-    <Introduce />
-    <Calender />
-    <Description />
-    <Faq /> 
-    <Footer />
+      <NavBar
+      // currentVisibleIndex={currentVisibleIndex}
+      // onClickNavLink={handleClickNavLink}
+      />
+      <Introduce />
+      <Calender />
+      <Description />
+      <Faq />
+      <Footer />
     </>
-);
+  );
 }
