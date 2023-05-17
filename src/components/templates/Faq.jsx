@@ -17,6 +17,8 @@ const Section = styled.section`
     // border-bottom: solid 1px #C1C1C1; 
 `
 
+
+
 const Title = styled.h1`
     text-align: center;
     padding-top: 100px;
