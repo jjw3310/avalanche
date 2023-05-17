@@ -14,8 +14,10 @@ import { forwardRef } from "react";
 
 import rocket from "@assets/images/rocket.png";
 // import { ReactComponent as arrowRight } from "@assets/images/arrowRightSolid.svg";
-import arrow from "@assets/images/arrow.png";
+// import arrow from "@assets/images/arrow.png";
 import mainPageClock  from "@assets/images/mainPageClock.png";
+import { BsArrowRight } from "react-icons/bs"; // react-icons 패키지에서 사용할 화살표 아이콘 가져오기
+
 
 const Introduce = forwardRef((props, ref) => {
   return (
@@ -130,23 +132,24 @@ const Introduce = forwardRef((props, ref) => {
                 Buy Your First Date Today
               </Text>  
             </Flex>
-
             <Button
               w={"160px"}
               borderRadius={"50px"}
+              _hover={{ bg: "purple.500" }} // hover 시 배경색 변경
             >
               <Text
                 fontWeight={"500"}
                 fontStyle={"normal"}
                 fontSize={{ base: "10px", md: "16px" }}
                 lineHeight={"30px"}
-                justifyContent={"center"} 
+                justifyContent={"center"}
                 alignItems={"center"}
+                color={"black"}
               >
                 Buy Your Date
               </Text>
-              <Box> 
-                <Image src={arrow} width={50} height={50} />
+              <Box ml={2}>
+                <BsArrowRight color="black"/>
               </Box>
             </Button>
           </Flex>
