@@ -16,6 +16,7 @@ import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import logoCalendar from "@assets/images/logoCalendar.png";
 import palateIcon from "@assets/images/palateIcon.png";
 import logoPeople from "@assets/images/logoPeople.png";
+
 const Description = forwardRef((props, ref) => {
   return (
     <Box 
