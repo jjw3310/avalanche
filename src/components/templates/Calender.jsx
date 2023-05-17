@@ -112,16 +112,16 @@ const Calender = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          <Box
+          {/* <Box
             borderRadius={"30px"}
             h="100%"
             bg="white"
             ml={"20px"}
             flex="1"
-          ></Box>
+          ></Box> */}
 
           {/* 큰 캘린더 */}
-          {/* <Box borderRadius={"30px"} h="100%" bg="gray.500" mr={"20px"} flex="2"></Box> */}
+          <Box borderRadius={"30px"} h="100%" bg="gray.500" mr={"20px"} flex="2"></Box>
 
           {/* 작은 캘린더 민팅 이후 */}
           <Box
@@ -129,11 +129,10 @@ const Calender = forwardRef((props, ref) => {
             h="100%"
             bg="gray.600"
             ml={"20px"}
-            flex="1"
           >
             <Box>
               <Image 
-                w={"282px"}
+                // w={"282px"}
                 h={"200px"}
 
                 borderRadius={"30px"}
@@ -171,7 +170,7 @@ const Calender = forwardRef((props, ref) => {
                   <Text ml={"10px"}>buyyourdate</Text>
                   <Button
                     // position={"relative"}
-                    ml={"55px"}
+                    ml={"160px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -269,7 +268,7 @@ const Calender = forwardRef((props, ref) => {
                     fontWeight={"700"}
                     fontSize={"16px"}
                     lineHeight={"23px"}
-                    color={"#FFFFFF"}
+                    color={"black"}
                   >
                     Today’s top 4 comments
                   </Text>
@@ -277,9 +276,9 @@ const Calender = forwardRef((props, ref) => {
 
                 
                 {/* 방명록 댓글 #Set1 시작 부분 */}
-                <Flex mt={"20px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
                   <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'white'}
+                    color={filled ? 'blue' : 'black'}
                     size={30}
                     onClick={handleClick}
                     style={{ cursor: 'pointer' }}
@@ -288,12 +287,14 @@ const Calender = forwardRef((props, ref) => {
                     fontSize={"16px"} 
                     ml={"10px"}
                     lineHeight={["23px", null, "23px"]}
+                    color={"black"}
+                    fontWeight={"bold"}
                   >
                     73elliot
                   </Text>
                 </Flex>
                 <Flex 
-                  justify={"center"} 
+                  justify={"space-around"} 
                   align={"center"}
                 >
                   <Text
@@ -333,12 +334,12 @@ const Calender = forwardRef((props, ref) => {
                   </Box>
                 </Flex>
                 <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
-                {/* 방명록 댓글 셋트 끝 부분 */}
+                {/* 방명록 댓글 #Set1 끝 부분 */}
 
                 {/* 방명록 댓글 #Set2 시작 부분 */}
-                <Flex mt={"20px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                  <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'white'}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
+                <IoPersonCircleOutline
+                    color={filled ? 'blue' : 'black'}
                     size={30}
                     onClick={handleClick}
                     style={{ cursor: 'pointer' }}
@@ -347,8 +348,10 @@ const Calender = forwardRef((props, ref) => {
                     fontSize={"16px"} 
                     ml={"10px"}
                     lineHeight={["23px", null, "23px"]}
+                    color={"black"}
+                    fontWeight={"bold"}
                   >
-                    73elliot
+                    elena124
                   </Text>
                 </Flex>
                 <Flex 
@@ -364,7 +367,7 @@ const Calender = forwardRef((props, ref) => {
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
-                    Today is our anniversary :)
+                    I passed the exam today!!!!!! LOL
                   </Text>
                   <Box
                     display="flex"
@@ -387,17 +390,17 @@ const Calender = forwardRef((props, ref) => {
                       color={"black"}
                       ml={"5px"}
                     >
-                      42
+                      37
                     </Text>
                   </Box>
                 </Flex>
                 <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
-                {/* 방명록 댓글 셋트 끝 부분 */}
+                {/* 방명록 댓글 #Set2 끝 부분 */}
 
                 {/* 방명록 댓글 #Set3 시작 부분 */}
-                <Flex mt={"20px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                  <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'white'}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
+                <IoPersonCircleOutline
+                    color={filled ? 'blue' : 'black'}
                     size={30}
                     onClick={handleClick}
                     style={{ cursor: 'pointer' }}
@@ -406,8 +409,10 @@ const Calender = forwardRef((props, ref) => {
                     fontSize={"16px"} 
                     ml={"10px"}
                     lineHeight={["23px", null, "23px"]}
+                    color={"black"}
+                    fontWeight={"bold"}
                   >
-                    73elliot
+                    345amanda
                   </Text>
                 </Flex>
                 <Flex 
@@ -423,7 +428,7 @@ const Calender = forwardRef((props, ref) => {
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
-                    Today is our anniversary :)
+                    Happy birthday!!! YOU ARE THE BEST XD
                   </Text>
                   <Box
                     display="flex"
@@ -446,22 +451,81 @@ const Calender = forwardRef((props, ref) => {
                       color={"black"}
                       ml={"5px"}
                     >
-                      42
+                      28
                     </Text>
                   </Box>
                 </Flex>
                 <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
-                {/* 방명록 댓글 셋트 끝 부분 */}
+                {/* 방명록 댓글 #Set3 끝 부분 */}
+
+                {/* 방명록 댓글 #Set4 시작 부분 */}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
+                <IoPersonCircleOutline
+                    color={filled ? 'blue' : 'black'}
+                    size={30}
+                    onClick={handleClick}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <Text  
+                    fontSize={"16px"} 
+                    ml={"10px"}
+                    lineHeight={["23px", null, "23px"]}
+                    color={"black"}
+                    fontWeight={"bold"}
+                  >
+                    theresa00
+                  </Text>
+                </Flex>
+                <Flex 
+                  justify={"center"} 
+                  align={"center"}
+                >
+                  <Text
+                    ml={"50px"}
+                    fontFamily="Raleway"
+                    fontStyle="normal"
+                    fontWeight={700}
+                    fontSize={["20px", null, "14px"]}
+                    lineHeight={["23px", null, "23px"]}
+                    color="#747474"
+                  >
+                    HBD!! Today is my birthday as well haha
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    padding="5px 12px"
+                    // gap="10px"
+                    width="66px"
+                    height="30px"
+                    borderRadius="50px"
+                    flex="none"
+                    order={1}
+                    flexGrow={0}
+                  >
+                    <Image 
+                      src={logoHeart}
+                    />
+                    <Text 
+                      color={"black"}
+                      ml={"5px"}
+                    >
+                      15
+                    </Text>
+                  </Box>
+                </Flex>
+                <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
+                {/* 방명록 댓글 #Set4 끝 부분 */}
 
               </Flex>
             </Box>
-
-          {/* 방명록 댓글 파트 */}
           
           </Box>
 
           {/* 작은 캘린더 민팅 이전 */}
-          <Box
+          {/* <Box
             direction={"column"}
             justify={"center"}
             align={"center"}
@@ -472,7 +536,7 @@ const Calender = forwardRef((props, ref) => {
             flex="1"
           >
             <Box>
-              {/* #1 top box */}
+              
               <Flex mt={"20px"} justify={"space-around"} align={"center"}>
                 <Image src={previousMonth} />
                 <Flex
@@ -487,7 +551,8 @@ const Calender = forwardRef((props, ref) => {
                 </Flex>
                 <Image src={nextMonth} />
               </Flex>
-              {/* #2 middle box */}
+              
+
               <Box
                 background="rgba(0, 0, 0, 0)"
                 position="relative"
@@ -499,7 +564,8 @@ const Calender = forwardRef((props, ref) => {
                 w={"300px"}
                 h={"350px"}
               ></Box>
-              {/* #3 below box */}
+              
+
               <Box
                 background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
                 position="relative"
@@ -592,6 +658,7 @@ const Calender = forwardRef((props, ref) => {
               </Box>
             </Box>
           </Box>
+          */}
 
         </Flex>
       </Box>
