@@ -7,7 +7,7 @@ import Description from "@components/templates/Description";
 import Faq from "@components/templates/Faq";
 import Footer from "@components/templates/Footer";
 
-import { useState } from "react";
+// import { useState } from "react";
 
 
 export default function MainPage() {

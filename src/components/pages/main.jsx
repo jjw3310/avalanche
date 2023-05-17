@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import Intro from "../components/Intro";
+import Intro from "../Intro";
 
 import Web3 from "web3";
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
-import Nfts from "../components/Nfts";
-import CalendarComponent from "../components/CalendarComponent";
-import Pinata from "../components/Pinata";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../../web3.config";
+import Nfts from "../Nfts";
+import CalendarComponent from "../CalendarComponent";
+import Pinata from "../Pinata";
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
