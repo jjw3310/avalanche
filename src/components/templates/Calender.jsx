@@ -100,31 +100,6 @@ const Calender = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2">
-            <div style={{ height: "100%" }}>
-              <CalendarContainer
-                style={{ height: "100%", backgroundColor: "white" }}
-              >
-                <Calendar
-                  selected={selectedDate}
-                  calendarType="US"
-                  minDetail="decade"
-                  onSelectDate={setSelectedDate}
-                  className="react-calendar"
-                  style={{ backgroundColor: "white" }}
-                  // style={{ "background-color": "black" }}
-                />
-              </CalendarContainer>
-              <div>
-                {nfts &&
-                  nfts.map((image, index) => (
-                    <img key={index} src={image.url} alt={image.title} />
-                  ))}
-              </div>
-              <div className="text-gray-500 mt-4">{formattedDate}</div>
-              {/* <MyCalendar /> */}
-            </div>
-          </Box>
           <Box
             borderRadius={"30px"}
             h="100%"
