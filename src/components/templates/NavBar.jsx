@@ -67,24 +67,27 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
           </a>
         </Flex>
 
-        <Button
-          borderRadius={"50px"}
-        >
+        <Button borderRadius={"50px"} _hover={{ bg: "purple.500" }}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
-                p={2}
-                fontSize={"sm"}
-                fontWeight={"bold"}
-                _hover={{
-                  textDecoration: "none",
-                  // color: linkHoverColor,
-                }}
-                href="/"
-                target="_blank"
+              <Box
+              p={2}
+              fontWeight={"500"}
+              color="black"
+              fontStyle={"normal"}
+              fontSize={{ base: "10px", md: "16px" }}
+              lineHeight={"30px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              _hover={{
+                textDecoration: "none",
+                color: "linkHoverColor",
+              }}
+              href="/"
+              target="_blank"
               >
-                Sign in
-              </Link>
+              Sign in
+              </Box>
             </PopoverTrigger>
           </Popover>
         </Button>
