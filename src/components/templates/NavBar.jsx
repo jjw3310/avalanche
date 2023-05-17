@@ -23,7 +23,7 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   const handleClick = () => {
     // 클릭 시 이동할 페이지 경로
     // 예시: "/profile"
-    const destination = "/Introduce";
+    const destination = "/purchaseDetail";
     // 페이지 이동
     window.location.href = destination;
   };
@@ -76,7 +76,7 @@ export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
           alignItems={"center"}
           transform={isOpen ? "translateY(5)" : "translateY(5px)"}
         >
-          <Link to="/Introduce" textDecoration="none">
+          <Link to="/purchaseDetail" textDecoration="none">
             <Flex
               justifyContent={"center"}
               alignItems={"center"}

@@ -46,29 +46,30 @@ import {
 } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useRef } from "react";
-import IntroducePage from "@components/pages/purchaseDetail";
-
 import MainPage from "./components/pages/MainPage";
+import PurchaseDetail from "./components/pages/PurchaseDetail";
 
 function App() {
   const [account, setAccount] = useState("");
 
   return (
-    <BrowserRouter>
-      <ChakraProvider>
-        <div className="min-h-screen bg-gray-950 text-white">
-          {/* <Header account={account} setAccount={setAccount} /> */}
+    <>
+      <BrowserRouter>
+        <ChakraProvider>
+          <div className="min-h-screen bg-gray-950 text-white">
+            {/* <Header account={account} setAccount={setAccount} /> */}
 
-          <Routes>
-            <Route path="/" element={<MainPage account={account} />} />
-            <Route path="Introduce" element={<IntroducePage />}>
-              {" "}
-            </Route>
-            {/* <Route path="/:tokenId" element={<Customizing />} /> */}
-          </Routes>
-        </div>
-      </ChakraProvider>
-    </BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainPage account={account} />} />
+              <Route path="/purchaseDetail" element={<PurchaseDetail />}>
+                {" "}
+              </Route>
+              {/* <Route path="/:tokenId" element={<Customizing />} /> */}
+            </Routes>
+          </div>
+        </ChakraProvider>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -3,21 +3,20 @@ import {
   // SimpleGrid,
   Flex,
   // chakra,
-  Text,
-  Image,
-  Stack,
-  Heading,
-  VStack,
+  // Text,
+  // Image,
+  // Stack,
+  // Heading,
+  // VStack,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import NavBar from "@components/templates/NavBar";
 
-const purchaseDetail = forwardRef((props, ref) => {
+const PurchaseDetail = forwardRef((props, ref) => {
   return (
     <>
       <NavBar/>
       <Box 
-        mt={"30px"}
         ref={ref} 
         w={"100%"} 
         h={"600px"} 
@@ -43,4 +42,4 @@ const purchaseDetail = forwardRef((props, ref) => {
   );
 });
 
-export default purchaseDetail;
+export default PurchaseDetail;
