@@ -10,7 +10,8 @@ import Footer from "@components/templates/Footer";
 import { useState } from "react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect } from "react";
-import { Button } from "@chakra-ui/react";
+import { Box, Button, Image, background } from "@chakra-ui/react";
+import IMG from "../../assets/images/DistanceStars.png";
 // import { useGasless } from "@hooks/useGasless";
 
 export default function MainPage() {
@@ -81,12 +82,16 @@ export default function MainPage() {
       if (!dateContract) {
         return;
       }
-      let userNftInfo = await dateContract.methods
+      let todayNftInfo = await dateContract.methods
         .getDayNftInfo(_yyyymmdd)
         .call();
       let jsonDate = await dateContract.methods.tokenURI(_yyyymmdd).call();
-      console.log(userNftInfo);
-      console.log(jsonDate);
+      if (todayNftInfo.showDefaultImg) {
+        console.log("변경한 url이 존재함");
+      } else {
+        console.log("기본 이미지 출력");
+        let metadataUrl = jsonDate;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -99,35 +104,37 @@ export default function MainPage() {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          mintDate("2023", 20230518);
-        }}
-        color={"blue"}
-      >
-        Test BTN
-      </Button>
-      <Button
-        onClick={() => {
-          getTodayNft();
-        }}
-        color={"blue"}
-      >
-        Test BTN2
-      </Button>
-      <NavBar
-        // currentVisibleIndex={currentVisibleIndex}
-        // onClickNavLink={handleClickNavLink}
-        signUp={signUp}
-        signIn={signIn}
-        address={address}
-        account={account}
-      />
-      <Introduce />
-      <Calender />
-      <Description />
-      <Faq />
-      <Footer />
+      <Box bg={`url(${IMG})`} bgSize={"100%"}>
+        <Button
+          onClick={() => {
+            mintDate("2023", 20230518);
+          }}
+          color={"blue"}
+        >
+          Test BTN
+        </Button>
+        <Button
+          onClick={() => {
+            getTodayNft();
+          }}
+          color={"blue"}
+        >
+          Test BTN2
+        </Button>
+        <NavBar
+          // currentVisibleIndex={currentVisibleIndex}
+          // onClickNavLink={handleClickNavLink}
+          signUp={signUp}
+          signIn={signIn}
+          address={address}
+          account={account}
+        />
+        <Introduce />
+        <Calender />
+        <Description />
+        <Faq />
+        <Footer />
+      </Box>
     </>
   );
 }
