@@ -15,19 +15,18 @@ import { forwardRef } from "react";
 import rocket from "@assets/images/rocket.png";
 // import { ReactComponent as arrowRight } from "@assets/images/arrowRightSolid.svg";
 // import arrow from "@assets/images/arrow.png";
-import mainPageClock  from "@assets/images/mainPageClock.png";
+import mainPageClock from "@assets/images/mainPageClock.png";
 import { BsArrowRight } from "react-icons/bs"; // react-icons 패키지에서 사용할 화살표 아이콘 가져오기
-
 
 const Introduce = forwardRef((props, ref) => {
   return (
     <>
-      <Box 
-        ref={ref} 
-        w={"100%"} 
-        h={"550px"} 
-        py={"50px"} 
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+      <Box
+        ref={ref}
+        w={"100%"}
+        h={"550px"}
+        py={"50px"}
+        // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
@@ -40,16 +39,16 @@ const Introduce = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          <Box 
-            borderRadius={"30px"} 
-            h="100%" 
-            // bg="tomato" 
-            mr={"20px"} 
+          <Box
+            borderRadius={"30px"}
+            h="100%"
+            // bg="tomato"
+            mr={"20px"}
             flex="2"
-            justifyContent={"center"} 
-            alignItems={"center"} 
+            justifyContent={"center"}
+            alignItems={"center"}
           >
-            <Flex direction={"row"} >
+            <Flex direction={"row"}>
               <Text
                 fontWeight={"400"}
                 fontStyle={"normal"}
@@ -60,7 +59,7 @@ const Introduce = forwardRef((props, ref) => {
                 position={"relative"}
                 font-family="Roboto"
               >
-                Own the Moments <br/>
+                Own the Moments <br />
                 that Matter Most
                 <Image
                   width={"200px"}
@@ -79,81 +78,81 @@ const Introduce = forwardRef((props, ref) => {
                   // color={"white"}
                   // fontWeight={"600"}
                   // fontSize={"10px"}
-              />
+                />
               </Text>
             </Flex>
           </Box>
-        
-        <Box 
-          borderRadius={"30px"} 
-          h="100%" 
-          // bg="white" 
-          ml={"20px"} 
-          flex="1"
-          display={"flex"} 
-          justifyContent={"center"} 
-          alignItems={"center"}
-        >
-          <Flex direction={"column"} justify={"center"}>
-            <Text
-              fontWeight={"400"}
-              fontStyle={"normal"}
-              fontSize={{ base: "10px", md: "16px" }}
-              lineHeight={"28px"}
-              font-weight={"400"}
-              // position: absolute;
-              font-family={"Raleway"}
-              color={"white"}
-              mb={"58px"}
-            >
-              Create unforgettable experiences on our web3 platform.  <br/>
-              Own and share your most cherished dates with others.  <br/>
-              Join now and make lasting memories.  <br/>
-            </Text>
 
-            <Flex>
-              <Image 
-                src={rocket} 
-                // justifyContent={"center"} 
-                // alignItems={"center"} 
-                boxSize={{ sm: "20px", md: "20px" }} 
-              />
+          <Box
+            borderRadius={"30px"}
+            h="100%"
+            // bg="white"
+            ml={"20px"}
+            flex="1"
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Flex direction={"column"} justify={"center"}>
               <Text
-                fontWeight={"500"}
+                fontWeight={"400"}
                 fontStyle={"normal"}
                 fontSize={{ base: "10px", md: "16px" }}
-                // lineHeight={"30px"}
-                mb={"58px"}
-                ml={"20px"}
-                justifyContent={"center"} 
-                alignItems={"center"}
+                lineHeight={"28px"}
+                font-weight={"400"}
+                // position: absolute;
+                font-family={"Raleway"}
                 color={"white"}
+                mb={"58px"}
               >
-                Buy Your First Date Today
-              </Text>  
-            </Flex>
-            <Button
-              w={"160px"}
-              borderRadius={"50px"}
-              _hover={{ bg: "purple.500" }} // hover 시 배경색 변경
-            >
-              <Text
-                fontWeight={"500"}
-                fontStyle={"normal"}
-                fontSize={{ base: "10px", md: "16px" }}
-                lineHeight={"30px"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                color={"black"}
-              >
-                Buy Your Date
+                Create unforgettable experiences on our web3 platform. <br />
+                Own and share your most cherished dates with others. <br />
+                Join now and make lasting memories. <br />
               </Text>
-              <Box ml={2}>
-                <BsArrowRight color="black"/>
-              </Box>
-            </Button>
-          </Flex>
-        </Box>
+
+              <Flex>
+                <Image
+                  src={rocket}
+                  // justifyContent={"center"}
+                  // alignItems={"center"}
+                  boxSize={{ sm: "20px", md: "20px" }}
+                />
+                <Text
+                  fontWeight={"500"}
+                  fontStyle={"normal"}
+                  fontSize={{ base: "10px", md: "16px" }}
+                  // lineHeight={"30px"}
+                  mb={"58px"}
+                  ml={"20px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  color={"white"}
+                >
+                  Buy Your First Date Today
+                </Text>
+              </Flex>
+              <Button
+                w={"160px"}
+                borderRadius={"50px"}
+                _hover={{ bg: "purple.500" }} // hover 시 배경색 변경
+              >
+                <Text
+                  fontWeight={"500"}
+                  fontStyle={"normal"}
+                  fontSize={{ base: "10px", md: "16px" }}
+                  lineHeight={"30px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  color={"black"}
+                >
+                  Buy Your Date
+                </Text>
+                <Box ml={2}>
+                  <BsArrowRight color="black" />
+                </Box>
+              </Button>
+            </Flex>
+          </Box>
         </Flex>
       </Box>
     </>
@@ -162,25 +161,19 @@ const Introduce = forwardRef((props, ref) => {
 
 export default Introduce;
 
-
-
-
-
-
-
 // const Introduce = forwardRef((props, ref) => {
 //   return (
-//     <Box 
-//       ref={ref} 
-//       // borderBottom={"solid 1px #C1C1C1"} 
-//       py={"10px"} 
+//     <Box
+//       ref={ref}
+//       // borderBottom={"solid 1px #C1C1C1"}
+//       py={"10px"}
 //       bgGradient={"linear(to-l,#8c1eaa,#272842)"}
-      
+
 //     >
 //       <SimpleGrid columns={{ base: 1, lg: 2 }} spacing="20" m={"80px"} marginBottom={"100px"}>
-//         <Box 
-//           justifyContent={"center"} 
-//           alignItems={"center"} 
+//         <Box
+//           justifyContent={"center"}
+//           alignItems={"center"}
 //         >
 //           <Flex direction={"row"} justify={"space-around"}>
 //             <Text
@@ -220,7 +213,7 @@ export default Introduce;
 //                 lineHeight={"30px"}
 //               >
 //                 Buy Your First Date Today
-//               </Text>  
+//               </Text>
 //             </Flex>
 //             <Button
 //               w={"150px"}

@@ -19,10 +19,10 @@ import logoPeople from "@assets/images/logoPeople.png";
 
 const Description = forwardRef((props, ref) => {
   return (
-    <Box 
-      ref={ref} 
+    <Box
+      ref={ref}
       py={"70px"}
-      bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+      // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
     >
       <Flex
         direction={"column"}
@@ -49,9 +49,8 @@ const Description = forwardRef((props, ref) => {
           columns={{ base: 1, md: 3 }}
           spacing={{ base: 20, md: 20, lg: 10 }}
         >
-
           <Flex direction={"column"} justify={"center"} align={"center"}>
-            <Image 
+            <Image
               src={logoCalendar}
               // position="relative"
               width="50px"
@@ -59,19 +58,19 @@ const Description = forwardRef((props, ref) => {
               left="100px"
               bottom="-80px"
             />
-              <Text
-                mt={"100px"}
-                ml={"70px"}
-                fontFamily={"Raleway"}
-                fontStyle={"normal"}
-                fontWeight={"700"}
-                fontSize={"30px"}
-                lineHeight={"38px"}
-                color={"#FFFFFF"}
-                position={"relative"}
-              >
-              <Image 
-                src={DescriptionStarLight2} 
+            <Text
+              mt={"100px"}
+              ml={"70px"}
+              fontFamily={"Raleway"}
+              fontStyle={"normal"}
+              fontWeight={"700"}
+              fontSize={"30px"}
+              lineHeight={"38px"}
+              color={"#FFFFFF"}
+              position={"relative"}
+            >
+              <Image
+                src={DescriptionStarLight2}
                 position={"absolute"}
                 width={"100px"}
                 height={"100px"}
@@ -90,23 +89,16 @@ const Description = forwardRef((props, ref) => {
               color={"#FFFFFF"}
             >
               <Text>
-              Join our social platform to connect, <br/>
-              share experiences, and celebrate together. <br/>
-              See other people's special dates, <br/>
-              leave comments, and mingle with others. <br/>
+                Join our social platform to connect, <br />
+                share experiences, and celebrate together. <br />
+                See other people's special dates, <br />
+                leave comments, and mingle with others. <br />
               </Text>
             </UnorderedList>
           </Flex>
 
-
-
-
-
-
-
-
           <Flex direction={"column"} justify={"center"} align={"center"}>
-            <Image  
+            <Image
               src={palateIcon}
               // position="relative"
               width="50px"
@@ -125,8 +117,8 @@ const Description = forwardRef((props, ref) => {
               color={"#FFFFFF"}
               position={"relative"}
             >
-              <Image 
-                src={DescriptionStarLight2} 
+              <Image
+                src={DescriptionStarLight2}
                 position={"absolute"}
                 width={"100px"}
                 height={"100px"}
@@ -145,16 +137,16 @@ const Description = forwardRef((props, ref) => {
               color={"#FFFFFF"}
             >
               <Text>
-              Create a unique memory by personalizing  <br/>
-              your special date with NFT pictures.  <br/>
-              Share a one-of-a-kind experience with others. <br/> 
-              <br/> 
+                Create a unique memory by personalizing <br />
+                your special date with NFT pictures. <br />
+                Share a one-of-a-kind experience with others. <br />
+                <br />
               </Text>
             </UnorderedList>
           </Flex>
 
           <Flex direction={"column"} justify={"center"} align={"center"}>
-            <Image  
+            <Image
               src={logoPeople}
               // position="relative"
               width="50px"
@@ -173,8 +165,8 @@ const Description = forwardRef((props, ref) => {
               color={"#FFFFFF"}
               position={"relative"}
             >
-              <Image 
-                src={DescriptionStarLight2} 
+              <Image
+                src={DescriptionStarLight2}
                 position={"absolute"}
                 width={"100px"}
                 height={"100px"}
@@ -193,14 +185,13 @@ const Description = forwardRef((props, ref) => {
               color={"#FFFFFF"}
             >
               <Text>
-              Add branding elements like a logo, tagline, <br/>
-              or message to create a unique personal brand. <br/> 
-              Showcase your NFTs to promote yourself <br/> 
-              in a creative and memorable way. <br/>       
+                Add branding elements like a logo, tagline, <br />
+                or message to create a unique personal brand. <br />
+                Showcase your NFTs to promote yourself <br />
+                in a creative and memorable way. <br />
               </Text>
             </UnorderedList>
           </Flex>
-
         </SimpleGrid>
       </Flex>
     </Box>

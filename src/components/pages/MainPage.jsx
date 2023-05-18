@@ -9,24 +9,16 @@ import Footer from "@components/templates/Footer";
 
 import { useState, useEffect } from "react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
-import { Button } from "@chakra-ui/react";
-// import { useGasless } from "@hooks/useGasless";
-
+import { Box, Button } from "@chakra-ui/react";
+import backIMG from "../../assets/images/DistanceStars.png";
 import Web3 from "web3";
 
-import {
-  // CONTRACT_ABI,
-  // CONTRACT_ADDRESS,
-  userContABI,
-  dateContABI,
-  commentContABI,
-  USER_CONTRACT_ADDRESS,
-  DATE_CONTRACT_ADDRESS,
-  COMMENT_CONTRACT_ADDRESS,
-} from "../../web3.config.js";
-// import { useGasless } from "@hooks/useGasless";
+// import {
+//   CONTRACT_ABI,
+//   CONTRACT_ADDRESS,
+// } from "../../web3.config.js";
 
-const web3 = new Web3(window.ethereum);
+// const web3 = new Web3(window.ethereum);
 // const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
 export default function MainPage() {
@@ -87,13 +79,12 @@ export default function MainPage() {
   //   getMyNft();
   // }, [account]);
 
-  //   useGasless();
   var date = new Date();
   var year = date.getFullYear();
   var month = ("0" + (1 + date.getMonth())).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
-  let yyyymmdd = year + month + day;
-  console.log(yyyymmdd);
+  let todayYYYYMMDD = year + month + day;
+  console.log(todayYYYYMMDD);
 
   useEffect(() => {
     getContracts();
@@ -135,7 +126,7 @@ export default function MainPage() {
     try {
       if (!dateContract) return;
       await dateContract.methods
-        .mintCommon(0, season, 20230518, address)
+        .mintCommon(0, season, _yyyymmdd, address)
         .send({ from: address })
         .then(console.log);
     } catch (error) {
@@ -148,60 +139,66 @@ export default function MainPage() {
       if (!dateContract) {
         return;
       }
-      let userNftInfo = await dateContract.methods
+      let todayNftInfo = await dateContract.methods
         .getDayNftInfo(_yyyymmdd)
         .call();
       let jsonDate = await dateContract.methods.tokenURI(_yyyymmdd).call();
-      console.log(userNftInfo);
-      console.log(jsonDate);
+      if (todayNftInfo.showDefaultImg) {
+        console.log("변경한 url이 존재함");
+      } else {
+        console.log("기본 이미지 출력");
+        let metadataUrl = jsonDate;
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getTodayNft(20230518);
+    getTodayNft(todayYYYYMMDD);
     console.log("NFT DATA", nftInfo);
   }, [dateContract]);
 
   return (
     <>
-      <Button
-        onClick={() => {
-          mintDate("2023", 20230518);
-        }}
-        color={"blue"}
-      >
-        Test BTN
-      </Button>
-      <Button
-        onClick={() => {
-          getTodayNft();
-        }}
-        color={"blue"}
-      >
-        Test BTN2
-      </Button>
-      <NavBar
-        // currentVisibleIndex={currentVisibleIndex}
-        // onClickNavLink={handleClickNavLink}
-        signUp={signUp}
-        signIn={signIn}
-        address={address}
-        account={account}
-      />
-      <Introduce />
-      <Calender
-        selected={selectedDate}
-        onSelectDate={setSelectedDate}
-        totalNft={totalNft}
-        mintedNft={mintedNft}
-        myNft={myNft}
-        page={page}
-      />
-      <Description />
-      <Faq />
-      <Footer />
+      <Box bg={`url(${backIMG})`} bgSize={"100%"}>
+        <Button
+          onClick={() => {
+            mintDate("2023", todayYYYYMMDD);
+          }}
+          color={"blue"}
+        >
+          Test BTN
+        </Button>
+        <Button
+          onClick={() => {
+            getTodayNft();
+          }}
+          color={"blue"}
+        >
+          Test BTN2
+        </Button>
+        <NavBar
+          // currentVisibleIndex={currentVisibleIndex}
+          // onClickNavLink={handleClickNavLink}
+          signUp={signUp}
+          signIn={signIn}
+          address={address}
+          account={account}
+        />
+        <Introduce />
+        <Calender
+          selected={selectedDate}
+          onSelectDate={setSelectedDate}
+          totalNft={totalNft}
+          mintedNft={mintedNft}
+          myNft={myNft}
+          page={page}
+        />
+        <Description />
+        <Faq />
+        <Footer />
+      </Box>
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function NavBar({
       z-index={"999"}
       top={0}
       width={"100%"}
-      bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+      // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
     >
       <Flex
         minH={"60px"}

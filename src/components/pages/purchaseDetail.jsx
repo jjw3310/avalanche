@@ -14,7 +14,6 @@ import {
   Button,
   Popover,
   PopoverTrigger,
-
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import NavBar from "@components/templates/NavBar";
@@ -37,12 +36,12 @@ const PurchaseDetail = forwardRef((props, ref) => {
 
   return (
     <>
-      <NavBar/>
-      <Box 
-        ref={ref} 
-        w={"100%"} 
-        h={"1000px"} 
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+      <NavBar />
+      <Box
+        ref={ref}
+        w={"100%"}
+        h={"1000px"}
+        // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
@@ -55,7 +54,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
-          
           <Box borderRadius={"30px"} h="100%" mr={"20px"} flex="3">
             <Box
               position="relative"
@@ -73,7 +71,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 lineHeight="47px"
                 color="#FFFFFF"
               >
-              Edit your day
+                Edit your day
               </Text>
               <Box
                 background="rgba(0, 0, 0, 0.4)"
@@ -83,7 +81,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 position="absolute"
                 left="0px"
                 top="50px"
-                w={"300px"} 
+                w={"300px"}
                 h={"300px"}
               >
                 <Box
@@ -94,23 +92,23 @@ const PurchaseDetail = forwardRef((props, ref) => {
                   top="25px"
                   border="1px solid #FFFFFF"
                   borderRadius="30px"
-                  w={"250px"} 
+                  w={"250px"}
                   h={"250px"}
+                >
+                  <Box
+                    fontFamily="sans-serif"
+                    position="relative"
+                    textAlign={"center"}
+                    left="0px"
+                    top="205px"
+                    fontStyle="normal"
+                    fontWeight={700}
+                    fontSize="15px"
+                    lineHeight="23px"
+                    color="#FFFFFF"
                   >
-                    <Box
-                      fontFamily="sans-serif"
-                      position="relative"
-                      textAlign={"center"}
-                      left="0px"
-                      top="205px"
-                      fontStyle="normal"       
-                      fontWeight={700}
-                      fontSize="15px"
-                      lineHeight="23px"
-                      color="#FFFFFF"
-                    >
-                      upload your artwork
-                    </Box>
+                    upload your artwork
+                  </Box>
                   <FontAwesomeIcon
                     icon={faImages}
                     size={120}
@@ -119,7 +117,9 @@ const PurchaseDetail = forwardRef((props, ref) => {
                       width: "250px",
                       height: "50px",
                       transition: "transform 0.4s",
-                      transform: `scale(${isHovered ? 1.05 : 1}) translateY(70px)`,
+                      transform: `scale(${
+                        isHovered ? 1.05 : 1
+                      }) translateY(70px)`,
                     }}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -133,109 +133,109 @@ const PurchaseDetail = forwardRef((props, ref) => {
             </Box>
           </Box>
 
-
-          <Box 
-            borderRadius={"30px"} 
-            h="100%" 
-            ml={"20px"} 
+          <Box
+            borderRadius={"30px"}
+            h="100%"
+            ml={"20px"}
             flex="4"
             direction={{ base: "column-reverse", md: "row" }}
             justify={"flex-start"}
             px={{ base: "20px", sm: "30px", lg: "50px" }}
             align={"flex-start"}
+          >
+            {/* M date */}
+            <Text
+              mt={"130px"}
+              fontFamily="sans-serif"
+              fontStyle="normal"
+              fontWeight={700}
+              fontSize="20px"
+              lineHeight="23px"
+              color="#FFFFFF"
             >
-              {/* M date */}
-              <Text 
-                mt={"130px"}
-                fontFamily="sans-serif"
-                fontStyle="normal"       
-                fontWeight={700}
-                fontSize="20px"
-                lineHeight="23px"
-                color="#FFFFFF"
-                
-              >
               <label for="input">My date</label>
-              </Text>
-              <Input 
-                mt={"20px"}
-                color="black"
-                type="text" 
-                placeholder="yy/mm/dd" 
-                width="283px"
-                background="rgba(226, 226, 226, 0.96)"
-                borderRadius="10px"
-              />
+            </Text>
+            <Input
+              mt={"20px"}
+              color="black"
+              type="text"
+              placeholder="yy/mm/dd"
+              width="283px"
+              background="rgba(226, 226, 226, 0.96)"
+              borderRadius="10px"
+            />
 
-              {/* Date’s title */}
-              <Text 
-                mt={"80px"}
-                fontFamily="sans-serif"
-                fontStyle="normal"       
-                fontWeight={700}
-                fontSize="20px"
-                lineHeight="23px"
-                color="#FFFFFF"
-                
-              >
-                <label for="input">Date’s title</label>
-              </Text>
-              <Input 
-                mt={"20px"}
-                color="black"
-                type="text" 
-                placeholder="My Birthday !! " 
-                width="600px"
-                background="rgba(226, 226, 226, 0.96)"
-                borderRadius="10px"
-              />
-              <Text
-                direction={{ base: "column-reverse", md: "row" }}
-                justify="flex-end"
-                align="flex-end"
-                ml={"565px"}
-                fontFamily="sans-serif"
-                fontSize="14px"
-                color="gray.500"
-              >
-                0/30
-              </Text>
+            {/* Date’s title */}
+            <Text
+              mt={"80px"}
+              fontFamily="sans-serif"
+              fontStyle="normal"
+              fontWeight={700}
+              fontSize="20px"
+              lineHeight="23px"
+              color="#FFFFFF"
+            >
+              <label for="input">Date’s title</label>
+            </Text>
+            <Input
+              mt={"20px"}
+              color="black"
+              type="text"
+              placeholder="My Birthday !! "
+              width="600px"
+              background="rgba(226, 226, 226, 0.96)"
+              borderRadius="10px"
+            />
+            <Text
+              direction={{ base: "column-reverse", md: "row" }}
+              justify="flex-end"
+              align="flex-end"
+              ml={"565px"}
+              fontFamily="sans-serif"
+              fontSize="14px"
+              color="gray.500"
+            >
+              0/30
+            </Text>
 
-              {/* Description for the date  */}
-              <Text 
-                mt={"80px"}
-                fontFamily="sans-serif"
-                fontStyle="normal"       
-                fontWeight={700}
-                fontSize="20px"
-                lineHeight="23px"
-                color="#FFFFFF"
-                
-              >
+            {/* Description for the date  */}
+            <Text
+              mt={"80px"}
+              fontFamily="sans-serif"
+              fontStyle="normal"
+              fontWeight={700}
+              fontSize="20px"
+              lineHeight="23px"
+              color="#FFFFFF"
+            >
               <label for="input">Description for the date</label>
-              </Text>
-              <Textarea
-                mt="20px"
-                color="black"
-                placeholder="Write a long sentence..."
-                width="600px"
-                height="200px"
-                background="rgba(226, 226, 226, 0.96)"
-                borderRadius="10px"
-              />
-              <Text
-                mt="2"
-                justify="flex-end"
-                align="flex-end"
-                fontFamily="sans-serif"
-                fontSize="14px"
-                color="gray.500"
-                ml={"565px"}
-              >
-                0/500
-              </Text>
-            
-            <Button borderRadius={"20px"} _hover={{ bg: "purple.500" }} mt={"100px"}>
+            </Text>
+            <Textarea
+              mt="20px"
+              color="black"
+              placeholder="Write a long sentence..."
+              width="600px"
+              height="200px"
+              background="rgba(226, 226, 226, 0.96)"
+              borderRadius="10px"
+            />
+            <Text
+              mt="2"
+              justify="flex-end"
+              align="flex-end"
+              fontFamily="sans-serif"
+              fontSize="14px"
+              color="gray.500"
+              ml={"565px"}
+            >
+              0/500
+            </Text>
+
+            <Button
+              borderRadius={"20px"}
+              _hover={{ bg: "purple.500" }}
+              mt={"100px"}
+            >
               <Popover trigger={"hover"} placement={"bottom-start"}>
                 <PopoverTrigger>
                   <Box
@@ -255,12 +255,11 @@ const PurchaseDetail = forwardRef((props, ref) => {
                     href="/"
                     target="_blank"
                   >
-                      Submit
+                    Submit
                   </Box>
                 </PopoverTrigger>
               </Popover>
             </Button>
-
           </Box>
         </Flex>
       </Box>

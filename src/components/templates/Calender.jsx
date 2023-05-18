@@ -5,13 +5,7 @@ import {
   // chakra,
   Text,
   Image,
-  Stack,
-  Heading,
-  VStack,
-  UnorderedList,
   Button,
-  Popover,
-  PopoverTrigger,
   Divider,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
@@ -218,7 +212,7 @@ const Calender = ({
         // ref={ref}
         w={"100%"}
         h={"600px"}
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+        // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
