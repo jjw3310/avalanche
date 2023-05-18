@@ -37,7 +37,7 @@ const Calender = ({
 
   const [selectedPage, setSelectedPage] = useState(1);
   const [nfts, setNfts] = useState();
-
+  const [nftImg, setNftImg] = useState([]);
   // const [nfts, setNfts] = useState(["", "h"]);
 
   useEffect(() => {
@@ -115,6 +115,21 @@ const Calender = ({
     }
   };
 
+  const getNftImg = () => {
+    let nftImgArray = [];
+    for (let i = 0; i < nfts.length; i++) {
+      document.querySelector(
+        ".react-calendar__tile"
+      ).style.backgroundImage = `url(${nfts[i].metadata.image}) !important`;
+      console.log("elelelel:" + `${nfts[i].metadata.image}`);
+      nftImgArray.push(i);
+    }
+    setNftImg(nftImgArray);
+  };
+  useEffect(() => {
+    if (!nfts) return;
+    getNftImg();
+  }, [nfts]);
   const onClickPageChange = (p) => () => {
     setSelectedPage(p);
     getNfts(p);
@@ -172,6 +187,7 @@ const Calender = ({
     getNfts(page);
   }, [page]);
 
+  const mintImg = () => {};
   return (
     <>
       <Box
