@@ -111,17 +111,17 @@ const Calender = ({
         // console.log(tokenId);
 
         let response = await axios.get(
-          `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+          // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
           // `https://olbm.mypinata.cloud/ipfs/QmU52T5t4bXtoUqQYStgx39DdXy3gLQq7KDuF1F9g3E9Qy/${tokenId}.json`
 
           // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${tokenIdjson[i]}.json`
-          // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
+          `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
         );
         console.log("heheheheeh" + response);
         console.log("tooooo" + tokenId);
         nftArray.push({ tokenId, metadata: response.data });
-        console.log(process.env.REACT_APP_JSON_URL);
-        // console.log(nftArray[0].metadata.properties.image.description);
+        // console.log(process.env.REACT_APP_JSON_URL);
+        console.log(nftArray[0].metadata.properties.image.description);
       }
       setNfts(nftArray);
     } catch (error) {
