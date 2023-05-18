@@ -4,7 +4,14 @@ import MyCalendar from "./MyCalendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
-const CalendarComponent = () => {
+import Web3 from "web3";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
+// import Nfts from "../components/Nfts";
+const web3 = new Web3(window.ethereum);
+const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+
+console.log(contract);
+const CalendarComponent = ({ totalNft, mintedNft, myNft }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [images, setImages] = useState(["ss", "sa"]);
   const [formatDate, setFormatDate] = useState(["aa", "bb"]);
@@ -78,6 +85,7 @@ const CalendarComponent = () => {
 
   useEffect(() => {
     getNfts();
+    console.log(nfts.image.url);
   }, []);
 
   // NFT 목록 반복
@@ -91,6 +99,7 @@ const CalendarComponent = () => {
   //   // NFT 이미지 출력
   //   console.log(nft.image);
   // }
+
   return (
     <div>
       <CalendarContainer>
@@ -100,7 +109,7 @@ const CalendarComponent = () => {
           minDetail="decade"
           onSelectDate={setSelectedDate}
           className="react-calendar"
-          style={{ backgroundColor: "black" }}
+          style={{ backgroundColor: "white" }}
           // style={{ "background-color": "black" }}
         />
       </CalendarContainer>

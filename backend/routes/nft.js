@@ -98,7 +98,7 @@ router.get("/:userId", async (req, res) => {
 //   }
 // });
 
-// 투두 완료
+// 완료
 router.put("/:id/done", async (req, res) => {
   try {
     //id params로 받고
