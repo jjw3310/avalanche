@@ -8,6 +8,10 @@ import Faq from "@components/templates/Faq";
 import Footer from "@components/templates/Footer";
 
 import { useState, useEffect } from "react";
+import { useWallet, useWeb3 } from "@hooks/useAvax";
+import { useEffect } from "react";
+import { Button } from "@chakra-ui/react";
+// import { useGasless } from "@hooks/useGasless";
 
 import Web3 from "web3";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../../web3.config";
@@ -22,6 +26,10 @@ export default function MainPage({ account }) {
   const [myNft, setMyNft] = useState(0);
   const [page, setPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { contract, userContract, dateContract, getContracts } = useWeb3();
+  const { address, getAddress } = useWallet();
+  const [account, setAccount] = useState();
+  const [inputAcnt, setInputAcnt] = useState("testing");
   const getTotalNft = async () => {
     try {
       if (!contract) return;
@@ -66,12 +74,86 @@ export default function MainPage({ account }) {
   useEffect(() => {
     getMyNft();
   }, [account]);
+
   //   useGasless();
+  useEffect(() => {
+    getContracts();
+    getAddress();
+  }, []);
+
+  const getCont = async () => {
+    try {
+      if (!contract) return;
+      console.log("account:", address);
+      const response = await contract.methods
+        .increment()
+        .send({ from: address });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signUp = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .signUp("test", "1234")
+        .send({ from: address });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .login(inputAcnt, "1234")
+        .call()
+        .then((res) => {
+          if (res) {
+            setAccount(inputAcnt);
+            alert("로그인 성공");
+          } else {
+            alert("로그인 실패");
+          }
+        });
+      // console.log("login:", response.data);
+    } catch (error) {
+      console.error(error);
+      alert("로그인 실패");
+    }
+  };
+
+  const mintDate = async () => {
+    try {
+      if (!dateContract) return;
+      await dateContract.methods
+        .mintCommon(20230518)
+        .send({ from: address })
+        .then(console.log);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
+      <Button
+        onClick={() => {
+          mintDate();
+        }}
+        color={"blue"}
+      >
+        Test BTN
+      </Button>
       <NavBar
-      // currentVisibleIndex={currentVisibleIndex}
-      // onClickNavLink={handleClickNavLink}
+        // currentVisibleIndex={currentVisibleIndex}
+        // onClickNavLink={handleClickNavLink}
+        signUp={signUp}
+        signIn={signIn}
+        address={address}
+        account={account}
       />
       <Introduce />
       <Calender
