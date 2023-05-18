@@ -225,6 +225,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
             </Box>
           </Box>
 
+
           {/* 오른쪽 영역 */}
           <Box
             h="100%"

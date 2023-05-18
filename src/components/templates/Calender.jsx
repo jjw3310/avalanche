@@ -337,6 +337,7 @@ const Calender = forwardRef((props, ref) => {
                   </Flex>
                   <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                   {/* 방명록 댓글 #Set1 끝 부분 */}
+
                   {/* 방명록 댓글 #Set2 시작 부분 */}
                   <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
                     <IoPersonCircleOutline
@@ -398,6 +399,7 @@ const Calender = forwardRef((props, ref) => {
                   </Flex>
                   <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                   {/* 방명록 댓글 #Set2 끝 부분 */}
+
                   {/* 방명록 댓글 #Set3 시작 부분 */}
                   <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
                     <IoPersonCircleOutline
@@ -459,6 +461,7 @@ const Calender = forwardRef((props, ref) => {
                   </Flex>
                   <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                   {/* 방명록 댓글 #Set3 끝 부분 */}
+
                   {/* 방명록 댓글 #Set4 시작 부분 */}
                   <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
                     <IoPersonCircleOutline
@@ -521,12 +524,11 @@ const Calender = forwardRef((props, ref) => {
                   <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                   {/* 방명록 댓글 #Set4 끝 부분 */}
 
-            
 
                 </Flex>
               </Box>
-            
             </Box>
+
           </Link>
 
           {/* 작은 캘린더 민팅 이전 */}
