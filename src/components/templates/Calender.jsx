@@ -218,15 +218,6 @@ const Calender = ({
           pt={5}
           pb={5}
         >
-<<<<<<< HEAD
-          <Box
-            borderRadius={"30px"}
-            h="100%"
-            bg="white"
-            ml={"20px"}
-            flex="1"
-          ></Box>
-=======
           <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2">
             <div style={{ height: "100%" }}>
               <CalendarContainer
@@ -289,7 +280,6 @@ const Calender = ({
             </div>
           </Box>
 
->>>>>>> 4ebebbc36cefcc86d074d8f973ceb1d7ddde7d59
           {/* 큰 캘린더 */}
           {/* <Box borderRadius={"30px"} h="100%" bg="gray.500" mr={"20px"} flex="2"></Box> */}
 
