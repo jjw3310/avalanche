@@ -14,8 +14,10 @@ import { Button } from "@chakra-ui/react";
 // import { useGasless } from "@hooks/useGasless";
 
 export default function MainPage() {
-  const { contract, userContract, getContracts } = useWeb3();
-  const { account, getAddress } = useWallet();
+  const { contract, userContract, dateContract, getContracts } = useWeb3();
+  const { address, getAddress } = useWallet();
+  const [account, setAccount] = useState();
+  const [inputAcnt, setInputAcnt] = useState("testing");
   //   useGasless();
   useEffect(() => {
     getContracts();
@@ -25,10 +27,10 @@ export default function MainPage() {
   const getCont = async () => {
     try {
       if (!contract) return;
-      console.log("account:", account);
+      console.log("account:", address);
       const response = await contract.methods
         .increment()
-        .send({ from: account });
+        .send({ from: address });
     } catch (error) {
       console.error(error);
     }
@@ -37,10 +39,42 @@ export default function MainPage() {
   const signUp = async () => {
     try {
       if (!userContract) return;
-      console.log("account:", account);
       const response = await userContract.methods
-        .signUp("tester", "1234")
-        .send({ from: account });
+        .signUp("test", "1234")
+        .send({ from: address });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .login(inputAcnt, "1234")
+        .call()
+        .then((res) => {
+          if (res) {
+            setAccount(inputAcnt);
+            alert("로그인 성공");
+          } else {
+            alert("로그인 실패");
+          }
+        });
+      // console.log("login:", response.data);
+    } catch (error) {
+      console.error(error);
+      alert("로그인 실패");
+    }
+  };
+
+  const mintDate = async () => {
+    try {
+      if (!dateContract) return;
+      await dateContract.methods
+        .mintCommon(20230518)
+        .send({ from: address })
+        .then(console.log);
     } catch (error) {
       console.error(error);
     }
@@ -50,23 +84,19 @@ export default function MainPage() {
     <>
       <Button
         onClick={() => {
-          getCont();
+          mintDate();
         }}
         color={"blue"}
       >
-        Contract Test BTN
-      </Button>
-      <Button
-        onClick={() => {
-          signUp();
-        }}
-        color={"blue"}
-      >
-        SignUP TEST
+        Test BTN
       </Button>
       <NavBar
-      // currentVisibleIndex={currentVisibleIndex}
-      // onClickNavLink={handleClickNavLink}
+        // currentVisibleIndex={currentVisibleIndex}
+        // onClickNavLink={handleClickNavLink}
+        signUp={signUp}
+        signIn={signIn}
+        address={address}
+        account={account}
       />
       <Introduce />
       <Calender />

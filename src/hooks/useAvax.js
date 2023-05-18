@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
-import { contractABI, userContABI } from "../hooks/abi.js";
+import { contractABI, userContABI, dateContABI } from "../hooks/abi.js";
 
 export const useWeb3 = () => {
   const [web3, setWeb3] = useState();
   const [contract, setContract] = useState();
   const [userContract, setUserContract] = useState();
+  const [dateContract, setDateContract] = useState();
 
   useEffect(() => {
     if (!window.ethereum) return;
@@ -28,6 +29,12 @@ export const useWeb3 = () => {
           process.env.REACT_APP_USER_CONTRACT_ADDRESS
         )
       );
+      await setDateContract(
+        new web3.eth.Contract(
+          dateContABI,
+          process.env.REACT_APP_DATE_CONTRACT_ADDRESS
+        )
+      );
     } catch (error) {
       console.error(error);
     }
@@ -36,18 +43,18 @@ export const useWeb3 = () => {
   useEffect(() => {
     getContracts();
   }, [web3]);
-  return { contract, userContract, getContracts };
+  return { contract, userContract, dateContract, getContracts };
 };
 
 export const useWallet = () => {
-  const [account, setAccount] = useState("");
+  const [address, setAddress] = useState("");
   const getAddress = async () => {
     try {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
 
-      setAccount(accounts[0]);
+      setAddress(accounts[0]);
     } catch (error) {
       console.error(error);
     }
@@ -55,5 +62,5 @@ export const useWallet = () => {
   useEffect(() => {
     getAddress();
   }, []);
-  return { account, getAddress };
+  return { address, getAddress };
 };
