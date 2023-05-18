@@ -45,6 +45,7 @@
 }
 .react-calendar__tile {
   background-image: url("https://velog.velcdn.com/images/h_jinny/post/855a7c1e-ed33-4d94-aacd-8e1d8c1e4d00/image.png");
+  background-size: 100% 100% !important;
 }
 
 .react-calendar__viewContainer {
