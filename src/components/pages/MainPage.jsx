@@ -7,27 +7,84 @@ import Description from "@components/templates/Description";
 import Faq from "@components/templates/Faq";
 import Footer from "@components/templates/Footer";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
-import { useEffect } from "react";
-import { Box, Button, Image, background } from "@chakra-ui/react";
-import IMG from "../../assets/images/DistanceStars.png";
-// import { useGasless } from "@hooks/useGasless";
+import { Box, Button } from "@chakra-ui/react";
+import backIMG from "../../assets/images/DistanceStars.png";
+import Web3 from "web3";
+
+// import {
+//   CONTRACT_ABI,
+//   CONTRACT_ADDRESS,
+// } from "../../web3.config.js";
+
+// const web3 = new Web3(window.ethereum);
+// const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
 export default function MainPage() {
+  const [totalNft, setTotalNft] = useState(0);
+  const [mintedNft, setMintedNft] = useState(0);
+  const [myNft, setMyNft] = useState(0);
+  const [page, setPage] = useState(1);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const { userContract, dateContract, commentContract, getContracts } =
     useWeb3();
   const { address, getAddress } = useWallet();
   const [account, setAccount] = useState();
   const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
-  //   useGasless();
+  // const getTotalNft = async () => {
+  //   try {
+  //     if (!contract) return;
+
+  //     const response = await contract.methods.totalNft().call();
+
+  //     setTotalNft(response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // const getMintedNft = async () => {
+  //   try {
+  //     if (!contract) return;
+
+  //     const response = await contract.methods.totalSupply().call();
+
+  //     setMintedNft(response);
+  //     //   console.log(response);
+  //     //   setPage(parseInt((parseInt(response) - 1) / 10) + 1);
+  //     setPage(Math.floor(parseInt(response - 1) / 3) + 1);
+  //     //   console.log(page);
+  //     // 10 - 1 = 9 / 10 = 0 + 1= 1page
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // const getMyNft = async () => {
+  //   try {
+  //     if (!contract || !account) return;
+  //     const response = await contract.methods.balanceOf(account).call();
+  //     console.log("내꺼 : " + response);
+  //     setMyNft(response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getTotalNft();
+  //   getMintedNft();
+  // }, []);
+  // useEffect(() => {
+  //   getMyNft();
+  // }, [account]);
+
   var date = new Date();
   var year = date.getFullYear();
   var month = ("0" + (1 + date.getMonth())).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
-  let yyyymmdd = year + month + day;
-  console.log(yyyymmdd);
+  let todayYYYYMMDD = year + month + day;
+  console.log(todayYYYYMMDD);
 
   useEffect(() => {
     getContracts();
@@ -69,7 +126,7 @@ export default function MainPage() {
     try {
       if (!dateContract) return;
       await dateContract.methods
-        .mintCommon(0, season, 20230518, address)
+        .mintCommon(0, season, _yyyymmdd, address)
         .send({ from: address })
         .then(console.log);
     } catch (error) {
@@ -98,16 +155,16 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    getTodayNft(20230518);
+    getTodayNft(todayYYYYMMDD);
     console.log("NFT DATA", nftInfo);
   }, [dateContract]);
 
   return (
     <>
-      <Box bg={`url(${IMG})`} bgSize={"100%"}>
+      <Box bg={`url(${backIMG})`} bgSize={"100%"}>
         <Button
           onClick={() => {
-            mintDate("2023", 20230518);
+            mintDate("2023", todayYYYYMMDD);
           }}
           color={"blue"}
         >
@@ -130,7 +187,14 @@ export default function MainPage() {
           account={account}
         />
         <Introduce />
-        <Calender />
+        <Calender
+          selected={selectedDate}
+          onSelectDate={setSelectedDate}
+          totalNft={totalNft}
+          mintedNft={mintedNft}
+          myNft={myNft}
+          page={page}
+        />
         <Description />
         <Faq />
         <Footer />
