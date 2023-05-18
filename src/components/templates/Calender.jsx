@@ -630,7 +630,8 @@ const Calender = forwardRef((props, ref) => {
                     <Button
                       mt={"5px"}
                       ml={"120px"}
-                      w={"120px"}
+                      mr={"30px"}
+                      w={"100%"}
                       h={"30px"}
                       borderRadius={"20px"}
                       _hover={{ bg: "purple.500" }}
@@ -643,8 +644,6 @@ const Calender = forwardRef((props, ref) => {
                             fontStyle={"normal"}
                             fontSize={{ base: "10px", md: "15px" }}
                             lineHeight={"30px"}
-                            justifyContent={"flex-end"}
-                            alignItems={"flex-end"}
                             _hover={{
                               textDecoration: "none",
                               color: "linkHoverColor",
@@ -661,8 +660,8 @@ const Calender = forwardRef((props, ref) => {
                 </Flex>
               </Box>
             </Box>
-          </Box>
-          */}
+          </Box> */}
+         
 
         </Flex>
       </Box>
