@@ -26,14 +26,10 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import emptyHeart from "@assets/images/emptyHeart.png";
 import todayDateNFT from "@assets/images/todayDateNFT.png";
 import logoHeart  from "@assets/images/logoHeart.png";
+import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 
 
 const Calender = forwardRef((props, ref) => {
-  const [filled, setFilled] = useState(false);
-
-  const handleClick = () => {
-    setFilled(!filled);
-  };
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [images, setImages] = useState(["ss", "sa"]);
@@ -127,19 +123,17 @@ const Calender = forwardRef((props, ref) => {
           <Box
             borderRadius={"30px"}
             h="100%"
-            bg="gray.600"
+            bg="white"
             ml={"20px"}
           >
-            <Box>
+            <Box w="350px" position={"relative"}>
               <Image 
-                // w={"282px"}
+                position={"absolute"}
                 h={"200px"}
-
+                w={"100%"}
                 borderRadius={"30px"}
                 src={todayDateNFT} 
                 object-fit="cover"
-                position="absolute"
-
                 boxSizing="border-box"
                 borderTopLeftRadius="30px"
                 borderTopRightRadius="30px"
@@ -162,15 +156,12 @@ const Calender = forwardRef((props, ref) => {
                 {/* #1 */}
                 <Flex ml={"20px"} mt={"15px"} direction={"row"} justify={"flex-start"} align={"center"} w={"100%"}>
                 <IoPersonCircleOutline
-                  color={filled ? 'blue' : 'white'}
                   size={30}
-                  onClick={handleClick}
-                  style={{ cursor: 'pointer' }}
                 />
                   <Text ml={"10px"}>buyyourdate</Text>
                   <Button
                     // position={"relative"}
-                    ml={"160px"}
+                    ml={"120px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -191,7 +182,6 @@ const Calender = forwardRef((props, ref) => {
                       // position={"absolute"}
                     />
                     <Text 
-                      
                       mr={"5px"}
                       color={"black"}
                       // position={"absolute"}
@@ -226,26 +216,34 @@ const Calender = forwardRef((props, ref) => {
                 </Flex>
 
                 {/* #3 */}
-                <Flex direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                  <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'white'}
-                    size={30}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
+                <Flex position={"relative"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
+                  <Text
+                    ml={"35px"}
+                    fontFamily={"Roboto"}
+                    fontStyle={"normal"}
+                    fontWeight={"400"}
+                    fontSize={"20px"}
+                    lineHeight={"33px"}
+                    color={"#FFFFFF"}
+                    
+                  >
+                  <Image 
+                    src={DescriptionStarLight2} 
+                    position={"absolute"}
+                    width={"100px"}
+                    height={"100px"}
+                    left={"-35px"}
+                    bottom={"-34px"}
                   />
-                  <Text  
-                    fontSize={"16px"} 
-                    ml={"10px"}
-                    lineHeight={["23px", null, "23px"]}
-                  >20230521</Text>
+                  20230521
+                </Text>
                 </Flex>
-
               </Flex>
             </Box>
 
             {/* #below box */}
             <Box
-              background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
+              background="white"
               boxSizing="border-box"
               borderTopLeftRadius="0px"
               borderTopRightRadius="0px"
@@ -261,14 +259,15 @@ const Calender = forwardRef((props, ref) => {
               >
                 <Box
                   mt={"10px"}
+                  mb={"10px"}
                 >
                   <Text
                     fontFamily={"Raleway"}
                     fontStyle={"normal"}
                     fontWeight={"700"}
-                    fontSize={"16px"}
-                    lineHeight={"23px"}
-                    color={"black"}
+                    fontSize={"18px"}
+                    lineHeight={"21px"}
+                    color={"#000000"}
                   >
                     Today’s top 4 comments
                   </Text>
@@ -278,37 +277,40 @@ const Calender = forwardRef((props, ref) => {
                 {/* 방명록 댓글 #Set1 시작 부분 */}
                 <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
                   <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'black'}
                     size={30}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
+                    color="black"
                   />
-                  <Text  
-                    fontSize={"16px"} 
+                  <Flex  
                     ml={"10px"}
+                    mt={"2px"}
+                    fontSize={"16px"} 
                     lineHeight={["23px", null, "23px"]}
                     color={"black"}
                     fontWeight={"bold"}
+                    justify={"center"}  
+                    align={"center"}
                   >
                     73elliot
-                  </Text>
+                  </Flex>
                 </Flex>
                 <Flex 
                   justify={"space-around"} 
                   align={"center"}
+                  w={"100%"}
                 >
                   <Text
-                    ml={"50px"}
+                    ml={"35px"}
                     fontFamily="Raleway"
                     fontStyle="normal"
                     fontWeight={700}
-                    fontSize={["20px", null, "14px"]}
+                    fontSize={["12px", null, "12px"]}
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
                     Today is our anniversary :)
                   </Text>
                   <Box
+                    ml={"90px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -324,7 +326,7 @@ const Calender = forwardRef((props, ref) => {
                   >
                     <Image 
                       src={logoHeart}
-                    />
+                      />
                     <Text 
                       color={"black"}
                       ml={"5px"}
@@ -333,43 +335,43 @@ const Calender = forwardRef((props, ref) => {
                     </Text>
                   </Box>
                 </Flex>
-                <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
+                <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                 {/* 방명록 댓글 #Set1 끝 부분 */}
-
                 {/* 방명록 댓글 #Set2 시작 부분 */}
-                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'black'}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
+                  <IoPersonCircleOutline
                     size={30}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
+                    color={"black"}
                   />
-                  <Text  
-                    fontSize={"16px"} 
+                  <Flex  
                     ml={"10px"}
+                    mt={"2px"}
+                    fontSize={"16px"} 
                     lineHeight={["23px", null, "23px"]}
                     color={"black"}
                     fontWeight={"bold"}
                   >
                     elena124
-                  </Text>
+                  </Flex>
                 </Flex>
                 <Flex 
-                  justify={"center"} 
+                  justify={"space-around"} 
                   align={"center"}
+                  w={"100%"}
                 >
                   <Text
-                    ml={"50px"}
+                    ml={"35px"}
                     fontFamily="Raleway"
                     fontStyle="normal"
                     fontWeight={700}
-                    fontSize={["20px", null, "14px"]}
+                    fontSize={["12px", null, "12px"]}
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
-                    I passed the exam today!!!!!! LOL
+                    I passed the exam today!!! LOL
                   </Text>
                   <Box
+                    ml={"60px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -394,20 +396,18 @@ const Calender = forwardRef((props, ref) => {
                     </Text>
                   </Box>
                 </Flex>
-                <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
+                <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                 {/* 방명록 댓글 #Set2 끝 부분 */}
-
                 {/* 방명록 댓글 #Set3 시작 부분 */}
-                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'black'}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
+                  <IoPersonCircleOutline
                     size={30}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
+                    color={"black"}
                   />
                   <Text  
-                    fontSize={"16px"} 
                     ml={"10px"}
+                    mt={"2px"}
+                    fontSize={"16px"} 
                     lineHeight={["23px", null, "23px"]}
                     color={"black"}
                     fontWeight={"bold"}
@@ -416,21 +416,23 @@ const Calender = forwardRef((props, ref) => {
                   </Text>
                 </Flex>
                 <Flex 
-                  justify={"center"} 
+                  justify={"space-around"} 
                   align={"center"}
+                  w={"100%"}
                 >
                   <Text
-                    ml={"50px"}
+                    ml={"35px"}
                     fontFamily="Raleway"
                     fontStyle="normal"
                     fontWeight={700}
-                    fontSize={["20px", null, "14px"]}
+                    fontSize={["12px", null, "12px"]}
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
-                    Happy birthday!!! YOU ARE THE BEST XD
+                    Happy birthday!! YOU ARE THE BEST XD
                   </Text>
                   <Box
+                    ml={"-10px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -455,20 +457,18 @@ const Calender = forwardRef((props, ref) => {
                     </Text>
                   </Box>
                 </Flex>
-                <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
+                <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                 {/* 방명록 댓글 #Set3 끝 부분 */}
-
                 {/* 방명록 댓글 #Set4 시작 부분 */}
-                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"center"} w={"100%"}>
-                <IoPersonCircleOutline
-                    color={filled ? 'blue' : 'black'}
+                <Flex mt={"10px"} direction={"row"} ml={"20px"} justify={"flex-start"} align={"flex-start"} w={"100%"}>
+                  <IoPersonCircleOutline
                     size={30}
-                    onClick={handleClick}
-                    style={{ cursor: 'pointer' }}
+                    color={"black"}
                   />
                   <Text  
-                    fontSize={"16px"} 
                     ml={"10px"}
+                    mt={"2px"}
+                    fontSize={"16px"} 
                     lineHeight={["23px", null, "23px"]}
                     color={"black"}
                     fontWeight={"bold"}
@@ -477,21 +477,23 @@ const Calender = forwardRef((props, ref) => {
                   </Text>
                 </Flex>
                 <Flex 
-                  justify={"center"} 
+                  justify={"space-around"} 
                   align={"center"}
+                  w={"100%"}
                 >
                   <Text
-                    ml={"50px"}
+                    ml={"35px"}
                     fontFamily="Raleway"
                     fontStyle="normal"
                     fontWeight={700}
-                    fontSize={["20px", null, "14px"]}
+                    fontSize={["14px", null, "12px"]}
                     lineHeight={["23px", null, "23px"]}
                     color="#747474"
                   >
                     HBD!! Today is my birthday as well haha
                   </Text>
                   <Box
+                    ml={"10px"}
                     display="flex"
                     flexDirection="row"
                     alignItems="center"
@@ -516,8 +518,10 @@ const Calender = forwardRef((props, ref) => {
                     </Text>
                   </Box>
                 </Flex>
-                <Divider orientation="horizontal" width="250px" color="#ADADAD" size="2px" />
+                <Divider mt="5px" orientation="horizontal" width="320px" borderColor="#ADADAD" borderWidth="1px" borderStyle="solid"/>
                 {/* 방명록 댓글 #Set4 끝 부분 */}
+
+          
 
               </Flex>
             </Box>
