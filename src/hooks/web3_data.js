@@ -1,9 +1,9 @@
 export const USER_CONTRACT_ADDRESS =
-  "0xC5A48Ee4ccBa9bFf3d5B14C51487FFA0aceF22be";
+  "0x7341a6506F48A9997096cce6E629E22b7677Be71";
 export const DATE_CONTRACT_ADDRESS =
-  "0x6F8d82F0c59303EAc4dBda451024a4aa63D87b6A";
-
-export const COMMENT_CONTRACT_ADDRESS = "";
+  "0x7C5699FCB945df2D564aAB19da97B0B00A4218D8";
+export const COMMENT_CONTRACT_ADDRESS =
+  "0xC5E599Cbf7B444c24F2e616e0b8Fda6fEefe88fB";
 
 export const userContABI = [
   {
@@ -197,11 +197,6 @@ export const dateContABI = [
         name: "_baseUri",
         type: "string",
       },
-      {
-        internalType: "address",
-        name: "_adminAddress",
-        type: "address",
-      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -299,19 +294,6 @@ export const dateContABI = [
     ],
     name: "Transfer",
     type: "event",
-  },
-  {
-    inputs: [],
-    name: "adminAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
   },
   {
     inputs: [

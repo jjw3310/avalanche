@@ -18,9 +18,16 @@ export default function MainPage() {
     useWeb3();
   const { address, getAddress } = useWallet();
   const [account, setAccount] = useState();
-  const [inputAcnt, setInputAcnt] = useState("testing");
+  const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
   //   useGasless();
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = ("0" + (1 + date.getMonth())).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+  let yyyymmdd = year + month + day;
+  console.log(yyyymmdd);
+
   useEffect(() => {
     getContracts();
     getAddress();
@@ -57,11 +64,11 @@ export default function MainPage() {
     }
   };
 
-  const mintDate = async () => {
+  const mintDate = async (season, _yyyymmdd) => {
     try {
       if (!dateContract) return;
       await dateContract.methods
-        .mintCommon(20230518)
+        .mintCommon(0, season, 20230518, address)
         .send({ from: address })
         .then(console.log);
     } catch (error) {
@@ -69,34 +76,44 @@ export default function MainPage() {
     }
   };
 
-  const getTodayNft = async () => {
+  const getTodayNft = async (_yyyymmdd) => {
     try {
-      if (!dateContract) return;
-      await dateContract.methods
-        .getDayNftInfo(20230518)
-        .call()
-        .then((res) => {
-          setNftInfo(res);
-        });
+      if (!dateContract) {
+        return;
+      }
+      let userNftInfo = await dateContract.methods
+        .getDayNftInfo(_yyyymmdd)
+        .call();
+      let jsonDate = await dateContract.methods.tokenURI(_yyyymmdd).call();
+      console.log(userNftInfo);
+      console.log(jsonDate);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getTodayNft();
+    getTodayNft(20230518);
     console.log("NFT DATA", nftInfo);
-  }, [address]);
+  }, [dateContract]);
 
   return (
     <>
       <Button
         onClick={() => {
-          mintDate();
+          mintDate("2023", 20230518);
         }}
         color={"blue"}
       >
         Test BTN
+      </Button>
+      <Button
+        onClick={() => {
+          getTodayNft();
+        }}
+        color={"blue"}
+      >
+        Test BTN2
       </Button>
       <NavBar
         // currentVisibleIndex={currentVisibleIndex}

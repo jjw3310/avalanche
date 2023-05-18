@@ -14,7 +14,6 @@ contract DateData is ERC721Enumerable, Ownable {
     uint public mintedNftCnt;
     uint public seasonOpened;
     uint public maxMintInASeasonCnt; // default 10 in constructor
-    address public adminAddress;
     
 // seasonal minting part
     struct season {
@@ -37,14 +36,13 @@ contract DateData is ERC721Enumerable, Ownable {
     }
     mapping(uint256 => nftInfo) nftInfoList; // tokenid => nftInfo
 
-    constructor(string memory _name, string memory _symbol, string memory _baseUri, address _adminAddress)
+    constructor(string memory _name, string memory _symbol, string memory _baseUri)
     ERC721(_name, _symbol) {
         baseURI = _baseUri;
         openedNftCnt = 1;
         seasonOpened = 0; // Genesis Season
         _safeMint(msg.sender, 0); // Genesis Date NFT
         mintedNftCnt = 1;
-        adminAddress = _adminAddress;
         maxMintInASeasonCnt = 10;
         seasonList.push(season(0,10100,10101,new address[](10101)));
     }
@@ -131,8 +129,8 @@ contract DateData is ERC721Enumerable, Ownable {
 
     function getMonthNftInfo(uint256 _yyyymm) public view returns(nftInfo[] memory) {
         nftInfo[] memory arr = new nftInfo[](31);
-        for(uint256 i=1; i < 32; i++){
-            arr[i] = nftInfoList[_yyyymm*100+i];
+        for(uint256 i=0; i < 31; i++){
+            arr[i] = nftInfoList[_yyyymm*101+i];
         }
         return arr;
     }
