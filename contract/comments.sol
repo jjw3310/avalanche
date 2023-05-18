@@ -8,18 +8,17 @@ contract comments {
         address writer;
         string title;
         string contents;
-        string imgUrl;
         uint256 likes;
     }
     mapping(uint256 => comment[]) commentlist; // tokenid => comment
     mapping(uint256 => mapping(address => bool)) cmtCheck; //tokenid => address => bool
     mapping(uint256 => mapping(uint => mapping(address => bool))) likeCheck; //tokenid => cmtIndex => address => bool
 
-    function writeComment(uint256 _yyyymmdd, string memory _title, string memory _contents, string memory _imgUrl) public {
+    function writeComment(uint256 _yyyymmdd, string memory _title, string memory _contents) public {
         require(cmtCheck[_yyyymmdd][msg.sender]==false,"_ERR[1000]:Only one comment in a date available");
         cmtCheck[_yyyymmdd][msg.sender] = true;
         uint256 idx = commentlist[_yyyymmdd].length;
-        commentlist[_yyyymmdd].push(comment(idx, msg.sender, _title, _contents, _imgUrl, 0));
+        commentlist[_yyyymmdd].push(comment(idx, msg.sender, _title, _contents, 0));
     }
 
     function getComments(uint256 _yyyymmdd) public view returns(comment[] memory) {

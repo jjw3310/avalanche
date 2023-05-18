@@ -14,27 +14,17 @@ import { Button } from "@chakra-ui/react";
 // import { useGasless } from "@hooks/useGasless";
 
 export default function MainPage() {
-  const { contract, userContract, dateContract, getContracts } = useWeb3();
+  const { userContract, dateContract, commentContract, getContracts } =
+    useWeb3();
   const { address, getAddress } = useWallet();
   const [account, setAccount] = useState();
   const [inputAcnt, setInputAcnt] = useState("testing");
+  const [nftInfo, setNftInfo] = useState();
   //   useGasless();
   useEffect(() => {
     getContracts();
     getAddress();
   }, []);
-
-  const getCont = async () => {
-    try {
-      if (!contract) return;
-      console.log("account:", address);
-      const response = await contract.methods
-        .increment()
-        .send({ from: address });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const signUp = async () => {
     try {
@@ -61,7 +51,6 @@ export default function MainPage() {
             alert("로그인 실패");
           }
         });
-      // console.log("login:", response.data);
     } catch (error) {
       console.error(error);
       alert("로그인 실패");
@@ -79,6 +68,25 @@ export default function MainPage() {
       console.error(error);
     }
   };
+
+  const getTodayNft = async () => {
+    try {
+      if (!dateContract) return;
+      await dateContract.methods
+        .getDayNftInfo(20230518)
+        .call()
+        .then((res) => {
+          setNftInfo(res);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getTodayNft();
+    console.log("NFT DATA", nftInfo);
+  }, [address]);
 
   return (
     <>
