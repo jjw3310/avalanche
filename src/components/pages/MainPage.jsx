@@ -25,10 +25,13 @@ export default function MainPage() {
   const [myNft, setMyNft] = useState(0);
   const [page, setPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { contract, userContract, dateContract, getContracts } = useWeb3();
+
+  const { userContract, dateContract, commentContract, getContracts } =
+    useWeb3();
   const { address, getAddress } = useWallet();
   const [account, setAccount] = useState();
-  const [inputAcnt, setInputAcnt] = useState("testing");
+  const [inputAcnt, setInputAcnt] = useState("test");
+  const [nftInfo, setNftInfo] = useState();
   const getTotalNft = async () => {
     try {
       if (!contract) return;
@@ -75,22 +78,17 @@ export default function MainPage() {
   }, [account]);
 
   //   useGasless();
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = ("0" + (1 + date.getMonth())).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+  let yyyymmdd = year + month + day;
+  console.log(yyyymmdd);
+
   useEffect(() => {
     getContracts();
     getAddress();
   }, []);
-
-  const getCont = async () => {
-    try {
-      if (!contract) return;
-      console.log("account:", address);
-      const response = await contract.methods
-        .increment()
-        .send({ from: address });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const signUp = async () => {
     try {
@@ -117,18 +115,17 @@ export default function MainPage() {
             alert("로그인 실패");
           }
         });
-      // console.log("login:", response.data);
     } catch (error) {
       console.error(error);
       alert("로그인 실패");
     }
   };
 
-  const mintDate = async () => {
+  const mintDate = async (season, _yyyymmdd) => {
     try {
       if (!dateContract) return;
       await dateContract.methods
-        .mintCommon(20230518)
+        .mintCommon(0, season, 20230518, address)
         .send({ from: address })
         .then(console.log);
     } catch (error) {
@@ -136,15 +133,44 @@ export default function MainPage() {
     }
   };
 
+  const getTodayNft = async (_yyyymmdd) => {
+    try {
+      if (!dateContract) {
+        return;
+      }
+      let userNftInfo = await dateContract.methods
+        .getDayNftInfo(_yyyymmdd)
+        .call();
+      let jsonDate = await dateContract.methods.tokenURI(_yyyymmdd).call();
+      console.log(userNftInfo);
+      console.log(jsonDate);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getTodayNft(20230518);
+    console.log("NFT DATA", nftInfo);
+  }, [dateContract]);
+
   return (
     <>
       <Button
         onClick={() => {
-          mintDate();
+          mintDate("2023", 20230518);
         }}
         color={"blue"}
       >
         Test BTN
+      </Button>
+      <Button
+        onClick={() => {
+          getTodayNft();
+        }}
+        color={"blue"}
+      >
+        Test BTN2
       </Button>
       <NavBar
         // currentVisibleIndex={currentVisibleIndex}

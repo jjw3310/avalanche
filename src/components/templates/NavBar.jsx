@@ -55,7 +55,7 @@ export default function NavBar({
             </Box>
           </a>
         </Flex>
-        {account ? `Welcome!\t"${account}"` : ""}
+        {/* {account ? `Welcome!\t"${account}"` : ""} */}
         {!account ? (
           <>
             <Button
@@ -124,6 +124,34 @@ export default function NavBar({
           </>
         ) : (
           <>
+            <Button
+              borderRadius={"50px"}
+              _hover={{ bg: "purple.500" }}
+              mt={"20px"}
+            >
+              <Popover trigger={"hover"} placement={"bottom-start"}>
+                <PopoverTrigger>
+                  <Box
+                    p={1}
+                    fontWeight={"500"}
+                    color="black"
+                    fontStyle={"normal"}
+                    fontSize={{ base: "10px", md: "16px" }}
+                    lineHeight={"30px"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    _hover={{
+                      textDecoration: "none",
+                      color: "linkHoverColor",
+                    }}
+                    href="/"
+                    target="_blank"
+                  >
+                    Sign Out
+                  </Box>
+                </PopoverTrigger>
+              </Popover>
+            </Button>
             <Flex
               ml={"20px"}
               mr={"40px"}

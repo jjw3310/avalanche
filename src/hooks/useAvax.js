@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
-import { contractABI, userContABI, dateContABI } from "../hooks/abi.js";
+import {
+  userContABI,
+  dateContABI,
+  commentContABI,
+  USER_CONTRACT_ADDRESS,
+  DATE_CONTRACT_ADDRESS,
+  COMMENT_CONTRACT_ADDRESS,
+} from "./web3_data.js";
 
 export const useWeb3 = () => {
   const [web3, setWeb3] = useState();
-  const [contract, setContract] = useState();
   const [userContract, setUserContract] = useState();
   const [dateContract, setDateContract] = useState();
+  const [commentContract, setCommentContract] = useState();
 
   useEffect(() => {
     if (!window.ethereum) return;
@@ -16,24 +23,14 @@ export const useWeb3 = () => {
   const getContracts = async () => {
     try {
       if (!web3) return;
-      await setContract(
-        new web3.eth.Contract(
-          contractABI,
-          process.env.REACT_APP_COUNTER_CONTRACT_ADDRESS
-        )
-      );
-
       await setUserContract(
-        new web3.eth.Contract(
-          userContABI,
-          process.env.REACT_APP_USER_CONTRACT_ADDRESS
-        )
+        new web3.eth.Contract(userContABI, USER_CONTRACT_ADDRESS)
       );
       await setDateContract(
-        new web3.eth.Contract(
-          dateContABI,
-          process.env.REACT_APP_DATE_CONTRACT_ADDRESS
-        )
+        new web3.eth.Contract(dateContABI, DATE_CONTRACT_ADDRESS)
+      );
+      await setCommentContract(
+        new web3.eth.Contract(commentContABI, COMMENT_CONTRACT_ADDRESS)
       );
     } catch (error) {
       console.error(error);
@@ -43,7 +40,7 @@ export const useWeb3 = () => {
   useEffect(() => {
     getContracts();
   }, [web3]);
-  return { contract, userContract, dateContract, getContracts };
+  return { userContract, dateContract, commentContract, getContracts };
 };
 
 export const useWallet = () => {

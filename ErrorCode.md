@@ -26,3 +26,4 @@ To User
 "\_ERR[1006]:Date you selected is not opened"
 "\_ERR[1007]:Can't mint more than 10 in a season"
 "\_ERR[1008]:This date NFT is already minted"
+"\_ERR[1009]:Only owner can change this option"
