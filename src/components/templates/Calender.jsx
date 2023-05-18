@@ -98,16 +98,24 @@ const Calender = ({
 
       //한 번 비워주고 시작
       setNfts();
+      let tokenIdjson = [20230518, 20230519, 20230520];
       for (let i = 0; i < 3; i++) {
         //   for (let i = 0; i < 10; i++) {
         const tokenId = i + 1 + (p - 1) * 3;
         // console.log(tokenId);
+
         let response = await axios.get(
-          `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+          // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+          // `https://olbm.mypinata.cloud/ipfs/QmU52T5t4bXtoUqQYStgx39DdXy3gLQq7KDuF1F9g3E9Qy/${tokenId}.json`
+
+          `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${tokenIdjson[i]}.json`
+          // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
         );
+        console.log("heheheheeh" + response);
         console.log("tooooo" + tokenId);
         nftArray.push({ tokenId, metadata: response.data });
-        console.log(process.env.REACT_APP_JSON_URL);
+        // console.log(process.env.REACT_APP_JSON_URL);
+        console.log(nftArray[0].metadata.properties.image.description);
       }
       setNfts(nftArray);
     } catch (error) {
@@ -246,6 +254,7 @@ const Calender = ({
                             </div>
                           )}
                           <img
+                            key={i}
                             className="rounded-t-2xl"
                             src={v.metadata.image}
                             alt={v.metadata.name}
