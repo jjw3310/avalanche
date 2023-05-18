@@ -117,14 +117,24 @@ const Calender = ({
 
   const getNftImg = () => {
     let nftImgArray = [];
-    for (let i = 0; i < nfts.length; i++) {
-      document.querySelector(
-        ".react-calendar__tile"
-      ).style.backgroundImage = `url(${nfts[i].metadata.image}) !important`;
-      console.log("elelelel:" + `${nfts[i].metadata.image}`);
-      nftImgArray.push(i);
+    let dates = document.querySelectorAll(".react-calendar__tile");
+    console.log(dates);
+    for (let i = 0; i < dates.length; i++) {
+      if (i >= nfts.length) break;
+      if (i === nfts[i].metadata.edition);
+      dates[i].style.backgroundImage = `url(${nfts[i].metadata.image}`;
     }
-    setNftImg(nftImgArray);
+
+    // for (let i = 0; i < nfts.length; i++) {
+    //   let el = document.querySelector(".react-calendar__tile").style
+    //     .backgroundImage;
+    //   console.log("===========el============");
+    //   console.log();
+    //   el = `url(${nfts[i].metadata.image}) !important`;
+    //   console.log("elelelel:" + `${nfts[i].metadata.image}`);
+    //   nftImgArray.push(i);
+    // }
+    // setNftImg(nftImgArray);
   };
   useEffect(() => {
     if (!nfts) return;
