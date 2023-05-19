@@ -1,11 +1,20 @@
-import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Image,
+  LinkBox,
+  LinkOverlay,
+  Text,
+} from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import logoHeart from "@assets/images/logoHeart.png";
 import whiteHeart from "@assets/images/whiteHeart.png";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect, useState } from "react";
 
-export default function InCardComments({ comment }) {
+export default function InCardComments({ yyyymmdd, comment }) {
   const { userContract, commentContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
   const [userId, setUserId] = useState();
@@ -19,7 +28,7 @@ export default function InCardComments({ comment }) {
   useEffect(() => {
     if (userContract) {
       if (!comment.writer) return;
-      console.log("_id : ", comment.writer);
+      // console.log("_id : ", comment.writer);
       const getId = async () => {
         const userid = await userContract.methods
           .getIdFromAddress(comment.writer)
@@ -31,15 +40,23 @@ export default function InCardComments({ comment }) {
     if (commentContract) {
       const getIsLiked = async () => {
         const isLiked = await commentContract.methods.getIsLiked();
-        // console.log(likeRes);
+        console.log("isLiked : ", isLiked);
       };
       getIsLiked();
     }
   }, [userContract, commentContract]);
 
   useEffect(() => {
-    console.log("userid : ", userId);
+    // console.log("userid : ", userId);
+    console.log(comment);
   }, [userId]);
+
+  const clickLikeBtn = async function (_yyyymmdd, _idx) {
+    const res = await commentContract.methods
+      .setLike(_yyyymmdd, _idx)
+      .send({ from: address });
+    console.log(res);
+  };
 
   return (
     <Box key={comment.writer}>
@@ -92,7 +109,16 @@ export default function InCardComments({ comment }) {
           order={1}
           flexGrow={0}
         >
-          {isLiked ? <Image src={logoHeart} /> : <Image src={whiteHeart} />}
+          <div>
+            <button
+              onClick={(event) => {
+                event.stopPropagation();
+                clickLikeBtn(yyyymmdd, comment.index);
+              }}
+            >
+              {isLiked ? <Image src={logoHeart} /> : <Image src={whiteHeart} />}
+            </button>
+          </div>
           <Text color={"black"} ml={"5px"}>
             {comment.likes}
           </Text>

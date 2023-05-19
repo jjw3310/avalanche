@@ -1,28 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MintedCard from "./MintedCard";
 import NotMintedCard from "./NotMintedCard";
 
 export default function TodayNftCard({
   isMinted,
-  todayNftImg,
+  todayNftUrl,
   selectedYYYYMMDD,
 }) {
+  const [minted, setIsMinted] = useState();
+  const [nftImg, setNftImg] = useState();
+  const [yyyymmdd, setSelectedYYYYMMDD] = useState();
+
+  useEffect(() => {
+    if (isMinted) setIsMinted(isMinted);
+    if (selectedYYYYMMDD) setSelectedYYYYMMDD(selectedYYYYMMDD);
+  }, [isMinted, selectedYYYYMMDD]);
+
   useEffect(() => {
     if (isMinted) {
-      console.log("MintedImgUrl : ", todayNftImg);
+      console.log("MintedImgUrl : ", todayNftUrl);
     } else {
-      console.log("Not Minted Yet : ", todayNftImg);
+      console.log("Not Minted Yet : ", todayNftUrl);
     }
-  }, [todayNftImg]);
+  }, [todayNftUrl]);
   return (
     <>
       {isMinted ? (
         <MintedCard
-          todayNftImg={todayNftImg}
+          todayNftUrl={todayNftUrl}
           selectedYYYYMMDD={selectedYYYYMMDD}
         />
       ) : (
-        <NotMintedCard todayNftImg={todayNftImg} />
+        <NotMintedCard selectedYYYYMMDD={selectedYYYYMMDD} />
       )}
     </>
   );

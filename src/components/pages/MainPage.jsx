@@ -36,6 +36,7 @@ export default function MainPage() {
   const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
   const [todayNftImg, setTodayNftImg] = useState();
+
   // const getTotalNft = async () => {
   //   try {
   //     if (!contract) return;

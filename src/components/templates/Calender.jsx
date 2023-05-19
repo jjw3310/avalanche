@@ -36,6 +36,12 @@ const Calender = ({
   // const [nfts, setNfts] = useState(["", "h"]);
 
   const [isMinted, setIsMinted] = useState();
+  const [todayNftUrl, setTodayNftUrl] = useState();
+
+  useEffect(() => {
+    if (todayNftImg) setTodayNftUrl(todayNftImg);
+  }, [todayNftImg]);
+
   var year = selectedDate.getFullYear();
   var month = ("0" + (1 + selectedDate.getMonth())).slice(-2);
   var day = ("0" + selectedDate.getDate()).slice(-2);
@@ -322,7 +328,7 @@ const Calender = ({
 
           <TodayNftCard
             isMinted={isMinted}
-            todayNftImg={todayNftImg}
+            todayNftUrl={todayNftUrl}
             selectedYYYYMMDD={todayYYYYMMDD}
           />
           {/* 작은 캘린더 민팅 이후 */}

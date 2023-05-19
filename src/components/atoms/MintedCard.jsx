@@ -178,11 +178,15 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                   : "Let's write comments"}
               </Text>
             </Box>
+
             {comments
               ? comments.map((v) => {
-                  return <InCardComments comment={v} />;
+                  return (
+                    <InCardComments yyyymmdd={selectedYYYYMMDD} comment={v} />
+                  );
                 })
               : ""}
+
             {/* 방명록 댓글 #Set1 시작 부분 */}
             {/* <Flex
               mt={"10px"}

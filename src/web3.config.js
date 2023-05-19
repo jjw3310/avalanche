@@ -4,6 +4,10 @@ export const DATE_CONTRACT_ADDRESS =
   "0xEbf5C6A8D700429b7e92F3Ec6829Fb4cE8ecB467";
 export const COMMENT_CONTRACT_ADDRESS =
   "0x37f8a5E92B44263193d6256E02cd5181Aa5e484E";
+export const PINATA_JSON_BASE_URL =
+  "https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/";
+export const PINATA_IMG_BASE_URL =
+  "https://gateway.pinata.cloud/ipfs/QmNmkuE5unrYNEFNApLAEC2K3kciZ6QiiKUTxUrirvpLxt/dates/202305/";
 
 export const userContABI = [
   {
