@@ -35,6 +35,7 @@ import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import celebrateIcon from "@assets/images/celebrateIcon.png";
 import guestBookEnterArrow from "@assets/images/guestBookEnterArrow.png";
 import glitch from "@assets/images/glitch.png";
+import backIMG from "@assets/images/DistanceStars.png";
 
 const GuestBook = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -54,12 +55,12 @@ const GuestBook = forwardRef((props, ref) => {
 
   return (
     <>
+    <Box bg={`url(${backIMG})`} bgSize={"100%"}>
       <NavBar />
       <Box
-        ref={ref}
+        // ref={ref}
         w={"100%"}
-        h={"100%"}
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+        h={"1000px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
         <Flex
@@ -370,6 +371,7 @@ const GuestBook = forwardRef((props, ref) => {
           </Box>
         </Flex>
       </Box>
+    </Box>
     </>
   );
 });

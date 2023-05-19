@@ -30,11 +30,9 @@ export default function NavBar({
   const handleClick = () => {
     // 클릭 시 이동할 페이지 경로
     // 예시: "/profile"
-    const destination1 = "/purchaseDetail";
-    const destination2 = "/guestBook";
+    const destination = "/purchaseDetail";
     // 페이지 이동
-    window.location.href = destination1;
-    window.location.href = destination2;
+    window.location.href = destination;
   };
 
   return (
