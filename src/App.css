@@ -82,6 +82,7 @@
   background-color: white;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
+  color: black;
 }
 
 .react-calendar__month-view__days .react-calendar__tile {
