@@ -2,47 +2,25 @@ import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import emptyHeart from "@assets/images/emptyHeart.png";
-import glitchImg from "@assets/images/glitch.png";
+// import todayDateNFT from "@assets/images/todayDateNFT.png";
+import todayDateNFT from "@assets/images/glitch.png";
 import logoHeart from "@assets/images/logoHeart.png";
 import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
-import { useWallet, useWeb3 } from "@hooks/useAvax";
-import { useEffect, useState } from "react";
-import InCardComments from "./InCardComments";
 
-export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
-  const { commentContract, getContracts } = useWeb3();
-  const { address, getAddress } = useWallet();
-  const [comments, setComments] = useState();
-
-  useEffect(() => {
-    getContracts();
-    getAddress();
-  }, []);
-
-  useEffect(() => {
-    if (!commentContract) return;
-    const getComments = async () => {
-      const res = await commentContract.methods
-        .getComments(selectedYYYYMMDD)
-        .call();
-      console.log("COMMENTS : ", res);
-      setComments(res);
-    };
-    getComments();
-  }, [commentContract]);
-
+export default function MintedCard() {
   return (
     <Link to="/guestBook">
-      <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
+      <Box overflow={"hidden"} borderRadius={"30px"} w="340px" h="100%" bg="white" ml={"20px"}>
         {/* #upper box */}
         <Box
-          w="350px"
+          w="100%"
+          h="100%"
           position={"relative"}
-          // bg={`url(${todayNftImg})`}
-          bg={`url(${glitchImg})`}
-          bgSize={"100%"}
-          backgroundBlendMode={"multiply"}
+          bg={`url(${todayDateNFT})`}
           backgroundColor={"rgba(0, 0, 0, 0.5)"}
+          bgSize="cover"
+          object-fit={"contain"}
+          backgroundBlendMode={"multiply"}
         >
           <Flex
             direction={"column"}
@@ -127,7 +105,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               ml={"20px"}
               justify={"flex-start"}
               align={"center"}
-              w={"100%"}
+              width={"100px"}
             >
               <Text
                 ml={"35px"}
@@ -173,18 +151,12 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                 lineHeight={"21px"}
                 color={"#000000"}
               >
-                {comments
-                  ? `Today’s top ${comments.length} comments`
-                  : "Let's write comments"}
+                Today’s top 4 comments
               </Text>
             </Box>
-            {comments
-              ? comments.map((v) => {
-                  return <InCardComments comment={v} />;
-                })
-              : ""}
+
             {/* 방명록 댓글 #Set1 시작 부분 */}
-            {/* <Flex
+            <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -246,10 +218,11 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            /> */}
+            />
             {/* 방명록 댓글 #Set1 끝 부분 */}
+
             {/* 방명록 댓글 #Set2 시작 부분 */}
-            {/* <Flex
+            <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -309,10 +282,11 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            /> */}
+            />
             {/* 방명록 댓글 #Set2 끝 부분 */}
+
             {/* 방명록 댓글 #Set3 시작 부분 */}
-            {/* <Flex
+            <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -374,8 +348,9 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderStyle="solid"
             />
             {/* 방명록 댓글 #Set3 끝 부분 */}
+
             {/* 방명록 댓글 #Set4 시작 부분 */}
-            {/* <Flex
+            <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -435,7 +410,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            /> */}
+            />
             {/* 방명록 댓글 #Set4 끝 부분 */}
           </Flex>
         </Box>
