@@ -97,7 +97,7 @@ const GuestBook = forwardRef((props, ref) => {
             px={{ base: "20px", sm: "30px", lg: "100px" }}
             h="680px"
             w="480px"
-            pt={5}
+            pt={100}
             pb={5}
             flex="1"
           >

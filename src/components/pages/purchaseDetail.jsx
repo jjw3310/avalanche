@@ -58,11 +58,12 @@ const PurchaseDetail = forwardRef((props, ref) => {
           direction={{ base: "column-reverse", md: "row" }}
           justify={"flex-start"}
           align={"center"}
-          px={{ base: "20px", sm: "30px", lg: "50px" }}
+          px={{ base: "10%", sm: "15%", lg: "25%" }}
           h="100%"
-          pt={5}
+          pt={100}
           pb={5}
           flex="1"
+          paddingInlineStart="25%"
         >
           {/* 전체 영역 */}
           <Box h="100%" mr={"30px"}>
