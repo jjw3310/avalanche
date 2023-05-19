@@ -192,6 +192,8 @@ const GuestBook = forwardRef((props, ref) => {
                     justify={"flex-start"} 
                     align={"flex-start"} 
                 >
+
+                    {/* #section1 방명록 제목 시작 부분 */}
                     <Box ml={"20px"} mt={"30px"} mb={"10px"} >
                     <Flex 
                         direction={"row"} 
@@ -250,7 +252,7 @@ const GuestBook = forwardRef((props, ref) => {
                     </Flex>
                     </Box>
 
-                    {/* 방명록 댓글 #Set1 시작 부분 */}
+                    {/* #section2 방명록 댓글 부분 */}
                     <Flex
                     mt={"10px"}
                     direction={"row"}
@@ -307,32 +309,20 @@ const GuestBook = forwardRef((props, ref) => {
                     </Box>
                     </Flex>
 
-                    {/* 댓글 쓰는 기능 */}
+                    {/* #section3 방명록 댓글 쓰는 기능 */}
                     <Flex>
-                        <Box
-                            background="gray.400"
-                            boxSizing="border-box"
-                            borderTopLeftRadius="0px"
-                            borderTopRightRadius="30px"
-                            borderBottomLeftRadius="00px"
-                            borderBottomRightRadius="30px"
-                            w={"100%"}
-                            h={"530px"}
-                            mt={"77px"}
-                        >
                         <Flex 
                             direction={"column"} 
                             justify={"flex-start"} 
                             align={"flex-start"} 
                         >
-                        <Box ml={"20px"} mt={"30px"} mb={"10px"} >
                             <Flex 
                                 direction={"row"} 
                                 justify={"flex-start"} 
                                 align={"center"}    
                                 pb={"10px"}                 
-                                borderBottomColor="#ADADAD"
-                                borderTopColor="transparent"
+                                borderBottomColor="transparent"
+                                borderTopColor="#ADADAD"
                                 borderLeftColor="transparent"
                                 borderRightColor="transparent"
                                 borderBottomWidth="2px"
@@ -349,43 +339,16 @@ const GuestBook = forwardRef((props, ref) => {
                                 >
                                 Today’s top 4 comments
                                 </Text>
-                                <Button
-                                // position={"relative"}
-                                ml={"170px"}
-                                display="flex"
-                                flexDirection="row"
-                                alignItems="center"
-                                justifyContent="center"
-                                padding="5px 12px"
-                                width="140px"
-                                height="40px"
-                                gap={"5px"}
-                                background="#FFFFFF"
-                                borderRadius="50px"
-                                flex="none"
-                                order={1}
-                                flexGrow={0}
-                                >
-                                    <Text 
-                                    mr={"5px"}
-                                    color={"black"}
-                                >
-                                    Today
-                                </Text>
-                                <Image src={logoHeart} />
-                                <Text 
-                                    mr={"5px"}
-                                    color={"black"}
-                                >
-                                    170
-                                </Text>
-                                </Button>
-                            </Flex>
-                        </Box>
 
+
+                                <Image src={logoHeart} />
+
+              
+                            </Flex>
                     </Flex>
-                        </Box>
                     </Flex>
+
+
 
                 </Flex>
             </Box>
