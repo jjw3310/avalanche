@@ -154,6 +154,7 @@ export default function MainPage() {
       } else {
         console.log("기본 이미지 출력");
         let jsonUrl = await dateContract.methods.tokenURI(_yyyymmdd).call();
+        // console.log("JSONURL : ", jsonUrl);
         const res = await axios.get(
           jsonUrl,
           // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${_yyyymmdd}`,
@@ -166,8 +167,8 @@ export default function MainPage() {
         // console.log("PINATA!!!!!!:", res.data.properties);
         // setNftInfo(res.data.properties);
         // console.log("PINATA!!!!!!:", res.data.properties.image.description);
-        setTodayNftImg(res.data.properties.image.description);
-        console.log("기본 IMG URL : ", todayNftImg);
+        const tnimg = res.data.properties.image.description;
+        setTodayNftImg(tnimg);
       }
     } catch (error) {
       console.error(error);
@@ -178,6 +179,10 @@ export default function MainPage() {
     getTodayNft(todayYYYYMMDD);
     console.log("NFT DATA", nftInfo);
   }, [dateContract]);
+
+  useEffect(() => {
+    if (todayNftImg) console.log("TODAY NFT IMG :", todayNftImg);
+  }, [todayNftImg]);
 
   return (
     // <>
@@ -214,6 +219,8 @@ export default function MainPage() {
         mintedNft={mintedNft}
         myNft={myNft}
         page={page}
+        todayNftImg={todayNftImg}
+        todayNftMinted={nftInfo}
       />
       <Description />
       <Faq />

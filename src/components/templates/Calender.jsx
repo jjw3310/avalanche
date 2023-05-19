@@ -18,7 +18,8 @@ import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import emptyHeart from "@assets/images/emptyHeart.png";
-import todayDateNFT from "@assets/images/todayDateNFT.png";
+// import todayDateNFT from "@assets/images/todayDateNFT.png";
+import todayDateNFT from "@assets/images/glitch.png";
 import logoHeart from "@assets/images/logoHeart.png";
 import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import { Link } from "react-router-dom";
@@ -30,6 +31,8 @@ const Calender = ({
   mintedNft,
   myNft,
   page,
+  todayNftImg,
+  todayNftMinted,
 }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [images, setImages] = useState(["ss", "sa"]);
@@ -39,6 +42,8 @@ const Calender = ({
   const [nfts, setNfts] = useState();
   const [nftImg, setNftImg] = useState([]);
   // const [nfts, setNfts] = useState(["", "h"]);
+
+  const [isDefaultImg, setIsDefaultImg] = useState();
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -148,6 +153,14 @@ const Calender = ({
     if (!nfts) return;
     getNftImg();
   }, [nfts]);
+
+  useEffect(() => {
+    if (todayNftMinted) {
+      // console.log("todayNftMinted : ", todayNftMinted.minted);
+      setIsDefaultImg(todayNftMinted.minted);
+      console.log("DefaultImg : ", isDefaultImg);
+    }
+  }, [todayNftMinted, isDefaultImg]);
   const onClickPageChange = (p) => () => {
     setSelectedPage(p);
     getNfts(p);
@@ -206,6 +219,16 @@ const Calender = ({
   }, [page]);
 
   const mintImg = () => {};
+
+  const handleClick = (routePath) => {
+    // 클릭 시 이동할 페이지 경로
+    // 예시: "/profile"
+    // const destination = "/purchaseDetail";
+    const destination = `/${routePath}`;
+    // 페이지 이동
+    window.location.href = destination;
+  };
+
   return (
     <>
       <Box
@@ -307,10 +330,19 @@ const Calender = ({
 
           {/* 작은 캘린더 민팅 이후 */}
           <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
-            <Box w="350px" position={"relative"}>
-              <Image
+            <Box
+              w="350px"
+              position={"relative"}
+              // bg={`url(${todayNftImg})`}
+              bg={`url(${todayDateNFT})`}
+              bgSize={"100%"}
+              backgroundBlendMode={"multiply"}
+              backgroundColor={"rgba(0, 0, 0, 0.5)"}
+            >
+              {/* <Image
                 position={"absolute"}
                 h={"200px"}
+                // h={"100%"}
                 w={"100%"}
                 borderRadius={"30px"}
                 src={todayDateNFT}
@@ -321,7 +353,7 @@ const Calender = ({
                 borderBottomRightRadius="0px"
                 borderBottomLeftRadius="0px"
                 filter="brightness(50%)"
-              />
+              /> */}
               {/* #upper box */}
               <Flex
                 direction={"column"}
