@@ -35,7 +35,11 @@ const Calender = ({
   const [nftImg, setNftImg] = useState([]);
   // const [nfts, setNfts] = useState(["", "h"]);
 
-  const [isDefaultImg, setIsDefaultImg] = useState();
+  const [isMinted, setIsMinted] = useState();
+  var year = selectedDate.getFullYear();
+  var month = ("0" + (1 + selectedDate.getMonth())).slice(-2);
+  var day = ("0" + selectedDate.getDate()).slice(-2);
+  let todayYYYYMMDD = year + month + day;
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -148,11 +152,14 @@ const Calender = ({
 
   useEffect(() => {
     if (todayNftMinted) {
-      // console.log("todayNftMinted : ", todayNftMinted.minted);
-      setIsDefaultImg(todayNftMinted.minted);
-      console.log("DefaultImg : ", isDefaultImg);
+      setIsMinted(todayNftMinted.minted);
+      // showDefaultImg = false => show defaultImg
+      // showDefaultImg = true  => show  selectedImg
+      // setIsSelectedImg(todayNftMinted.showDefaultImg);
+      // console.log("setIsMinted : ", isMinted);
+      // console.log("DefaultImg : ", isSelectedImg, isMinted);
     }
-  }, [todayNftMinted, isDefaultImg]);
+  }, [todayNftMinted, isMinted]);
   const onClickPageChange = (p) => () => {
     setSelectedPage(p);
     getNfts(p);
@@ -313,7 +320,11 @@ const Calender = ({
 
           {/* 큰 캘린더 */}
 
-          <TodayNftCard isDefault={isDefaultImg} todayNftImg={todayNftImg} />
+          <TodayNftCard
+            isMinted={isMinted}
+            todayNftImg={todayNftImg}
+            selectedYYYYMMDD={todayYYYYMMDD}
+          />
           {/* 작은 캘린더 민팅 이후 */}
 
           {/* 작은 캘린더 민팅 이전 */}

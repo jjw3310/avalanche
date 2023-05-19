@@ -86,7 +86,7 @@ export default function MainPage() {
   var month = ("0" + (1 + date.getMonth())).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
   let todayYYYYMMDD = year + month + day;
-  // console.log(todayYYYYMMDD);
+  console.log(todayYYYYMMDD);
 
   useEffect(() => {
     getContracts();
@@ -147,26 +147,18 @@ export default function MainPage() {
         .call();
       setNftInfo(todayNftInfo);
       console.log("TODAY NFT INFO:", todayNftInfo);
+      if (!todayNftInfo) return;
       if (todayNftInfo.showDefaultImg) {
         console.log("변경한 url이 존재함");
         setTodayNftImg(todayNftInfo.imgUrl);
-        console.log("사용자 업로드 IMG URL : ", todayNftImg);
       } else {
         console.log("기본 이미지 출력");
         let jsonUrl = await dateContract.methods.tokenURI(_yyyymmdd).call();
-        // console.log("JSONURL : ", jsonUrl);
-        const res = await axios.get(
-          jsonUrl,
-          // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${_yyyymmdd}`,
-          {
-            headers: {
-              Accept: "text/plain",
-            },
-          }
-        );
-        // console.log("PINATA!!!!!!:", res.data.properties);
-        // setNftInfo(res.data.properties);
-        // console.log("PINATA!!!!!!:", res.data.properties.image.description);
+        const res = await axios.get(jsonUrl, {
+          headers: {
+            Accept: "text/plain",
+          },
+        });
         const tnimg = res.data.properties.image.description;
         setTodayNftImg(tnimg);
       }
@@ -177,12 +169,12 @@ export default function MainPage() {
 
   useEffect(() => {
     getTodayNft(todayYYYYMMDD);
-    console.log("NFT DATA", nftInfo);
+    // console.log("NFT DATA", nftInfo);
   }, [dateContract]);
 
-  useEffect(() => {
-    if (todayNftImg) console.log("TODAY NFT IMG :", todayNftImg);
-  }, [todayNftImg]);
+  // useEffect(() => {
+  //   if (todayNftImg) console.log("TODAY NFT IMG :", todayNftImg);
+  // }, [todayNftImg]);
 
   return (
     // <>

@@ -80,4 +80,8 @@ contract UserData {
         userList[_id].updatedAt = block.timestamp;
         return true;
     }
+
+    function getIdFromAddress(address _userAddress) public view returns(string memory) {
+        return userID[_userAddress];
+    }
 }

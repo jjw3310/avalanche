@@ -492,7 +492,7 @@ export const USER_CONTRACT_ADDRESS =
 export const DATE_CONTRACT_ADDRESS =
   "0x378b1468Aa7aA3AE80E7827f56dB211F3922F21A";
 export const COMMENT_CONTRACT_ADDRESS =
-  "0x125d76C995Aa67bb6b408E6FcFaA8d9Ecf607eAe";
+  "0x249776daf7c0746948b35bC7966ab050bb24E53F";
 
 export const userContABI = [
   {
@@ -1408,52 +1408,6 @@ export const commentContABI = [
         name: "_yyyymmdd",
         type: "uint256",
       },
-    ],
-    name: "getComments",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "index",
-            type: "uint256",
-          },
-          {
-            internalType: "address",
-            name: "writer",
-            type: "address",
-          },
-          {
-            internalType: "string",
-            name: "title",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "contents",
-            type: "string",
-          },
-          {
-            internalType: "uint256",
-            name: "likes",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct comments.comment[]",
-        name: "",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_yyyymmdd",
-        type: "uint256",
-      },
       {
         internalType: "uint256",
         name: "_idx",
@@ -1497,6 +1451,52 @@ export const commentContABI = [
     name: "writeComment",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_yyyymmdd",
+        type: "uint256",
+      },
+    ],
+    name: "getComments",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "index",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "writer",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "title",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "contents",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "likes",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct comments.comment[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
 ];
