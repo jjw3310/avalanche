@@ -25,9 +25,11 @@ contract UserData {
         require(userList[_id].createdAt == 0, "_ERR[1000]:ID Already Exists");
 
         bytes32 pass = keccak256(abi.encodePacked(_password));
-        userList[_id] = User(address(0), pass, block.timestamp, 0);
+        // userList[_id] = User(address(0), pass, block.timestamp, 0);
+        userList[nicknameList[userCnt]] = User(address(0), pass, block.timestamp, 0);
         // userID[msg.sender] = _id;
-        userID[msg.sender] = nicknameList[userCnt++];
+        userID[msg.sender] = nicknameList[userCnt];
+        userCnt++;
         return true;
     }
 
