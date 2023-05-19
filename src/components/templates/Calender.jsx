@@ -8,8 +8,6 @@ import {
   // VStack,
   // UnorderedList,
   Button,
-  Popover,
-  PopoverTrigger,
   Divider,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -24,16 +22,26 @@ import littleStar from "@assets/images/littleStar.png";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import emptyHeart from "@assets/images/emptyHeart.png";
 import todayDateNFT from "@assets/images/todayDateNFT.png";
-import logoHeart  from "@assets/images/logoHeart.png";
+import logoHeart from "@assets/images/logoHeart.png";
 import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
-
-
-const Calender = forwardRef((props, ref) => {
-
+import axios from "axios";
+const Calender = ({
+  selected,
+  onSelectDate,
+  totalNft,
+  mintedNft,
+  myNft,
+  page,
+}) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [images, setImages] = useState(["ss", "sa"]);
   const [formatDate, setFormatDate] = useState(["aa", "bb"]);
-  const [nfts, setNfts] = useState(["", "h"]);
+
+  const [selectedPage, setSelectedPage] = useState(1);
+  const [nfts, setNfts] = useState();
+  const [nftImg, setNftImg] = useState([]);
+  // const [nfts, setNfts] = useState(["", "h"]);
+
   useEffect(() => {
     const fetchImages = async () => {
       const response = await fetch(
@@ -74,26 +82,139 @@ const Calender = forwardRef((props, ref) => {
   const walletAddress = "0x0c4E3dAc7B9595329911C21331E311E0E0Bf3ad5";
 
   // 지갑의 NFT 목록 가져오기
-  const getNfts = async () => {
+  // const getNfts = async () => {
+  //   try {
+  //     // const nfts = await web3.eth.getNFTs(walletAddress);
+  //     // setNfts(nfts);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getNfts();
+  // }, []);
+  const getNfts = async (p) => {
     try {
-      const nfts = await web3.eth.getNFTs(walletAddress);
-      setNfts(nfts);
+      let nftArray = [];
+
+      //한 번 비워주고 시작
+      setNfts();
+      let tokenIdjson = [20230518, 20230519, 20230520];
+      for (let i = 0; i < 35; i++) {
+        //   for (let i = 0; i < 10; i++) {
+        const tokenId = i + 1 + (p - 1) * 3;
+        // console.log(tokenId);
+
+        let response = await axios.get(
+          // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+          // `https://olbm.mypinata.cloud/ipfs/QmU52T5t4bXtoUqQYStgx39DdXy3gLQq7KDuF1F9g3E9Qy/${tokenId}.json`
+
+          // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${tokenIdjson[i]}.json`
+          `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
+        );
+        console.log("heheheheeh" + response);
+        console.log("tooooo" + tokenId);
+        nftArray.push({ tokenId, metadata: response.data });
+        // console.log(process.env.REACT_APP_JSON_URL);
+        console.log(nftArray[0].metadata.properties.image.description);
+      }
+      setNfts(nftArray);
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    getNfts();
-  }, []);
+  const getNftImg = () => {
+    let nftImgArray = [];
+    let dates = document.querySelectorAll(".react-calendar__tile");
+    console.log(dates);
+    for (let i = 0; i < dates.length; i++) {
+      if (i >= nfts.length) break;
+      if (i === nfts[i].metadata.edition);
+      dates[i].style.backgroundImage = `url(${nfts[i].metadata.image}`;
+    }
 
+    // for (let i = 0; i < nfts.length; i++) {
+    //   let el = document.querySelector(".react-calendar__tile").style
+    //     .backgroundImage;
+    //   console.log("===========el============");
+    //   console.log();
+    //   el = `url(${nfts[i].metadata.image}) !important`;
+    //   console.log("elelelel:" + `${nfts[i].metadata.image}`);
+    //   nftImgArray.push(i);
+    // }
+    // setNftImg(nftImgArray);
+  };
+  useEffect(() => {
+    if (!nfts) return;
+    getNftImg();
+  }, [nfts]);
+  const onClickPageChange = (p) => () => {
+    setSelectedPage(p);
+    getNfts(p);
+  };
+
+  const pageComp = () => {
+    let pageArray = [];
+
+    for (let i = 0; i < page; i++) {
+      pageArray.push(
+        <button
+          key={i}
+          className={`ml-4 text-2xl font-bold hover:text-white ${
+            i + 1 === selectedPage ? "text-white" : "text-gray-400"
+          }`}
+          onClick={onClickPageChange(i + 1)}
+        >
+          {i + 1} <span className="text-base">페이지</span>
+        </button>
+      );
+    }
+    return pageArray;
+  };
+
+  //   이 방식이 리액트에서 공식적으로 권장하는 방식
+  //   const pageComp = () => {
+  //     let pageArray = [];
+
+  //     for (let i = 0; i < page; i++) {
+  //       pageArray.push(
+  //         <button
+  //           key={i}
+  //           className={`ml-4 text-2xl font-bold hover:text-white ${
+  //             i + 1 === selectedPage ? "text-white" : "text-gray-400"
+  //           }`}
+  //           onClick={() => onClickPageChange(i)}
+  //         >
+  //           {i + 1} <span className="text-base">페이지</span>
+  //         </button>
+  //       );
+  //     }
+  //     return pageArray;
+  //   };
+
+  //   const onClickPageChange = (p) => {
+  //     setSelectedPage(p);
+  //   };
+  //   useEffect(() => {
+  //     // console.log(page);
+  //     getNfts(page);
+  //   }, [page]);
+
+  useEffect(() => {
+    console.log(nfts);
+    getNfts(page);
+  }, [page]);
+
+  const mintImg = () => {};
   return (
     <>
       <Box
-        ref={ref}
+        // ref={ref}
         w={"100%"}
         h={"600px"}
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+        // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
@@ -107,6 +228,68 @@ const Calender = forwardRef((props, ref) => {
           pt={5}
           pb={5}
         >
+          <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2">
+            <div style={{ height: "100%" }}>
+              <CalendarContainer
+                style={{ height: "100%", backgroundColor: "white" }}
+              >
+                <Calendar
+                  selected={selectedDate}
+                  calendarType="US"
+                  minDetail="decade"
+                  onSelectDate={setSelectedDate}
+                  className="react-calendar"
+                  style={{ backgroundColor: "white" }}
+                  // style={{ "background-color": "black" }}
+                />
+              </CalendarContainer>
+              <div className="max-w-screen-xl mx-auto pt-4">
+                <div>{pageComp()}</div>
+                <ul className="mt-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8">
+                  {nfts ? (
+                    nfts.map((v, i) => {
+                      return (
+                        <div className="rounded-2xl bg-gray-800 pb-4 relative">
+                          {parseInt(mintedNft) < v.tokenId && (
+                            <div className="absolute bg-black w-full h-full bg-opacity-50 rounded-2xl flex justify-center items-center text-4xl font-bold pb-[200px]">
+                              not Minted
+                            </div>
+                          )}
+                          <img
+                            key={i}
+                            className="rounded-t-2xl"
+                            src={v.metadata.image}
+                            alt={v.metadata.name}
+                          />
+                          <div className="mt-4 text-xl font-bold flex items-center px-4 text-gray-300">
+                            Da Den Bu
+                            {/* <div className="bg-main w-6 h-6 rounded-full flex justify-center items-center ml-2 text-gray-950">
+                              <FaChessRook size={16} />
+                            </div> */}
+                          </div>
+                          <div className="mt-4"># {v.tokenId}</div>
+                          <div className="mt-4 text-xl flex justify-end px-4">
+                            <Link to={`/${v.tokenId}`}>
+                              <button
+                                disabled={parseInt(mintedNft) < v.tokenId}
+                                className="bg-gray-50 text-gray-950 px-4 py-2 rounded-xl hover:bg-gray-500"
+                              >
+                                Detail
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div>로딩중입니다...</div>
+                  )}
+                </ul>
+              </div>
+              <div className="text-gray-500 mt-4">{formattedDate}</div>
+              {/* <MyCalendar /> */}
+            </div>
+          </Box>
           {/* <Box
             borderRadius={"30px"}
             h="100%"
@@ -670,6 +853,6 @@ const Calender = forwardRef((props, ref) => {
       </Box>
     </>
   );
-});
+};
 
 export default Calender;

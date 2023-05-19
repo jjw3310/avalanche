@@ -7,7 +7,7 @@ import {
   USER_CONTRACT_ADDRESS,
   DATE_CONTRACT_ADDRESS,
   COMMENT_CONTRACT_ADDRESS,
-} from "./web3_data.js";
+} from "../web3.config.js";
 
 export const useWeb3 = () => {
   const [web3, setWeb3] = useState();

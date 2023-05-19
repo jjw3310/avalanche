@@ -1,5 +1,5 @@
 import { IoIosBatteryCharging } from "react-icons/io";
-import { CONTRACT_ADDRESS } from "../web3.config";
+import { CONTRACT_ADDRESS } from "../web3.config.js";
 const ranNum = Math.floor(Math.random() * 1000) + 1;
 const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
 

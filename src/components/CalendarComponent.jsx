@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
 import Web3 from "web3";
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3Config";
 // import Nfts from "../components/Nfts";
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
