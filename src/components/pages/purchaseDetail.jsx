@@ -5,10 +5,10 @@ import {
   // chakra,
   Text,
   Image,
+  Input,
   Stack,
   Heading,
   VStack,
-  Input,
   label,
   Textarea,
   Button,
@@ -21,10 +21,15 @@ import NavBar from "@components/templates/NavBar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImages } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import React, { useState } from "react";
+import previousMonth from "@assets/images/previousMonth.svg";
+import nextMonth from "@assets/images/nextMonth.svg";
+import littleStar from "@assets/images/littleStar.png";
+import editPictureIcon from "@assets/images/editPictureIcon.png";
 
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -34,6 +39,10 @@ const PurchaseDetail = forwardRef((props, ref) => {
     setIsHovered(false);
   };
 
+  const toggleInfo = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <NavBar />
@@ -41,111 +50,193 @@ const PurchaseDetail = forwardRef((props, ref) => {
         ref={ref}
         w={"100%"}
         h={"1000px"}
-        // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
+        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
         <Flex
           direction={{ base: "column-reverse", md: "row" }}
-          justify={"flex-end"}
-          px={{ base: "20px", sm: "30px", lg: "50px" }}
+          justify={"flex-start"}
           align={"center"}
+          px={{ base: "20px", sm: "30px", lg: "50px" }}
           h="100%"
           pt={5}
           pb={5}
+          flex="1"
         >
-          <Box borderRadius={"30px"} h="100%" mr={"20px"} flex="3">
-            <Box
-              position="relative"
-              zIndex={1}
-              width="266px"
-              height="47px"
-              left="100px"
-              top="50px"
+          {/* 전체 영역 */}
+          <Box h="100%" mr={"30px"}>
+            <Text
+              fontFamily="sans-serif"
+              fontStyle="normal"
+              fontWeight="700"
+              fontSize="40px"
+              lineHeight="47px"
+              color="#FFFFFF"
             >
-              <Text
-                fontFamily="sans-serif"
-                fontStyle="normal"
-                fontWeight="700"
-                fontSize="40px"
-                lineHeight="47px"
-                color="#FFFFFF"
-              >
-                Edit your day
-              </Text>
-              <Box
-                background="rgba(0, 0, 0, 0.4)"
-                boxShadow="1px 1px 25px 10px rgba(0, 0, 0, 0.2)"
-                borderRadius={"30px"}
-                mt={"30px"}
-                position="absolute"
-                left="0px"
-                top="50px"
-                w={"300px"}
-                h={"300px"}
-              >
-                <Box
-                  background="rgba(0, 0, 0, 0)"
-                  position="relative"
-                  boxSizing="border-box"
-                  left="25px"
-                  top="25px"
-                  border="1px solid #FFFFFF"
-                  borderRadius="30px"
-                  w={"250px"}
-                  h={"250px"}
-                >
-                  <Box
-                    fontFamily="sans-serif"
-                    position="relative"
-                    textAlign={"center"}
-                    left="0px"
-                    top="205px"
+              Edit your day
+            </Text>
+
+            {/* 왼쪽 가장 큰 카드 */}
+            <Box
+              direction={"column"}
+              justify={"center"}
+              align={"center"}
+              borderRadius={"30px"}
+              h="530px"
+              bg="white"
+              flex="1"
+              mt={"30px"}
+            >
+              <Box mt={"30px"}>
+                {/* 1번째 줄 기능 */}
+                <Flex justify={"space-around"} align={"center"}>
+                  <Image src={previousMonth} />
+                  <Flex
+                    py={3}
+                    fontFamily="Poppins"
                     fontStyle="normal"
                     fontWeight={700}
-                    fontSize="15px"
-                    lineHeight="23px"
-                    color="#FFFFFF"
+                    fontSize={["20px", null, "25.7447px"]}
+                    lineHeight={["23px", null, "39px"]}
+                    color="#000000"
                   >
-                    upload your artwork
+                    Date's
+                  </Flex>
+                  <Image src={nextMonth} />
+                </Flex>
+              </Box>
+
+              {/* 2번째 줄 기능 */}
+              <Box
+                position={"relative"}
+                justify={"center"}
+                align={"center"}
+                borderRadius={"30px"}
+                borderColor="#ADADAD"
+                borderWidth="1px"
+                borderStyle="solid"
+                w="300px"
+                h="300px"
+                mt={"39px"}
+                bg="white"
+                boxShadow="base"
+                p={4}
+                filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
+              >
+                <Image
+                  position={"absolute"}
+                  top={"130px"}
+                  left={"130px"}
+                  src={editPictureIcon}
+                />
+              </Box>
+
+              {/* 3번째 줄 기능 */}
+              <Box
+                background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
+                position="relative"
+                boxSizing="border-box"
+                left="0px"
+                top="48px"
+                border="1px solid #ADADAD"
+                borderTopLeftRadius="0px"
+                borderTopRightRadius="0px"
+                borderBottomRightRadius="30px"
+                borderBottomLeftRadius="30px"
+                w={"100%"}
+                h={"80px"}
+              >
+                <Flex
+                  direction={"column"}
+                  justify={"flex-start"}
+                  align={"flex-start"}
+                >
+                  <Box
+                    mt={"10px"}
+                    ml={"20px"}
+                    fontFamily={"Raleway"}
+                    fontStyle={"normal"}
+                    fontWeight={"700"}
+                    fontSize={"16px"}
+                    lineHeight={"23px"}
+                    color={"#FFFFFF"}
+                    justify={"center"}
+                    align={"center"}
+                  >
+                    Date
                   </Box>
-                  <FontAwesomeIcon
-                    icon={faImages}
-                    size={120}
-                    style={{
-                      position: "absolute",
-                      width: "250px",
-                      height: "50px",
-                      transition: "transform 0.4s",
-                      transform: `scale(${
-                        isHovered ? 1.05 : 1
-                      }) translateY(70px)`,
-                    }}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  />
-                  {/* <Image 
-                    src={editPictureSection} // png 받으면 여기 바꿔넣어라.
-                    z-zIndex={"999"}
-                  /> */}
-                </Box>
+
+                  <Flex position={"relative"}>
+                    <Image
+                      src={littleStar}
+                      position={"absolute"}
+                      left={"-20px"}
+                      bottom={"-30px"}
+                      width={"100px"}
+                      height={"100px"}
+                    />
+                    <Text
+                      ml={"50px"}
+                      mb={"2px"}
+                      fontFamily={"Raleway"}
+                      fontStyle={"normal"}
+                      fontWeight={"700"}
+                      fontSize={"20px"}
+                      lineHeight={"38px"}
+                      color={"#FFFFFF"}
+                      // position={"relative"}
+                    >
+                      20230522
+                    </Text>
+
+                    <Button
+                      mt={"5px"}
+                      ml={"120px"}
+                      mr={"30px"}
+                      w={"100%"}
+                      h={"30px"}
+                      borderRadius={"20px"}
+                      _hover={{ bg: "purple.500" }}
+                    >
+                      <Popover trigger={"hover"} placement={"bottom-start"}>
+                        <PopoverTrigger>
+                          <Box
+                            fontWeight={"500"}
+                            color="black"
+                            fontStyle={"normal"}
+                            fontSize={{ base: "10px", md: "15px" }}
+                            lineHeight={"30px"}
+                            _hover={{
+                              textDecoration: "none",
+                              color: "linkHoverColor",
+                            }}
+                            href="/"
+                            target="_blank"
+                          >
+                            Mint the date
+                          </Box>
+                        </PopoverTrigger>
+                      </Popover>
+                    </Button>
+                  </Flex>
+                </Flex>
               </Box>
             </Box>
           </Box>
 
+
+          {/* 오른쪽 영역 */}
           <Box
-            borderRadius={"30px"}
             h="100%"
             ml={"20px"}
-            flex="4"
             direction={{ base: "column-reverse", md: "row" }}
             justify={"flex-start"}
             px={{ base: "20px", sm: "30px", lg: "50px" }}
             align={"flex-start"}
           >
-            {/* M date */}
             <Text
-              mt={"130px"}
+              mt={"80px"}
               fontFamily="sans-serif"
               fontStyle="normal"
               fontWeight={700}
@@ -155,19 +246,62 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               <label for="input">My date</label>
             </Text>
-            <Input
-              mt={"20px"}
-              color="black"
-              type="text"
-              placeholder="yy/mm/dd"
-              width="283px"
-              background="rgba(226, 226, 226, 0.96)"
-              borderRadius="10px"
-            />
+            
+            {/* 1번째 input tag */}
+            <Box position="relative" width="283px">
+              <Input
+                mt="20px"
+                color="black"
+                type="text"
+                placeholder="Select a date"
+                background="rgba(226, 226, 226, 0.96)"
+                borderRadius="10px"
+                paddingRight={isOpen ? "2.5rem" : "0.75rem"}
+                onClick={toggleInfo}
+              />
+              <Box
+                position="absolute"
+                right={isOpen ? "0.75rem" : "1.25rem"}
+                top="50%"
+                fontSize="16px"
+                color="blue.500"
+                cursor="pointer"
+                transition="transform 0.3s"
+                transform={isOpen ? "rotate(180deg)" : "rotate(0)"}
+                zIndex={1}
+              >
+                &#9660;
+              </Box>
+              {isOpen && (
+                <Box
+                  position="absolute"
+                  width="100%"
+                  top="calc(100%)"
+                  left="0"
+                  zIndex={2}
+                >
+                  <Box
+                    bg="white"
+                    borderRadius="10px"
+                    boxShadow="0px 4px 10px rgba(0, 0, 0, 0.1)"
+                    p="10px"
+                  >
+                    <Text color="black">May 1, 2023</Text>
+                    <Text color="black" mt="10px">
+                      May 10, 2023
+                    </Text>
+                    <Text color="black" mt="10px">
+                      May 17, 2023
+                    </Text>
+                  </Box>
+                </Box>
+              )}
+            </Box>
 
-            {/* Date’s title */}
+
+
             <Text
-              mt={"80px"}
+              mt={"150px"}
               fontFamily="sans-serif"
               fontStyle="normal"
               fontWeight={700}
@@ -181,7 +315,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               mt={"20px"}
               color="black"
               type="text"
-              placeholder="My Birthday !! "
+              placeholder="Give your date a special title."
               width="600px"
               background="rgba(226, 226, 226, 0.96)"
               borderRadius="10px"
@@ -198,7 +332,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
               0/30
             </Text>
 
-            {/* Description for the date  */}
             <Text
               mt={"80px"}
               fontFamily="sans-serif"
@@ -213,7 +346,9 @@ const PurchaseDetail = forwardRef((props, ref) => {
             <Textarea
               mt="20px"
               color="black"
-              placeholder="Write a long sentence..."
+              placeholder="Share the magic of your special date. Describe the cherished moments, emotions, and significance  that 
+                  make it unforgettable. Tell the story, highlight the meaning, and bring your memories to life in a lasting tribute 
+                  to your treasured experience.      "
               width="600px"
               height="200px"
               background="rgba(226, 226, 226, 0.96)"
@@ -230,7 +365,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               0/500
             </Text>
-
             <Button
               borderRadius={"20px"}
               _hover={{ bg: "purple.500" }}

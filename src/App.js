@@ -48,6 +48,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useRef } from "react";
 import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
+import GuestBook from "@components/pages/guestBook";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -62,6 +63,9 @@ function App() {
             <Routes>
               <Route path="/" element={<MainPage account={account} />} />
               <Route path="/purchaseDetail" element={<PurchaseDetail />}>
+                {" "}
+              </Route>
+              <Route path="/GuestBook" element={<GuestBook />}>
                 {" "}
               </Route>
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}

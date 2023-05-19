@@ -1,36 +1,27 @@
-import {
-  Box,
-  // SimpleGrid,
-  Flex,
-  // chakra,
-  Text,
-  Image,
-  Button,
-  Divider,
-} from "@chakra-ui/react";
-import { forwardRef } from "react";
-import { Calendar, CalendarDay, CalendarMonth } from "react-calendar";
+import { Box, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
+import { Calendar } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import previousMonth from "@assets/images/previousMonth.svg";
-import nextMonth from "@assets/images/nextMonth.svg";
-import littleStar from "@assets/images/littleStar.png";
-import { IoPersonCircleOutline } from "react-icons/io5";
-import emptyHeart from "@assets/images/emptyHeart.png";
+// import previousMonth from "@assets/images/previousMonth.svg";
+// import nextMonth from "@assets/images/nextMonth.svg";
+// import littleStar from "@assets/images/littleStar.png";
+// import { IoPersonCircleOutline } from "react-icons/io5";
+// import emptyHeart from "@assets/images/emptyHeart.png";
 // import todayDateNFT from "@assets/images/todayDateNFT.png";
-import todayDateNFT from "@assets/images/glitch.png";
-import logoHeart from "@assets/images/logoHeart.png";
-import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
-import { Link } from "react-router-dom";
+// import todayDateNFT from "@assets/images/glitch.png";
+// import logoHeart from "@assets/images/logoHeart.png";
+// import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import axios from "axios";
 import TodayNftCard from "@components/atoms/TodayNftCard";
 const Calender = ({
-  selected,
-  onSelectDate,
-  totalNft,
+  // selected,
+  // onSelectDate,
+  // totalNft,
   mintedNft,
-  myNft,
+  // myNft,
   page,
   todayNftImg,
   todayNftMinted,
@@ -321,13 +312,6 @@ const Calender = ({
           ></Box> */}
 
           {/* 큰 캘린더 */}
-          {/* <Box
-            borderRadius={"30px"}
-            h="100%"
-            bg="gray.500"
-            mr={"20px"}
-            flex="2"
-          ></Box> */}
 
           <TodayNftCard isDefault={isDefaultImg} todayNftImg={todayNftImg} />
           {/* 작은 캘린더 민팅 이후 */}
@@ -434,7 +418,8 @@ const Calender = ({
                     <Button
                       mt={"5px"}
                       ml={"120px"}
-                      w={"120px"}
+                      mr={"30px"}
+                      w={"100%"}
                       h={"30px"}
                       borderRadius={"20px"}
                       _hover={{ bg: "purple.500" }}
@@ -447,8 +432,6 @@ const Calender = ({
                             fontStyle={"normal"}
                             fontSize={{ base: "10px", md: "15px" }}
                             lineHeight={"30px"}
-                            justifyContent={"flex-end"}
-                            alignItems={"flex-end"}
                             _hover={{
                               textDecoration: "none",
                               color: "linkHoverColor",
@@ -465,8 +448,7 @@ const Calender = ({
                 </Flex>
               </Box>
             </Box>
-          </Box>
-          */}
+          </Box> */}
         </Flex>
       </Box>
     </>
