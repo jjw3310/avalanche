@@ -156,7 +156,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                     left={"-35px"}
                     bottom={"-34px"}
                   />
-                  20230521
+                  {selectedYYYYMMDD}
                 </Text>
               </Flex>
             </Flex>
