@@ -45,7 +45,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box
         ref={ref}
         w={"100%"}
@@ -225,7 +225,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
             </Box>
           </Box>
 
-
           {/* 오른쪽 영역 */}
           <Box
             h="100%"
@@ -246,7 +245,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               <label for="input">My date</label>
             </Text>
-            
+
             {/* 1번째 input tag */}
             <Box position="relative" width="283px">
               <Input
@@ -297,8 +296,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 </Box>
               )}
             </Box>
-
-
 
             <Text
               mt={"150px"}

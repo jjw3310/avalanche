@@ -36,7 +36,7 @@ import celebrateIcon from "@assets/images/celebrateIcon.png";
 import guestBookEnterArrow from "@assets/images/guestBookEnterArrow.png";
 import glitch from "@assets/images/glitch.png";
 
-const GuestBook = forwardRef((props, ref) => {
+const GuestBook = forwardRef((props, ref, account) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +54,12 @@ const GuestBook = forwardRef((props, ref) => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar
+        // signUp={signUp}
+        // signIn={signIn}
+        // address={address}
+        account={account}
+      /> */}
       <Box
         ref={ref}
         w={"100%"}
@@ -74,7 +79,7 @@ const GuestBook = forwardRef((props, ref) => {
           flex="1"
         >
           {/* 왼쪽 전체 영역 */}
-          <Box >
+          <Box>
             <Text
               fontFamily="sans-serif"
               fontStyle="normal"
@@ -89,22 +94,21 @@ const GuestBook = forwardRef((props, ref) => {
             {/* 왼쪽 가장 큰 카드 */}
 
             <Box
-                direction="column"
-                justify="flex-start"
-                align="space-around"
-                w="400px"
-                h="530px"
-                bg={`url(${glitch})`}
-                backgroundBlendMode={"multiply"}
-                backgroundColor={"rgba(0, 0, 0, 0.5)"}
-                bgSize="cover"
-                borderTopLeftRadius="30px"
-                borderTopRightRadius="0px"
-                borderBottomLeftRadius="30px"
-                borderBottomRightRadius="0px"
-                pos={"relative"} 
+              direction="column"
+              justify="flex-start"
+              align="space-around"
+              w="400px"
+              h="530px"
+              bg={`url(${glitch})`}
+              backgroundBlendMode={"multiply"}
+              backgroundColor={"rgba(0, 0, 0, 0.5)"}
+              bgSize="cover"
+              borderTopLeftRadius="30px"
+              borderTopRightRadius="0px"
+              borderBottomLeftRadius="30px"
+              borderBottomRightRadius="0px"
+              pos={"relative"}
             >
-              
               <Box mt={"30px"}>
                 <Flex
                   pos={"absolute"}
@@ -120,7 +124,6 @@ const GuestBook = forwardRef((props, ref) => {
                 </Flex>
               </Box>
 
-              
               <Box
                 position="relative"
                 boxSizing="border-box"
@@ -178,10 +181,7 @@ const GuestBook = forwardRef((props, ref) => {
                 </Flex>
               </Box>
             </Box>
-
-
           </Box>
-
 
           {/* 오른쪽 가장 큰 카드 */}
           <Box
@@ -256,15 +256,15 @@ const GuestBook = forwardRef((props, ref) => {
               {/* #section2 방명록 댓글 부분 */}
               <Box h={"390px"}>
                 <Flex
-                    mt={"10px"}
-                    direction={"row"}
-                    ml={"20px"}
-                    justify={"flex-start"}
-                    align={"flex-start"}
-                    w={"650px"}
+                  mt={"10px"}
+                  direction={"row"}
+                  ml={"20px"}
+                  justify={"flex-start"}
+                  align={"flex-start"}
+                  w={"650px"}
                 >
-                    <IoPersonCircleOutline size={30} color="black" />
-                    <Flex
+                  <IoPersonCircleOutline size={30} color="black" />
+                  <Flex
                     ml={"10px"}
                     mt={"2px"}
                     fontSize={"16px"}
@@ -273,99 +273,106 @@ const GuestBook = forwardRef((props, ref) => {
                     fontWeight={"bold"}
                     justify={"center"}
                     align={"center"}
-                    >
+                  >
                     73elliot
-                    </Flex>
+                  </Flex>
                 </Flex>
-                <Flex direction={"column"} justify={"space-between"} align={"center"} w={"100%"}>
-                    <Flex direction={"row"} justify={"space-between"} align={"center"} w={"100%"}>
-                        <Text
-                        ml={"50px"}
-                        fontFamily="Raleway"
-                        fontStyle="normal"
-                        fontWeight={700}
-                        fontSize={["12px", null, "12px"]}
-                        lineHeight={["23px", null, "23px"]}
-                        color="#747474"
-                        >
-                        Today is our anniversary :)
-                        </Text>
-                        <Box
-                        display="flex"
-                        flexDirection="row"
-                        alignItems="center"
-                        justifyContent="center"
-                        padding="5px 12px"
-                        // gap="10px"
-                        width="66px"
-                        height="30px"
-                        borderRadius="50px"
-                        flex="none"
-                        order={1}
-                        flexGrow={0}
-                        mr={"30px"}
-                        >
-                            <Image src={logoHeart} />
-                            <Text color={"black"} ml={"5px"}>
-                                42
-                            </Text>
-                        </Box>
-                    </Flex>
-
+                <Flex
+                  direction={"column"}
+                  justify={"space-between"}
+                  align={"center"}
+                  w={"100%"}
+                >
+                  <Flex
+                    direction={"row"}
+                    justify={"space-between"}
+                    align={"center"}
+                    w={"100%"}
+                  >
+                    <Text
+                      ml={"50px"}
+                      fontFamily="Raleway"
+                      fontStyle="normal"
+                      fontWeight={700}
+                      fontSize={["12px", null, "12px"]}
+                      lineHeight={["23px", null, "23px"]}
+                      color="#747474"
+                    >
+                      Today is our anniversary :)
+                    </Text>
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center"
+                      justifyContent="center"
+                      padding="5px 12px"
+                      // gap="10px"
+                      width="66px"
+                      height="30px"
+                      borderRadius="50px"
+                      flex="none"
+                      order={1}
+                      flexGrow={0}
+                      mr={"30px"}
+                    >
+                      <Image src={logoHeart} />
+                      <Text color={"black"} ml={"5px"}>
+                        42
+                      </Text>
+                    </Box>
+                  </Flex>
                 </Flex>
               </Box>
 
               {/* #section3 방명록 댓글 쓰는 기능 */}
               <Box w={"650px"}>
                 <Flex>
-                    <Flex
-                        width={"100%"}
-                        direction="row"
-                        justify="flex-start"
-                        align="center"
-                        borderTopColor="black"
-                        borderBottomColor="transparent"
-                        borderLeftColor="transparent"
-                        borderRightColor="transparent"
-                        borderTopWidth="1px"
-                    >
-                    <Flex >
-                        <Divider
-                            ml="20px"
-                            mt="13px"
-                            border={"2px"}
-                            orientation="vertical"
-                            borderColor="#ADADAD"
-                            borderWidth="1px"
-                            borderStyle="solid"
-                            height="15px" // 세로 길이 조정
-                        />
-                        <Text
-                            ml="15px"
-                            mt="10px"
-                            fontFamily="Raleway"
-                            fontStyle="normal"
-                            fontSize="18px"
-                            lineHeight="21px"
-                            color="black"
-                            color="rgba(0, 0, 0, 0.5)"
-                        >
-                            One comment only..
-                        </Text>
-                        <Image 
-                            mt="5px"
-                            ml={"410px"}
-                            src={guestBookEnterArrow} 
-                            width="30px" 
-                            height="auto"
-                            style={{ opacity: 4 }}
-                        />
+                  <Flex
+                    width={"100%"}
+                    direction="row"
+                    justify="flex-start"
+                    align="center"
+                    borderTopColor="black"
+                    borderBottomColor="transparent"
+                    borderLeftColor="transparent"
+                    borderRightColor="transparent"
+                    borderTopWidth="1px"
+                  >
+                    <Flex>
+                      <Divider
+                        ml="20px"
+                        mt="13px"
+                        border={"2px"}
+                        orientation="vertical"
+                        borderColor="#ADADAD"
+                        borderWidth="1px"
+                        borderStyle="solid"
+                        height="15px" // 세로 길이 조정
+                      />
+                      <Text
+                        ml="15px"
+                        mt="10px"
+                        fontFamily="Raleway"
+                        fontStyle="normal"
+                        fontSize="18px"
+                        lineHeight="21px"
+                        // color="black"
+                        color="rgba(0, 0, 0, 0.5)"
+                      >
+                        One comment only..
+                      </Text>
+                      <Image
+                        mt="5px"
+                        ml={"410px"}
+                        src={guestBookEnterArrow}
+                        width="30px"
+                        height="auto"
+                        style={{ opacity: 4 }}
+                      />
                     </Flex>
+                  </Flex>
                 </Flex>
-                </Flex>
-            </Box> 
-
-
+              </Box>
             </Flex>
           </Box>
         </Flex>

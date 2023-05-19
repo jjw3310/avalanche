@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({
   currentVisibleIndex,
@@ -26,15 +27,31 @@ export default function NavBar({
 }) {
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
-
+  // const history = useHistory();
+  const navigate = useNavigate();
   const handleClick = () => {
     // 클릭 시 이동할 페이지 경로
     // 예시: "/profile"
-    const destination1 = "/purchaseDetail";
-    const destination2 = "/guestBook";
+    console.log("helloacount:" + account);
+    const destination1 = {
+      pathname: "/purchaseDetail",
+      state: { account: account },
+    };
+    const destination2 = {
+      pathname: "/guestBook",
+      state: { account: account },
+    };
+    // const destination1 = "/purchaseDetail";
+    // const destination2 = "/guestBook";
     // 페이지 이동
-    window.location.href = destination1;
-    window.location.href = destination2;
+
+    if (account) {
+      // window.location.href = destination1;
+      navigate(destination1);
+    } else {
+      // window.location.href = destination2;
+      navigate(destination2);
+    }
   };
 
   return (
@@ -51,11 +68,9 @@ export default function NavBar({
         align={"space-around"}
       >
         <Flex flex={{ base: 1 }} ml={"12px"} alignItems={"center"}>
-          <a href="/">
-            <Box width={70} cursor={"pointer"}>
-              <Text color={"white"}>Date's</Text>
-            </Box>
-          </a>
+          <Box width={70} cursor={"pointer"} onClick={() => navigate("/")}>
+            <Text color={"white"}>Date's</Text>
+          </Box>
         </Flex>
         {/* {account ? `Welcome!\t"${account}"` : ""} */}
         {!account ? (

@@ -22,7 +22,7 @@ import axios from "axios";
 // const web3 = new Web3(window.ethereum);
 // const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
-export default function MainPage() {
+export default function MainPage({ account }) {
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
   const [myNft, setMyNft] = useState(0);
@@ -32,7 +32,7 @@ export default function MainPage() {
   const { userContract, dateContract, commentContract, getContracts } =
     useWeb3();
   const { address, getAddress } = useWallet();
-  const [account, setAccount] = useState();
+  // const [account, setAccount] = useState();
   const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
   const [todayNftImg, setTodayNftImg] = useState();
@@ -93,39 +93,39 @@ export default function MainPage() {
     getAddress();
   }, []);
 
-  const signUp = async () => {
-    try {
-      if (!userContract) return;
-      const response = await userContract.methods
-        .signUp("test", "1234")
-        .send({ from: address });
-      if (response) {
-        console.log("가입완료");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const signUp = async () => {
+  //   try {
+  //     if (!userContract) return;
+  //     const response = await userContract.methods
+  //       .signUp("test", "1234")
+  //       .send({ from: address });
+  //     if (response) {
+  //       console.log("가입완료");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const signIn = async () => {
-    try {
-      if (!userContract) return;
-      const response = await userContract.methods
-        .login(inputAcnt, "1234")
-        .call()
-        .then((res) => {
-          if (res) {
-            setAccount(inputAcnt);
-            alert("로그인 성공");
-          } else {
-            alert("로그인 실패");
-          }
-        });
-    } catch (error) {
-      console.error(error);
-      alert("로그인 실패");
-    }
-  };
+  // const signIn = async () => {
+  //   try {
+  //     if (!userContract) return;
+  //     const response = await userContract.methods
+  //       .login(inputAcnt, "1234")
+  //       .call()
+  //       .then((res) => {
+  //         if (res) {
+  //           setAccount(inputAcnt);
+  //           alert("로그인 성공");
+  //         } else {
+  //           alert("로그인 실패");
+  //         }
+  //       });
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("로그인 실패");
+  //   }
+  // };
 
   const mintDate = async (season, _yyyymmdd) => {
     try {
@@ -195,14 +195,14 @@ export default function MainPage() {
       >
         Test BTN2
       </Button> */}
-      <NavBar
+      {/* <NavBar
         // currentVisibleIndex={currentVisibleIndex}
         // onClickNavLink={handleClickNavLink}
         signUp={signUp}
         signIn={signIn}
         address={address}
         account={account}
-      />
+      /> */}
       <Introduce mintDate={mintDate} />
       <Calender
         selected={selectedDate}
