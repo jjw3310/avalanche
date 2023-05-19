@@ -87,6 +87,7 @@ const GuestBook = forwardRef((props, ref) => {
             </Text>
 
             {/* 왼쪽 가장 큰 카드 */}
+
             <Box
                 direction="column"
                 justify="flex-start"
@@ -94,15 +95,17 @@ const GuestBook = forwardRef((props, ref) => {
                 w="400px"
                 h="530px"
                 bg={`url(${glitch})`}
-                style={{ filter: "brightness(0.5)" }}
+                backgroundBlendMode={"multiply"}
+                backgroundColor={"rgba(0, 0, 0, 0.5)"}
                 bgSize="cover"
                 borderTopLeftRadius="30px"
                 borderTopRightRadius="0px"
                 borderBottomLeftRadius="30px"
                 borderBottomRightRadius="0px"
+                pos={"relative"} 
             >
-              {/* upper 파트 기능 */}
-              <Box pos={"relative"} mt={"30px"}>
+              
+              <Box mt={"30px"}>
                 <Flex
                   pos={"absolute"}
                   ml={"20px"}
@@ -117,7 +120,7 @@ const GuestBook = forwardRef((props, ref) => {
                 </Flex>
               </Box>
 
-              {/* below 파트 기능 */}
+              
               <Box
                 position="relative"
                 boxSizing="border-box"
@@ -175,6 +178,8 @@ const GuestBook = forwardRef((props, ref) => {
                 </Flex>
               </Box>
             </Box>
+
+
           </Box>
 
 

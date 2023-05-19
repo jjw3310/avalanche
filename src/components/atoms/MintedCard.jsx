@@ -17,7 +17,7 @@ export default function MintedCard() {
           position={"relative"}
           // bg={`url(${todayNftImg})`}
           bg={`url(${todayDateNFT})`}
-          bgSize={"100%"}
+          bgSize={"cover"} // {"100%"} 에서 cover로 바꿈
           backgroundBlendMode={"multiply"}
           backgroundColor={"rgba(0, 0, 0, 0.5)"}
         >
