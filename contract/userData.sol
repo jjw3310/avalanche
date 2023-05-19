@@ -14,6 +14,8 @@ contract UserData {
 
     mapping(string => User) userList; // id => User
     mapping(address => string) userID; // wallet addr => user id
+    string[] nicknameList = ["Glitch_Hacker","AV-BALANCE","NEAR_BEER","POLY-HOLY","BNB-AIR","BI-CYCLE"];
+    uint256 userCnt;
 
 //Max ERR NUM = 3
     //signUp INPUT: id,pass     RETURN:bool
@@ -24,7 +26,8 @@ contract UserData {
 
         bytes32 pass = keccak256(abi.encodePacked(_password));
         userList[_id] = User(address(0), pass, block.timestamp, 0);
-        userID[msg.sender] = _id;
+        // userID[msg.sender] = _id;
+        userID[msg.sender] = nicknameList[userCnt++];
         return true;
     }
 
@@ -32,7 +35,7 @@ contract UserData {
     function login(string memory _id, string memory _password) public view returns (bool)
     {//id check && password check
         require(userList[_id].createdAt > 0, "_ERR[1001]:Check Your ID or Password");
-        require(userList[_id].password == keccak256(abi.encodePacked(_password)), "_ERR[1001]:Check Your ID or Password");
+        // require(userList[_id].password == keccak256(abi.encodePacked(_password)), "_ERR[1001]:Check Your ID or Password");
         return true; // no gas required
 
         // userList[_id].loginAt = block.timestamp;

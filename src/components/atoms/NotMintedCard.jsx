@@ -1,4 +1,11 @@
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Image,
+  Popover,
+  PopoverTrigger,
+  Text,
+} from "@chakra-ui/react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";

@@ -24,7 +24,7 @@ import previousMonth from "@assets/images/previousMonth.svg";
 import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
 import editPictureIcon from "@assets/images/editPictureIcon.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Calendar, CalendarDay, CalendarMonth } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
@@ -36,12 +36,19 @@ import celebrateIcon from "@assets/images/celebrateIcon.png";
 import guestBookEnterArrow from "@assets/images/guestBookEnterArrow.png";
 import glitch from "@assets/images/glitch.png";
 import backIMG from "@assets/images/DistanceStars.png";
+import { useWeb3 } from "@hooks/useAvax";
 
-const GuestBook = forwardRef((props, ref, account) => {
+const GuestBook = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [comment, setComment] = useState("");
+  const { commentContract, getContracts } = useWeb3();
+  const { yyyymmdd, address } = useParams();
+
+  useEffect(() => {
+    getContracts();
+  }, [commentContract]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -65,6 +72,12 @@ const GuestBook = forwardRef((props, ref, account) => {
 
   const handleBlur = () => {
     setIsClicked(false);
+  };
+
+  const sendComment = async function () {
+    const res = await commentContract.methods
+      .writeComment(yyyymmdd, "TITLE", comment)
+      .send({ from: address });
   };
 
   return (
@@ -380,13 +393,12 @@ const GuestBook = forwardRef((props, ref, account) => {
                           onMouseLeave={handleMouseLeave}
                           onClick={handleClick}
                         >
-                          {isClicked ? (
+                          {comment ? (
                             <input
                               type="text"
                               value={comment}
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              placeholder="Write a comment..."
                               autoFocus
                               style={{
                                 outline: "none",
@@ -395,13 +407,19 @@ const GuestBook = forwardRef((props, ref, account) => {
                               }}
                             />
                           ) : (
-                            <>
-                              <Flex width={"550px"}>
-                                <span style={{ flex: "1" }}>
-                                  One comment only..
-                                </span>
-                              </Flex>
-                            </>
+                            <input
+                              type="text"
+                              value={comment}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              placeholder="One comment only.."
+                              autoFocus
+                              style={{
+                                outline: "none",
+                                border: "none",
+                                width: "552px", // Adjust the width as needed
+                              }}
+                            />
                           )}
                         </div>
                         <Image
@@ -411,6 +429,10 @@ const GuestBook = forwardRef((props, ref, account) => {
                           width="30px"
                           height="auto"
                           style={{ opacity: 4 }}
+                          onClick={() => {
+                            setComment("");
+                            sendComment();
+                          }}
                         />
                       </Flex>
                     </Flex>

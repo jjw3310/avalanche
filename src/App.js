@@ -112,7 +112,7 @@ function App() {
                 {" "}
               </Route>
               <Route
-                path="/GuestBook"
+                path="/GuestBook/:yyyymmdd/:address"
                 element={
                   <GuestBook
                     // signUp={signUp}

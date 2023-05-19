@@ -180,22 +180,6 @@ export default function MainPage({ account }) {
   return (
     // <>
     <Box bg={`url(${backIMG})`} bgSize={"100%"}>
-      {/* <Button
-        onClick={() => {
-          mintDate("2023", todayYYYYMMDD);
-        }}
-        color={"blue"}
-      >
-        Test BTN
-      </Button>
-      <Button
-        onClick={() => {
-          getTodayNft();
-        }}
-        color={"blue"}
-      >
-        Test BTN2
-      </Button> */}
       {/* <NavBar
         // currentVisibleIndex={currentVisibleIndex}
         // onClickNavLink={handleClickNavLink}

@@ -1,4 +1,13 @@
-import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Image,
+  Popover,
+  PopoverTrigger,
+  Text,
+} from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import emptyHeart from "@assets/images/emptyHeart.png";
@@ -32,163 +41,164 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
   }, [commentContract]);
 
   return (
-    <Link to="/guestBook">
-      <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
-        {/* #upper box */}
-        <Box
-          w="350px"
-          position={"relative"}
-          // bg={`url(${todayNftImg})`}
-          bg={`url(${glitchImg})`}
-          bgSize={"100%"}
-          backgroundBlendMode={"multiply"}
-          backgroundColor={"rgba(0, 0, 0, 0.5)"}
-        >
-          <Flex
-            direction={"column"}
-            justify={"flex-start"}
-            align={"space-around"}
-            w={"100%"}
-            h="200px"
+    <>
+      <Link to={`/guestBook/${selectedYYYYMMDD}/${address}`}>
+        <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
+          {/* #upper box */}
+          <Box
+            w="350px"
             position={"relative"}
-            overflow={"hidden"}
+            // bg={`url(${todayNftImg})`}
+            bg={`url(${glitchImg})`}
+            bgSize={"100%"}
+            backgroundBlendMode={"multiply"}
+            backgroundColor={"rgba(0, 0, 0, 0.5)"}
           >
-            {/* #1 */}
             <Flex
-              ml={"20px"}
-              mt={"15px"}
-              direction={"row"}
+              direction={"column"}
               justify={"flex-start"}
-              align={"center"}
+              align={"space-around"}
               w={"100%"}
-            >
-              <IoPersonCircleOutline size={30} />
-              <Text ml={"10px"}>buyyourdate</Text>
-              <Button
-                // position={"relative"}
-                ml={"120px"}
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="center"
-                padding="5px 12px"
-                width="60px"
-                gap={"5px"}
-                height="30px"
-                background="#FFFFFF"
-                borderRadius="50px"
-                flex="none"
-                order={1}
-                flexGrow={0}
-              >
-                <Image
-                  ml={"5px"}
-                  src={emptyHeart}
-                  // position={"absolute"}
-                />
-                <Text
-                  mr={"5px"}
-                  color={"black"}
-                  // position={"absolute"}
-                >
-                  42
-                </Text>
-              </Button>
-            </Flex>
-            <Flex
-              ml={"25px"}
-              mt={"5px"}
-              fontFamily="Raleway"
-              fontStyle="normal"
-              fontWeight={700}
-              fontSize={["20px", null, "20px"]}
-              // lineHeight={["23px", null, "47px"]}
-              color="#FFFFFF"
-            >
-              My birthday
-            </Flex>
-            <Flex
-              ml={"25px"}
-              mt={"45px"}
-              fontFamily="Raleway"
-              fontStyle="normal"
-              fontWeight={400}
-              fontSize={["20px", null, "20px"]}
-              // lineHeight={["23px", null, "28px"]}
-              color="#FFFFFF"
-            >
-              Date
-            </Flex>
-
-            {/* #3 */}
-            <Flex
+              h="200px"
               position={"relative"}
-              direction={"row"}
-              ml={"20px"}
-              justify={"flex-start"}
-              align={"center"}
-              w={"100%"}
+              overflow={"hidden"}
             >
-              <Text
-                ml={"35px"}
-                fontFamily={"Roboto"}
-                fontStyle={"normal"}
-                fontWeight={"400"}
-                fontSize={"20px"}
-                lineHeight={"33px"}
-                color={"#FFFFFF"}
+              {/* #1 */}
+              <Flex
+                ml={"20px"}
+                mt={"15px"}
+                direction={"row"}
+                justify={"flex-start"}
+                align={"center"}
+                w={"100%"}
               >
-                <Image
-                  src={DescriptionStarLight2}
-                  position={"absolute"}
-                  width={"100px"}
-                  height={"100px"}
-                  left={"-35px"}
-                  bottom={"-34px"}
-                />
-                20230521
-              </Text>
+                <IoPersonCircleOutline size={30} />
+                <Text ml={"10px"}>buyyourdate</Text>
+                <Button
+                  // position={"relative"}
+                  ml={"120px"}
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="center"
+                  padding="5px 12px"
+                  width="60px"
+                  gap={"5px"}
+                  height="30px"
+                  background="#FFFFFF"
+                  borderRadius="50px"
+                  flex="none"
+                  order={1}
+                  flexGrow={0}
+                >
+                  <Image
+                    ml={"5px"}
+                    src={emptyHeart}
+                    // position={"absolute"}
+                  />
+                  <Text
+                    mr={"5px"}
+                    color={"black"}
+                    // position={"absolute"}
+                  >
+                    42
+                  </Text>
+                </Button>
+              </Flex>
+              <Flex
+                ml={"25px"}
+                mt={"5px"}
+                fontFamily="Raleway"
+                fontStyle="normal"
+                fontWeight={700}
+                fontSize={["20px", null, "20px"]}
+                // lineHeight={["23px", null, "47px"]}
+                color="#FFFFFF"
+              >
+                My birthday
+              </Flex>
+              <Flex
+                ml={"25px"}
+                mt={"45px"}
+                fontFamily="Raleway"
+                fontStyle="normal"
+                fontWeight={400}
+                fontSize={["20px", null, "20px"]}
+                // lineHeight={["23px", null, "28px"]}
+                color="#FFFFFF"
+              >
+                Date
+              </Flex>
+
+              {/* #3 */}
+              <Flex
+                position={"relative"}
+                direction={"row"}
+                ml={"20px"}
+                justify={"flex-start"}
+                align={"center"}
+                w={"100%"}
+              >
+                <Text
+                  ml={"35px"}
+                  fontFamily={"Roboto"}
+                  fontStyle={"normal"}
+                  fontWeight={"400"}
+                  fontSize={"20px"}
+                  lineHeight={"33px"}
+                  color={"#FFFFFF"}
+                >
+                  <Image
+                    src={DescriptionStarLight2}
+                    position={"absolute"}
+                    width={"100px"}
+                    height={"100px"}
+                    left={"-35px"}
+                    bottom={"-34px"}
+                  />
+                  20230521
+                </Text>
+              </Flex>
             </Flex>
-          </Flex>
-        </Box>
+          </Box>
 
-        {/* #below box */}
-        <Box
-          background="white"
-          boxSizing="border-box"
-          borderTopLeftRadius="0px"
-          borderTopRightRadius="0px"
-          borderBottomRightRadius="30px"
-          borderBottomLeftRadius="30px"
-          w={"100%"}
-          h={"360px"}
-        >
-          <Flex direction={"column"} justify={"center"} align={"center"}>
-            <Box mt={"10px"} mb={"10px"}>
-              <Text
-                fontFamily={"Raleway"}
-                fontStyle={"normal"}
-                fontWeight={"700"}
-                fontSize={"18px"}
-                lineHeight={"21px"}
-                color={"#000000"}
-              >
-                {comments
-                  ? `Today’s top ${comments.length} comments`
-                  : "Let's write comments"}
-              </Text>
-            </Box>
+          {/* #below box */}
+          <Box
+            background="white"
+            boxSizing="border-box"
+            borderTopLeftRadius="0px"
+            borderTopRightRadius="0px"
+            borderBottomRightRadius="30px"
+            borderBottomLeftRadius="30px"
+            w={"100%"}
+            h={"360px"}
+          >
+            <Flex direction={"column"} justify={"center"} align={"center"}>
+              <Box mt={"10px"} mb={"10px"}>
+                <Text
+                  fontFamily={"Raleway"}
+                  fontStyle={"normal"}
+                  fontWeight={"700"}
+                  fontSize={"18px"}
+                  lineHeight={"21px"}
+                  color={"#000000"}
+                >
+                  {comments
+                    ? `Today’s top ${comments.length} comments`
+                    : "Let's write comments"}
+                </Text>
+              </Box>
 
-            {comments
-              ? comments.map((v) => {
-                  return (
-                    <InCardComments yyyymmdd={selectedYYYYMMDD} comment={v} />
-                  );
-                })
-              : ""}
+              {comments
+                ? comments.map((v) => {
+                    return (
+                      <InCardComments yyyymmdd={selectedYYYYMMDD} comment={v} />
+                    );
+                  })
+                : ""}
 
-            {/* 방명록 댓글 #Set1 시작 부분 */}
-            {/* <Flex
+              {/* 방명록 댓글 #Set1 시작 부분 */}
+              {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -251,9 +261,9 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderWidth="1px"
               borderStyle="solid"
             /> */}
-            {/* 방명록 댓글 #Set1 끝 부분 */}
-            {/* 방명록 댓글 #Set2 시작 부분 */}
-            {/* <Flex
+              {/* 방명록 댓글 #Set1 끝 부분 */}
+              {/* 방명록 댓글 #Set2 시작 부분 */}
+              {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -314,9 +324,9 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderWidth="1px"
               borderStyle="solid"
             /> */}
-            {/* 방명록 댓글 #Set2 끝 부분 */}
-            {/* 방명록 댓글 #Set3 시작 부분 */}
-            {/* <Flex
+              {/* 방명록 댓글 #Set2 끝 부분 */}
+              {/* 방명록 댓글 #Set3 시작 부분 */}
+              {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -378,8 +388,8 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderStyle="solid"
             />
             {/* 방명록 댓글 #Set3 끝 부분 */}
-            {/* 방명록 댓글 #Set4 시작 부분 */}
-            {/* <Flex
+              {/* 방명록 댓글 #Set4 시작 부분 */}
+              {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -440,10 +450,11 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderWidth="1px"
               borderStyle="solid"
             /> */}
-            {/* 방명록 댓글 #Set4 끝 부분 */}
-          </Flex>
+              {/* 방명록 댓글 #Set4 끝 부분 */}
+            </Flex>
+          </Box>
         </Box>
-      </Box>
-    </Link>
+      </Link>
+    </>
   );
 }

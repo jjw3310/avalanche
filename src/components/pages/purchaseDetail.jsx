@@ -189,36 +189,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
                     >
                       20230522
                     </Text>
-
-                    <Button
-                      mt={"5px"}
-                      ml={"120px"}
-                      mr={"30px"}
-                      w={"100%"}
-                      h={"30px"}
-                      borderRadius={"20px"}
-                      _hover={{ bg: "purple.500" }}
-                    >
-                      <Popover trigger={"hover"} placement={"bottom-start"}>
-                        <PopoverTrigger>
-                          <Box
-                            fontWeight={"500"}
-                            color="black"
-                            fontStyle={"normal"}
-                            fontSize={{ base: "10px", md: "15px" }}
-                            lineHeight={"30px"}
-                            _hover={{
-                              textDecoration: "none",
-                              color: "linkHoverColor",
-                            }}
-                            href="/"
-                            target="_blank"
-                          >
-                            Mint the date
-                          </Box>
-                        </PopoverTrigger>
-                      </Popover>
-                    </Button>
                   </Flex>
                 </Flex>
               </Box>
