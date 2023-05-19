@@ -284,7 +284,7 @@ const Calender = ({
                           <img
                             key={i}
                             className="rounded-t-2xl"
-                            src={v.metadata.image}
+                            src={v.metadata.properties.image.description}
                             alt={v.metadata.name}
                           />
                           <div className="mt-4 text-xl font-bold flex items-center px-4 text-gray-300">

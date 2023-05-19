@@ -25,7 +25,7 @@ const Introduce = forwardRef((props, ref) => {
         ref={ref}
         w={"100%"}
         h={"550px"}
-        py={"50px"}
+        py={"100px"}
         // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
