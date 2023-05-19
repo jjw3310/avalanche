@@ -57,7 +57,8 @@ const Introduce = forwardRef((props, ref) => {
                 color={"#FFFFFF"}
                 mt={"30px"}
                 position={"relative"}
-                font-family="Roboto"
+                // font-family="Roboto"
+                fontFamily="Roboto"
               >
                 Own the Moments <br />
                 that Matter Most
@@ -99,9 +100,10 @@ const Introduce = forwardRef((props, ref) => {
                 fontStyle={"normal"}
                 fontSize={{ base: "10px", md: "16px" }}
                 lineHeight={"28px"}
-                font-weight={"400"}
+                // font-weight={"400"}
                 // position: absolute;
-                font-family={"Raleway"}
+                // font-family={"Raleway"}
+                fontFamily={"Raleway"}
                 color={"white"}
                 mb={"58px"}
               >
@@ -115,7 +117,8 @@ const Introduce = forwardRef((props, ref) => {
                   src={rocket}
                   // justifyContent={"center"}
                   // alignItems={"center"}
-                  boxSize={{ sm: "20px", md: "20px" }}
+                  // boxSize={{ sm: "20px", md: "20px" }}
+                  boxSize={"20px"}
                 />
                 <Text
                   fontWeight={"500"}

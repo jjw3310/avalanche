@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Intro from "../Intro";
 
 import Web3 from "web3";
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../../web3.config";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../../web3Config";
 import Nfts from "../Nfts";
 import CalendarComponent from "../CalendarComponent";
 import Pinata from "../Pinata";

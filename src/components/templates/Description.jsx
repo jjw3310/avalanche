@@ -38,7 +38,8 @@ const Description = forwardRef((props, ref) => {
           fontStyle={"normal"}
           fontSize={"40px"}
           lineHeight={"82px"}
-          font-family="Raleway"
+          // font-family="Raleway"
+          fontFamily="Raleway"
           color={"#FFFFFF"}
           mb={"100px"}
         >

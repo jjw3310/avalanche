@@ -14,7 +14,13 @@ contract DateData is ERC721Enumerable, Ownable {
     uint public mintedNftCnt;
     uint public seasonOpened;
     uint public maxMintInASeasonCnt; // default 10 in constructor
-    
+
+    constructor(string memory _name, string memory _symbol, string memory _baseUri)
+    ERC721(_name, _symbol) {
+        baseURI = _baseUri;
+        maxMintInASeasonCnt = 10;
+    }
+
 // seasonal minting part
     struct season {
         uint256 startDate;
@@ -36,16 +42,6 @@ contract DateData is ERC721Enumerable, Ownable {
     }
     mapping(uint256 => nftInfo) nftInfoList; // tokenid => nftInfo
 
-    constructor(string memory _name, string memory _symbol, string memory _baseUri)
-    ERC721(_name, _symbol) {
-        baseURI = _baseUri;
-        openedNftCnt = 1;
-        seasonOpened = 0; // Genesis Season
-        _safeMint(msg.sender, 0); // Genesis Date NFT
-        mintedNftCnt = 1;
-        maxMintInASeasonCnt = 10;
-        seasonList.push(season(0,10100,10101,new address[](10101)));
-    }
 
     function setBaseURI(string memory _baseUri) external {
         baseURI = _baseUri;
@@ -78,49 +74,48 @@ contract DateData is ERC721Enumerable, Ownable {
         require(_totalcnt > 0 && _totalcnt <= 366, "_ERR[0002]:_totalcnt between 1~366");
         require(_endDate >= _startDate, "_ERR[0003]:_stardDate can't be bigger than _endDate");
 
-        seasonOpened++; // first season starts with 1, Genesis Season 0
         seasonNameToNum[_name] = seasonOpened;
+        seasonOpened++;
         seasonList.push(season(_startDate, _endDate, _totalcnt, new address[](_totalcnt)));
         openedNftCnt = openedNftCnt + _totalcnt;
     }
 
     // common mint function
     // check input data(date availablity) before call this function!!!
-    function mintCommon(uint256 _season, string memory _seasonName, uint256 _yyyymmdd, address _owner )
+    function mintCommon(string memory _seasonName, uint256 _yyyymmdd, address _owner)
      public
     {
-        // Double mint check
-        // require(ownerOf(_yyyymmdd)==address(0),"_ERR[1008]:This date NFT is already minted");
-        uint256 seasonNum;
+        uint256 seasonNum = seasonNameToNum[_seasonName];
 
         // Input value check
-        if(_season > 0 && bytes(_seasonName).length > 0) {
-            require(seasonNameToNum[_seasonName] == _season, "_ERR[0004]:Check _season or _seasonName");
-        }
-        if(_season > 0) {
-            require(_season > 0 && _season <= seasonOpened, "_ERR[0005]:Check your _seanson value");
-        } else if(bytes(_seasonName).length > 0 ) {
-            require(seasonNameToNum[_seasonName] > 0, "_ERR[0006]:Check _seasonName value");
-            seasonNum = seasonNameToNum[_seasonName];
-        }
+        // if(_season > 0 && bytes(_seasonName).length > 0) {
+        //     require(seasonNameToNum[_seasonName] == _season, "_ERR[0004]:Check _season or _seasonName");
+        // }
+        // if(_season > 0) {
+        //     require(_season > 0 && _season <= seasonOpened, "_ERR[0005]:Check your _seanson value");
+        // } else if(bytes(_seasonName).length > 0 ) {
+        // if(bytes(_seasonName).length > 0 ) {
+        //     require(seasonNameToNum[_seasonName] >= 0, "_ERR[0006]:Check _seasonName value");
+        //     seasonNum = seasonNameToNum[_seasonName];
+        // }
 
         // Max mint in a season check
-        uint ownCnt;
-        for(uint i=0; i < seasonList[seasonNum].owners.length; i++){
-            if(seasonList[seasonNum].owners[i] == _owner) ownCnt++;
-            require(ownCnt <= maxMintInASeasonCnt, "_ERR[1007]:Can't mint more than maxMintInASeasonCnt");
-        }
+        // uint ownCnt;
+        // for(uint i=0; i < seasonList[seasonNum].owners.length; i++){
+        //     if(seasonList[seasonNum].owners[i] == msg.sender) ownCnt++;
+        //     require(ownCnt < maxMintInASeasonCnt, "_ERR[1007]:Can't mint more than maxMintInASeasonCnt");
+        // }
 
         //totalcnt and minted count check [!!Check for Code Error!!]
-        require(seasonList[seasonNum].totalcnt >= seasonList[seasonNum].owners.length,"_ERR[0007]:Owners length can't exceed totalcnt");
-        require(openedNftCnt >= mintedNftCnt, "_ERR[0008]:Check openedNftCnt and mintedNftCnt");
+        // require(seasonList[seasonNum].totalcnt >= seasonList[seasonNum].owners.length,"_ERR[0007]:Owners length can't exceed totalcnt");
+        // require(openedNftCnt >= mintedNftCnt, "_ERR[0008]:Check openedNftCnt and mintedNftCnt");
 
         // mint
         nftInfoList[_yyyymmdd].minted = true;
-        seasonList[seasonNum].owners.push(_owner);
+        seasonList[seasonNum].owners.push(msg.sender);
         mintedNftCnt++;
         // _safeMint(_msgSender(), _yyyymmdd); // use _msgSender() to get user address in gas relayer
-        _safeMint(msg.sender, _yyyymmdd); // use msg.sender in normal situation
+        _safeMint(_owner, _yyyymmdd); // use msg.sender in normal situation
     }
 
     function getDayNftInfo(uint256 _yyyymmdd) public view returns(nftInfo memory) {

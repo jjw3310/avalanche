@@ -12,6 +12,7 @@ import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { Box, Button } from "@chakra-ui/react";
 import backIMG from "../../assets/images/DistanceStars.png";
 import Web3 from "web3";
+import axios from "axios";
 
 // import {
 //   CONTRACT_ABI,
@@ -34,6 +35,7 @@ export default function MainPage() {
   const [account, setAccount] = useState();
   const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
+  const [todayNftImg, setTodayNftImg] = useState();
   // const getTotalNft = async () => {
   //   try {
   //     if (!contract) return;
@@ -84,7 +86,7 @@ export default function MainPage() {
   var month = ("0" + (1 + date.getMonth())).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
   let todayYYYYMMDD = year + month + day;
-  console.log(todayYYYYMMDD);
+  // console.log(todayYYYYMMDD);
 
   useEffect(() => {
     getContracts();
@@ -97,6 +99,9 @@ export default function MainPage() {
       const response = await userContract.methods
         .signUp("test", "1234")
         .send({ from: address });
+      if (response) {
+        console.log("가입완료");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -126,7 +131,7 @@ export default function MainPage() {
     try {
       if (!dateContract) return;
       await dateContract.methods
-        .mintCommon(0, season, _yyyymmdd, address)
+        .mintCommon(season, _yyyymmdd, address)
         .send({ from: address })
         .then(console.log);
     } catch (error) {
@@ -136,18 +141,33 @@ export default function MainPage() {
 
   const getTodayNft = async (_yyyymmdd) => {
     try {
-      if (!dateContract) {
-        return;
-      }
-      let todayNftInfo = await dateContract.methods
+      if (!dateContract) return;
+      const todayNftInfo = await dateContract.methods
         .getDayNftInfo(_yyyymmdd)
         .call();
-      let jsonDate = await dateContract.methods.tokenURI(_yyyymmdd).call();
+      setNftInfo(todayNftInfo);
+      console.log("TODAY NFT INFO:", todayNftInfo);
       if (todayNftInfo.showDefaultImg) {
         console.log("변경한 url이 존재함");
+        setTodayNftImg(todayNftInfo.imgUrl);
+        console.log("사용자 업로드 IMG URL : ", todayNftImg);
       } else {
         console.log("기본 이미지 출력");
-        let metadataUrl = jsonDate;
+        let jsonUrl = await dateContract.methods.tokenURI(_yyyymmdd).call();
+        const res = await axios.get(
+          jsonUrl,
+          // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${_yyyymmdd}`,
+          {
+            headers: {
+              Accept: "text/plain",
+            },
+          }
+        );
+        // console.log("PINATA!!!!!!:", res.data.properties);
+        // setNftInfo(res.data.properties);
+        // console.log("PINATA!!!!!!:", res.data.properties.image.description);
+        setTodayNftImg(res.data.properties.image.description);
+        console.log("기본 IMG URL : ", todayNftImg);
       }
     } catch (error) {
       console.error(error);
@@ -160,45 +180,45 @@ export default function MainPage() {
   }, [dateContract]);
 
   return (
-    <>
-      <Box bg={`url(${backIMG})`} bgSize={"100%"}>
-        <Button
-          onClick={() => {
-            mintDate("2023", todayYYYYMMDD);
-          }}
-          color={"blue"}
-        >
-          Test BTN
-        </Button>
-        <Button
-          onClick={() => {
-            getTodayNft();
-          }}
-          color={"blue"}
-        >
-          Test BTN2
-        </Button>
-        <NavBar
-          // currentVisibleIndex={currentVisibleIndex}
-          // onClickNavLink={handleClickNavLink}
-          signUp={signUp}
-          signIn={signIn}
-          address={address}
-          account={account}
-        />
-        <Introduce />
-        <Calender
-          selected={selectedDate}
-          onSelectDate={setSelectedDate}
-          totalNft={totalNft}
-          mintedNft={mintedNft}
-          myNft={myNft}
-          page={page}
-        />
-        <Description />
-        <Faq />
-        <Footer />
-      </Box>
-    </>
+    // <>
+    <Box bg={`url(${backIMG})`} bgSize={"100%"}>
+      {/* <Button
+        onClick={() => {
+          mintDate("2023", todayYYYYMMDD);
+        }}
+        color={"blue"}
+      >
+        Test BTN
+      </Button>
+      <Button
+        onClick={() => {
+          getTodayNft();
+        }}
+        color={"blue"}
+      >
+        Test BTN2
+      </Button> */}
+      <NavBar
+        // currentVisibleIndex={currentVisibleIndex}
+        // onClickNavLink={handleClickNavLink}
+        signUp={signUp}
+        signIn={signIn}
+        address={address}
+        account={account}
+      />
+      <Introduce />
+      <Calender
+        selected={selectedDate}
+        onSelectDate={setSelectedDate}
+        totalNft={totalNft}
+        mintedNft={mintedNft}
+        myNft={myNft}
+        page={page}
+      />
+      <Description />
+      <Faq />
+      <Footer />
+    </Box>
+    // </>
   );
 }
