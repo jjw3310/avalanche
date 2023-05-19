@@ -36,7 +36,7 @@
 
 import logo from "./logo.svg";
 import "./App.css";
-
+import NavBar from "@components/templates/NavBar";
 import {
   ChakraProvider,
   // Box,
@@ -49,10 +49,48 @@ import { useState, useRef } from "react";
 import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
-
+import { useWallet, useWeb3 } from "@hooks/useAvax";
 function App() {
   const [account, setAccount] = useState("");
 
+  const { address, getAddress } = useWallet();
+  const { userContract, dateContract, commentContract, getContracts } =
+    useWeb3();
+
+  const [inputAcnt, setInputAcnt] = useState("test");
+  const signUp = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .signUp("test", "1234")
+        .send({ from: address });
+      if (response) {
+        console.log("가입완료");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .login(inputAcnt, "1234")
+        .call()
+        .then((res) => {
+          if (res) {
+            setAccount(inputAcnt);
+            alert("로그인 성공");
+          } else {
+            alert("로그인 실패");
+          }
+        });
+    } catch (error) {
+      console.error(error);
+      alert("로그인 실패");
+    }
+  };
   return (
     <>
       <BrowserRouter>
@@ -60,12 +98,30 @@ function App() {
           <div className="min-h-screen bg-gray-950 text-white">
             {/* <Header account={account} setAccount={setAccount} /> */}
 
+            <NavBar
+              // currentVisibleIndex={currentVisibleIndex}
+              // onClickNavLink={handleClickNavLink}
+              signUp={signUp}
+              signIn={signIn}
+              address={address}
+              account={account}
+            />
             <Routes>
               <Route path="/" element={<MainPage account={account} />} />
               <Route path="/purchaseDetail" element={<PurchaseDetail />}>
                 {" "}
               </Route>
-              <Route path="/GuestBook" element={<GuestBook />}>
+              <Route
+                path="/GuestBook"
+                element={
+                  <GuestBook
+                    // signUp={signUp}
+                    // signIn={signIn}
+                    // address={address}
+                    account={account}
+                  />
+                }
+              >
                 {" "}
               </Route>
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}

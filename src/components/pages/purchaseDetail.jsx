@@ -26,6 +26,7 @@ import previousMonth from "@assets/images/previousMonth.svg";
 import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
 import editPictureIcon from "@assets/images/editPictureIcon.png";
+import backIMG from "@assets/images/DistanceStars.png";
 
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -45,12 +46,11 @@ const PurchaseDetail = forwardRef((props, ref) => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box
         ref={ref}
         w={"100%"}
         h={"1000px"}
-        bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
@@ -225,7 +225,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
             </Box>
           </Box>
 
-
           {/* 오른쪽 영역 */}
           <Box
             h="100%"
@@ -246,7 +245,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               <label for="input">My date</label>
             </Text>
-            
+
             {/* 1번째 input tag */}
             <Box position="relative" width="283px">
               <Input
@@ -297,8 +296,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 </Box>
               )}
             </Box>
-
-
 
             <Text
               mt={"150px"}
@@ -365,35 +362,36 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               0/500
             </Text>
-            <Button
-              borderRadius={"20px"}
-              _hover={{ bg: "purple.500" }}
-              mt={"100px"}
-            >
-              <Popover trigger={"hover"} placement={"bottom-start"}>
-                <PopoverTrigger>
-                  <Box
-                    p={1}
-                    // mt={"164px"}
-                    fontWeight={"500"}
-                    color="black"
-                    fontStyle={"normal"}
-                    fontSize={{ base: "10px", md: "16px" }}
-                    lineHeight={"30px"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    _hover={{
-                      textDecoration: "none",
-                      color: "linkHoverColor",
-                    }}
-                    href="/"
-                    target="_blank"
-                  >
-                    Submit
-                  </Box>
-                </PopoverTrigger>
-              </Popover>
-            </Button>
+            <Flex direction={"row"} justify={"flex-end"} align="flex-end">
+              <Button
+                borderRadius={"20px"}
+                _hover={{ bg: "purple.500" }}
+                mt={"30px"}
+              >
+                <Popover trigger={"hover"} placement={"bottom-start"}>
+                  <PopoverTrigger>
+                    <Box
+                      p={1}
+                      fontWeight={"500"}
+                      color="black"
+                      fontStyle={"normal"}
+                      fontSize={{ base: "10px", md: "16px" }}
+                      lineHeight={"30px"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      _hover={{
+                        textDecoration: "none",
+                        color: "linkHoverColor",
+                      }}
+                      href="/"
+                      target="_blank"
+                    >
+                      Submit
+                    </Box>
+                  </PopoverTrigger>
+                </Popover>
+              </Button>
+            </Flex>
           </Box>
         </Flex>
       </Box>
