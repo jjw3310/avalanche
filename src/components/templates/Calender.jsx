@@ -69,7 +69,7 @@ const Calender = ({
     /* margin: auto; */
     /* margin-top: 20px; */
     background-color: white;
-    // padding: 10px;
+    //ng: 10px;
     border-radius: 30px;
     height: 100%;
   `;
