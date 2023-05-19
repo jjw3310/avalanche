@@ -24,6 +24,7 @@ contract UserData {
 
         bytes32 pass = keccak256(abi.encodePacked(_password));
         userList[_id] = User(address(0), pass, block.timestamp, 0);
+        userID[msg.sender] = _id;
         return true;
     }
 

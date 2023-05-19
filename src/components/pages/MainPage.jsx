@@ -203,7 +203,7 @@ export default function MainPage() {
         address={address}
         account={account}
       />
-      <Introduce />
+      <Introduce mintDate={mintDate} />
       <Calender
         selected={selectedDate}
         onSelectDate={setSelectedDate}

@@ -9,7 +9,7 @@ contract comments {
         string title;
         string contents;
         uint256 likes;
-    }
+    } 
     mapping(uint256 => comment[]) commentlist; // tokenid => comment
     mapping(uint256 => mapping(address => bool)) cmtCheck; //tokenid => address => bool
     mapping(uint256 => mapping(uint => mapping(address => bool))) likeCheck; //tokenid => cmtIndex => address => bool
@@ -34,5 +34,9 @@ contract comments {
         }
         likeCheck[_yyyymmdd][_idx][msg.sender] = !likeCheck[_yyyymmdd][_idx][msg.sender];
         return (likeCheck[_yyyymmdd][_idx][msg.sender], commentlist[_yyyymmdd][_idx].likes);
+    }
+    
+    function getIsLiked(uint256 _yyyymmdd, uint256 _cmtidx ) public view returns(bool) {
+        return likeCheck[_yyyymmdd][_cmtidx][msg.sender];
     }
 }

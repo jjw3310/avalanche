@@ -180,17 +180,11 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
             </Box>
             {comments
               ? comments.map((v) => {
-                  return (
-                    <InCardComments
-                      _id={v.writer}
-                      _contents={v.contents}
-                      _likes={v.likes}
-                    />
-                  );
+                  return <InCardComments comment={v} />;
                 })
               : ""}
             {/* 방명록 댓글 #Set1 시작 부분 */}
-            <Flex
+            {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -252,11 +246,10 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            />
+            /> */}
             {/* 방명록 댓글 #Set1 끝 부분 */}
-
             {/* 방명록 댓글 #Set2 시작 부분 */}
-            <Flex
+            {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -316,11 +309,10 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            />
+            /> */}
             {/* 방명록 댓글 #Set2 끝 부분 */}
-
             {/* 방명록 댓글 #Set3 시작 부분 */}
-            <Flex
+            {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -382,9 +374,8 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderStyle="solid"
             />
             {/* 방명록 댓글 #Set3 끝 부분 */}
-
             {/* 방명록 댓글 #Set4 시작 부분 */}
-            <Flex
+            {/* <Flex
               mt={"10px"}
               direction={"row"}
               ml={"20px"}
@@ -444,7 +435,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
               borderColor="#ADADAD"
               borderWidth="1px"
               borderStyle="solid"
-            />
+            /> */}
             {/* 방명록 댓글 #Set4 끝 부분 */}
           </Flex>
         </Box>
