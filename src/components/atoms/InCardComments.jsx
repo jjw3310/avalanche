@@ -5,7 +5,7 @@ import whiteHeart from "@assets/images/whiteHeart.png";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect, useState } from "react";
 
-export default function InCardComments({ _id, _contents, _likes }) {
+export default function InCardComments({ comment }) {
   const { userContract, commentContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
   const [userId, setUserId] = useState();
@@ -18,25 +18,31 @@ export default function InCardComments({ _id, _contents, _likes }) {
 
   useEffect(() => {
     if (userContract) {
+      if (!comment.writer) return;
+      console.log("_id : ", comment.writer);
       const getId = async () => {
-        const userid = await userContract.methods.getIdFromAddress(_id).call();
+        const userid = await userContract.methods
+          .getIdFromAddress(comment.writer)
+          .call();
         setUserId(userid);
-        console.log(userid);
       };
       getId();
     }
     if (commentContract) {
       const getIsLiked = async () => {
-        const likeRes = await userContract.methods.getIdFromAddress(_id).call();
-        setIsLiked(likeRes);
-        console.log(likeRes);
+        const isLiked = await commentContract.methods.getIsLiked();
+        // console.log(likeRes);
       };
       getIsLiked();
     }
   }, [userContract, commentContract]);
 
+  useEffect(() => {
+    console.log("userid : ", userId);
+  }, [userId]);
+
   return (
-    <Box key={_id}>
+    <Box key={comment.writer}>
       <Flex
         mt={"10px"}
         direction={"row"}
@@ -69,7 +75,7 @@ export default function InCardComments({ _id, _contents, _likes }) {
           lineHeight={["23px", null, "23px"]}
           color="#747474"
         >
-          {_contents}
+          {comment.contents}
         </Text>
         <Box
           ml={"90px"}
@@ -88,7 +94,7 @@ export default function InCardComments({ _id, _contents, _likes }) {
         >
           {isLiked ? <Image src={logoHeart} /> : <Image src={whiteHeart} />}
           <Text color={"black"} ml={"5px"}>
-            {isLiked}
+            {comment.likes}
           </Text>
         </Box>
       </Flex>

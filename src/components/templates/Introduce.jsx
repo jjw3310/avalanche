@@ -147,6 +147,9 @@ const Introduce = forwardRef((props, ref) => {
                   justifyContent={"center"}
                   alignItems={"center"}
                   color={"black"}
+                  onClick={() => {
+                    props.mintDate("2023", 20230519);
+                  }}
                 >
                   Buy Your Date
                 </Text>

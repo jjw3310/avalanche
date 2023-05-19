@@ -1,498 +1,9 @@
-// export const CONTRACT_ADDRESS = "0xc3f21b70a6bc436505b55F613B0934b15f48BEb2";
-// export const CONTRACT_ADDRESS = "0x49512635338a78217bE757aD6b415438D41A26c5";
-// export const CONTRACT_ABI = [
-//   {
-//     inputs: [
-//       {
-//         internalType: "string",
-//         name: "_name",
-//         type: "string",
-//       },
-//       {
-//         internalType: "string",
-//         name: "_symbol",
-//         type: "string",
-//       },
-//       {
-//         internalType: "string",
-//         name: "_metadataUri",
-//         type: "string",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "_totalNft",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "nonpayable",
-//     type: "constructor",
-//   },
-//   {
-//     anonymous: false,
-//     inputs: [
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "owner",
-//         type: "address",
-//       },
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "approved",
-//         type: "address",
-//       },
-//       {
-//         indexed: true,
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "Approval",
-//     type: "event",
-//   },
-//   {
-//     anonymous: false,
-//     inputs: [
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "owner",
-//         type: "address",
-//       },
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "operator",
-//         type: "address",
-//       },
-//       {
-//         indexed: false,
-//         internalType: "bool",
-//         name: "approved",
-//         type: "bool",
-//       },
-//     ],
-//     name: "ApprovalForAll",
-//     type: "event",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "to",
-//         type: "address",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "approve",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "_amount",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "batchMint",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "_tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "burnNFT",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "mintNft",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "from",
-//         type: "address",
-//       },
-//       {
-//         internalType: "address",
-//         name: "to",
-//         type: "address",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "safeTransferFrom",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "from",
-//         type: "address",
-//       },
-//       {
-//         internalType: "address",
-//         name: "to",
-//         type: "address",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//       {
-//         internalType: "bytes",
-//         name: "data",
-//         type: "bytes",
-//       },
-//     ],
-//     name: "safeTransferFrom",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "operator",
-//         type: "address",
-//       },
-//       {
-//         internalType: "bool",
-//         name: "approved",
-//         type: "bool",
-//       },
-//     ],
-//     name: "setApprovalForAll",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     anonymous: false,
-//     inputs: [
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "from",
-//         type: "address",
-//       },
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "to",
-//         type: "address",
-//       },
-//       {
-//         indexed: true,
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "Transfer",
-//     type: "event",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "from",
-//         type: "address",
-//       },
-//       {
-//         internalType: "address",
-//         name: "to",
-//         type: "address",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "transferFrom",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "owner",
-//         type: "address",
-//       },
-//     ],
-//     name: "balanceOf",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "getApproved",
-//     outputs: [
-//       {
-//         internalType: "address",
-//         name: "",
-//         type: "address",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "owner",
-//         type: "address",
-//       },
-//       {
-//         internalType: "address",
-//         name: "operator",
-//         type: "address",
-//       },
-//     ],
-//     name: "isApprovedForAll",
-//     outputs: [
-//       {
-//         internalType: "bool",
-//         name: "",
-//         type: "bool",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "metadataUri",
-//     outputs: [
-//       {
-//         internalType: "string",
-//         name: "",
-//         type: "string",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "mintedNft",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "name",
-//     outputs: [
-//       {
-//         internalType: "string",
-//         name: "",
-//         type: "string",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "ownerOf",
-//     outputs: [
-//       {
-//         internalType: "address",
-//         name: "",
-//         type: "address",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "bytes4",
-//         name: "interfaceId",
-//         type: "bytes4",
-//       },
-//     ],
-//     name: "supportsInterface",
-//     outputs: [
-//       {
-//         internalType: "bool",
-//         name: "",
-//         type: "bool",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "symbol",
-//     outputs: [
-//       {
-//         internalType: "string",
-//         name: "",
-//         type: "string",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "index",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "tokenByIndex",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "owner",
-//         type: "address",
-//       },
-//       {
-//         internalType: "uint256",
-//         name: "index",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "tokenOfOwnerByIndex",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "_tokenId",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "tokenURI",
-//     outputs: [
-//       {
-//         internalType: "string",
-//         name: "",
-//         type: "string",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "totalNft",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "totalSupply",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-// ];
-
 export const USER_CONTRACT_ADDRESS =
-  "0x312985cC6c8D1fb4afDC63ABDeaDe34d102F725D";
+  "0x8F319d4E804624Fc87D0d420aBe31cAF60160f43";
 export const DATE_CONTRACT_ADDRESS =
-  "0x378b1468Aa7aA3AE80E7827f56dB211F3922F21A";
+  "0xEbf5C6A8D700429b7e92F3Ec6829Fb4cE8ecB467";
 export const COMMENT_CONTRACT_ADDRESS =
-  "0x249776daf7c0746948b35bC7966ab050bb24E53F";
+  "0x37f8a5E92B44263193d6256E02cd5181Aa5e484E";
 
 export const userContABI = [
   {
@@ -517,6 +28,90 @@ export const userContABI = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_userAddress",
+        type: "address",
+      },
+    ],
+    name: "getIdFromAddress",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_id",
+        type: "string",
+      },
+    ],
+    name: "getUser",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "bytes32",
+            name: "password",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint256",
+            name: "createdAt",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "updatedAt",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct UserData.User",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_id",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_password",
+        type: "string",
+      },
+    ],
+    name: "login",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -599,71 +194,6 @@ export const userContABI = [
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
-    ],
-    name: "getUser",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "addr",
-            type: "address",
-          },
-          {
-            internalType: "bytes32",
-            name: "password",
-            type: "bytes32",
-          },
-          {
-            internalType: "uint256",
-            name: "createdAt",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "updatedAt",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct UserData.User",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_password",
-        type: "string",
-      },
-    ],
-    name: "login",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
 ];
@@ -1494,6 +1024,30 @@ export const commentContABI = [
         internalType: "struct comments.comment[]",
         name: "",
         type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_yyyymmdd",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_cmtidx",
+        type: "uint256",
+      },
+    ],
+    name: "getIsLiked",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",
