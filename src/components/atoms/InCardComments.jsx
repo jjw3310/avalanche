@@ -46,10 +46,10 @@ export default function InCardComments({ yyyymmdd, comment }) {
     }
   }, [userContract, commentContract]);
 
-  useEffect(() => {
-    // console.log("userid : ", userId);
-    console.log(comment);
-  }, [userId]);
+  // useEffect(() => {
+  // console.log("userid : ", userId);
+  //   console.log(comment);
+  // }, [userId]);
 
   const clickLikeBtn = async function (_yyyymmdd, _idx) {
     const res = await commentContract.methods
