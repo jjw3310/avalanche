@@ -28,7 +28,13 @@ export default function NavBar({
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
   // const history = useHistory();
+  
   const navigate = useNavigate();
+  const navigateToPurchase = () => {
+    navigate("/signUp");
+  };
+
+
   const handleClick = () => {
     // 클릭 시 이동할 페이지 경로
     // 예시: "/profile"
@@ -89,6 +95,7 @@ export default function NavBar({
           {!account ? (
             <>
               <Button
+                onClick={navigateToPurchase}
                 borderRadius={"50px"}
                 _hover={{ bg: "purple.500" }}
                 mt={"20px"}

@@ -50,29 +50,27 @@ import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
-import SignUp from "@components/pages/SignUp";
+import SignUp from "@components/pages/signUp";
 
 function App() {
   const [account, setAccount] = useState("");
-
   const { address, getAddress } = useWallet();
-  const { userContract, dateContract, commentContract, getContracts } =
-    useWeb3();
-
+  const { userContract, dateContract, commentContract, getContracts } = useWeb3();
   const [inputAcnt, setInputAcnt] = useState("test");
-  const signUp = async () => {
-    try {
-      if (!userContract) return;
-      const response = await userContract.methods
-        .signUp("test", "1234")
-        .send({ from: address });
-      if (response) {
-        console.log("가입완료");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+  // const signUp = async () => {
+  //   try {
+  //     if (!userContract) return;
+  //     const response = await userContract.methods
+  //       .signUp("test", "1234")
+  //       .send({ from: address });
+  //     if (response) {
+  //       console.log("가입완료");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const signIn = async () => {
     try {
@@ -93,6 +91,11 @@ function App() {
       alert("로그인 실패");
     }
   };
+
+
+
+
+
   return (
     <>
       <BrowserRouter>
@@ -103,7 +106,7 @@ function App() {
             <NavBar
               // currentVisibleIndex={currentVisibleIndex}
               // onClickNavLink={handleClickNavLink}
-              signUp={signUp}
+              // signUp={signUp}
               signIn={signIn}
               address={address}
               account={account}
@@ -122,7 +125,7 @@ function App() {
                   />
                 }
               />
-              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signUp" element={<SignUp />} />
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}
             </Routes>
           </div>
