@@ -65,7 +65,7 @@ const Introduce = forwardRef((props, ref) => {
                 <Image
                   width={"200px"}
                   height={"200px"}
-                  left={"480px"}
+                  left="85%"
                   bottom={"60px"}
                   src={mainPageClock}
                   position={"absolute"}

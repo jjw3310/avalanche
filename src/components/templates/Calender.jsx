@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 import { Calendar } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
@@ -37,7 +37,10 @@ const Calender = ({
 
   const [isMinted, setIsMinted] = useState();
   const [todayNftUrl, setTodayNftUrl] = useState();
-
+  const [value, onChange] = useState(new Date());
+  const monthOfActiveDate = moment(value).format("YYYYMMDD");
+  const [activeMonth, setActiveMonth] = useState(monthOfActiveDate);
+  // const activeDate = moment(value).format("YYYY-MM-DD");
   useEffect(() => {
     if (todayNftImg) setTodayNftUrl(todayNftImg);
   }, [todayNftImg]);
@@ -234,6 +237,11 @@ const Calender = ({
     window.location.href = destination;
   };
 
+  const getActiveMonth = (activeStartDate) => {
+    const newActiveMonth = moment(activeStartDate).format("YYYYMMDD");
+    setActiveMonth(newActiveMonth);
+  };
+
   return (
     <>
       <Box
@@ -266,6 +274,14 @@ const Calender = ({
                   onSelectDate={setSelectedDate}
                   className="react-calendar"
                   style={{ backgroundColor: "white" }}
+                  onChange={onChange}
+                  value={value}
+                  formatDay={(locale, date) => moment(date).format("D")}
+                  onActiveStartDateChange={({ activeStartDate }) =>
+                    getActiveMonth(activeStartDate)
+                  }
+                  // formatDay={(locale, date) => moment(date).format("D")}
+                  // tileContent={addContent}
                   // style={{ "background-color": "black" }}
                 />
               </CalendarContainer>
