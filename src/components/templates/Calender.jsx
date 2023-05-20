@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Calendar } from "react-calendar";
@@ -356,6 +356,20 @@ const Calender = ({
               </CalendarContainer>
               <div className="max-w-screen-xl mx-auto pt-4">
                 {/* <div>{pageComp()}</div> */}
+                  <Button
+                    position={"relative"}
+                    borderRadius={"50%"}
+                    borderColor={"#ADADAD"}
+                    borderWidth={"3px"}
+                    bg={"white"}
+                    _hover={{ bg: "purple.500" }}
+                    >
+                    <Flex
+                      position={"absolute"}
+                      fontWeight="bold"
+                      color="#ADADAD"
+                    >＋</Flex>
+                  </Button>
                 <ul className="mt-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8">
                   {nfts ? (
                     nfts.map((v, i) => {
