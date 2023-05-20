@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TodayNftCard from "@components/atoms/TodayNftCard";
 import { render } from "@testing-library/react";
-import { PINATA_JSON_BASE_URL } from "src/web3.config";
+import { PINATA_JSON_BASE_URL, PINATA_IMG_BASE_URL } from "src/web3.config";
 const Calender = ({
   // selected,
   // onSelectDate,
@@ -43,6 +43,7 @@ const Calender = ({
   const monthOfActiveDate = moment(value).format("YYYYMMDD");
   const [activeMonth, setActiveMonth] = useState(monthOfActiveDate);
   const [startDate, setStartDate] = useState();
+  const [responss, setResponss] = useState();
   // const activeDate = moment(value).format("YYYY-MM-DD");
   // useEffect(() => {
   //   if (todayNftImg) setTodayNftUrl(todayNftImg);
@@ -112,23 +113,24 @@ const Calender = ({
   //   }
   // };
 
-  // useEffect(() => {
-  //   getNfts();
-  // }, []);
+  useEffect(() => {
+    getNfts();
+  }, [startDate]);
   const getNfts = async () => {
     try {
       let nftArray = [];
-
+      let imgurl = [];
       //한 번 비워주고 시작
       setNfts();
       let tokenIdjson = [20230518, 20230519, 20230520];
-      for (let i = 0; i < 35; i++) {
+      for (let i = 0; i < 10; i++) {
         //   for (let i = 0; i < 10; i++) {
         // const tokenId = i + 1 + (p - 1) * 3;
         // const tokenId = checkDate + i;
         // const tokenId = activeMonth + i;
         const tokenId = startDate + i;
         console.log("hello~~~~~~~~~~~~~~~~~~~~~~~~:" + tokenId);
+        console.log(PINATA_JSON_BASE_URL);
 
         let response = await axios.get(
           // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
@@ -140,13 +142,31 @@ const Calender = ({
           // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenId[i]}`
           `${PINATA_JSON_BASE_URL}/${tokenId[i]}`
         );
+
+        let imgurl = [];
+        // let responsess = await axios.get(
+        //   // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+        //   // `https://olbm.mypinata.cloud/ipfs/QmU52T5t4bXtoUqQYStgx39DdXy3gLQq7KDuF1F9g3E9Qy/${tokenId}.json`
+
+        //   // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${tokenIdjson[i]}.json`
+        //   // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
+
+        //   // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenId[i]}`
+        //   `${PINATA_IMG_BASE_URL}/${tokenId[i]}`
+        // );
         console.log("heheheheeh" + response);
         console.log("tooooo" + tokenId);
         nftArray.push({ tokenId, metadata: response.data });
+        imgurl.push(`${PINATA_IMG_BASE_URL}/${tokenId[i]}`);
+        console.log("imgmgmgmgmgmg: " + imgurl[i]);
         // console.log(process.env.REACT_APP_JSON_URL);
-        console.log(nftArray[0].metadata.properties.image.description);
+        console.log(
+          nftArray[0].metadata.properties.image.description +
+            "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+        );
       }
       setNfts(nftArray);
+      setResponss(imgurl);
     } catch (error) {
       console.error(error);
     }
@@ -157,9 +177,18 @@ const Calender = ({
     let dates = document.querySelectorAll(".react-calendar__tile");
     console.log(dates);
     for (let i = 0; i < dates.length; i++) {
-      if (i >= nfts.length) break;
-      if (i === nfts[i].metadata.edition);
-      dates[i].style.backgroundImage = `url(${nfts[i].metadata.image}`;
+      // if (i >= nfts.length) break;
+      if (!nfts) break;
+      // if (i === nfts[i].metadata.edition)
+
+      // 20230521
+      if (todayYYYYMMDD.toString() == startDate) {
+        // dates[i].style.backgroundImage = `url(${nfts[i].metadata.image}`;
+        dates[
+          i
+        ].style.backgroundImage = `url(${nfts[i].metadata.properties.image.description})`;
+        console.log("trueture");
+      }
     }
 
     // for (let i = 0; i < nfts.length; i++) {
@@ -174,9 +203,9 @@ const Calender = ({
     // setNftImg(nftImgArray);
   };
   useEffect(() => {
-    if (!nfts) return;
+    // if (!nfts) return;
     getNftImg();
-  }, [nfts, startDate]);
+  }, [nfts]);
   useEffect(() => {
     if (todayNftMinted) {
       setIsMinted(todayNftMinted.minted);
@@ -242,7 +271,7 @@ const Calender = ({
   useEffect(() => {
     console.log(nfts);
     getNfts(page);
-  }, [page]);
+  }, [startDate]);
 
   const mintImg = () => {};
 
@@ -273,7 +302,7 @@ const Calender = ({
     setStartDate(outputValue2);
 
     const newActiveMonth = moment(activeStartDate).format("YYYYMMDD");
-    setActiveMonth(newActiveMonth);
+    // setActiveMonth(newActiveMonth);
   };
 
   const getImg = () => {
@@ -315,8 +344,9 @@ const Calender = ({
                   onChange={onChange}
                   value={value}
                   formatDay={(locale, date) => moment(date).format("D")}
-                  onActiveStartDateChange={({ activeStartDate }) =>
-                    getActiveMonth(activeStartDate)
+                  onActiveStartDateChange={
+                    (({ activeStartDate }) => getActiveMonth(activeStartDate),
+                    onClickPageChange(startDate))
                   }
                   // tileContent={() => {getNft}
                   // formatDay={(locale, date) => moment(date).format("D")}
