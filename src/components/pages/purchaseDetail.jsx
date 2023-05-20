@@ -31,7 +31,6 @@ import { Rnd } from "react-rnd";
 import { DraggableCore } from "react-draggable";
 import editPictureSection from "@assets/images/editPictureSection.png";
 
-
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +57,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
     reader.onload = () => {
       setSelectedImage(reader.result);
       const imageDataURL = reader.result;
+      console.log(reader);
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -83,7 +83,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
       y: position.y,
     }));
   };
-  
+
   // const onDrop = (acceptedFiles) => {
   //   / 파일을 업로드하고 이미지 URL 또는 Blob 등을 얻는 로직을 추가해야 합니다.
   //   / 이 예시에서는 단순히 첫 번째 파일만 사용합니다.
@@ -149,7 +149,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
             >
               <Box mt={"30px"}>
                 {/* 1번째 줄 기능 */}
-                <Flex  justify={"space-around"} align={"center"}>
+                <Flex justify={"space-around"} align={"center"}>
                   <Image src={previousMonth} />
                   <Flex
                     py={3}
@@ -185,7 +185,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
                   bg="white"
                   boxShadow="base"
                   filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
-
                   // 사진 업로드용
                   // {...getRootProps()}
                   border="1px dashed gray"
@@ -195,43 +194,43 @@ const PurchaseDetail = forwardRef((props, ref) => {
                   width={300} // 원하는 고정된 너비 설정
                   height={380} // 원하는 고정된 높이 설정
                 >
-                        <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        style={{ display: "none" }}
-        id="upload-input"
-      />
-      <label htmlFor="upload-input">
-        {selectedImage ? (
-          <Image
-            alt="Uploaded Image"
-            src={selectedImage}
-            maxW="100%"
-            maxH="700px"
-            width={300} // Box의 너비와 동일한 크기로 설정
-            height={300} // Box의 높이와 동일한 크기로 설정
-            // objectFit="contain"
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                    id="upload-input"
+                  />
+                  <label htmlFor="upload-input">
+                    {selectedImage ? (
+                      <Image
+                        alt="Uploaded Image"
+                        src={selectedImage}
+                        maxW="100%"
+                        maxH="700px"
+                        width={300} // Box의 너비와 동일한 크기로 설정
+                        height={300} // Box의 높이와 동일한 크기로 설정
+                        // objectFit="contain"
 
-            // position="absolute"
-            // top="50%"
-            // left="50%"
-            // transform="translate(-50%, -50%)"
-          />
-        ) : (
-          <Image
-            alt="Edit Picture Icon"
-            position="absolute"
-            bgSize="cover"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            object-fit={"contain"}
-            // backgroundBlendMode={"multiply"}
-            src={editPictureIcon}
-          />
-        )}
-      </label>
+                        // position="absolute"
+                        // top="50%"
+                        // left="50%"
+                        // transform="translate(-50%, -50%)"
+                        />
+                        ) : (
+                      <Image
+                        alt="Edit Picture Icon"
+                        position="absolute"
+                        bgSize="cover"
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                        object-fit={"contain"}
+                        // backgroundBlendMode={"multiply"}
+                        src={editPictureIcon}
+                      />
+                    )}
+                  </label>
                   {/* <input {...getInputProps()} />
                     {isDragActive ? (
                       <p>여기에 이미지를 드롭하세요!</p>
@@ -264,7 +263,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
                   </Text>
                 </Box>
                 {/* 3번째 기능 */}
-                <Flex >
+                <Flex>
                   <Box
                     background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
                     boxSizing="border-box"
@@ -320,16 +319,11 @@ const PurchaseDetail = forwardRef((props, ref) => {
                         >
                           20230522
                         </Text>
-
-
                       </Flex>
                     </Flex>
                   </Box>
                 </Flex>
-
-
               </Flex>
-
             </Box>
           </Box>
 
