@@ -1,39 +1,3 @@
-// import { useState, useRef } from "react";
-// import "./App.css";
-// import Main from "@components/Main";
-// import Nfts from "@components/Nfts";
-// import "./App.css";
-// import Main from "./pages/main";
-// import Customizing from "./pages/customizing";
-// import logo from "./logo.svg";
-
-// import {
-//   ChakraProvider,
-// Box,
-// Heading,
-// Text,
-// Button
-// } from "@chakra-ui/react";
-// import {
-// BrowserRouter,
-// Routes,
-// Route
-// } from "react-router-dom";
-// import Main from "./pages/main";
-// import Customizing from "./pages/customizing";
-// import MainPage from "./pages/MainPage";
-// import { useState, useRef } from "react";
-// import "./App.css";
-// import Main from "@components/Main";
-// import Nfts from "@components/Nfts";
-// import Main from "./components/pages/main";
-// import Customizing from "./components/pages/customizing";
-// import Header from "./components/Header";
-
-// import BoxCompo from "@components/BoxCompo";
-// import Nfts from "@components/Nfts";
-// const [account, setAccount] = useState("");
-
 import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "@components/templates/NavBar";
@@ -53,24 +17,24 @@ import { useWallet, useWeb3 } from "@hooks/useAvax";
 import SignUp from "@components/pages/signUp";
 
 function App() {
-  const [account, setAccount] = useState("");
+  const [ account, setAccount] = useState("");
   const { address, getAddress } = useWallet();
   const { userContract, dateContract, commentContract, getContracts } = useWeb3();
   const [inputAcnt, setInputAcnt] = useState("test");
 
-  // const signUp = async () => {
-  //   try {
-  //     if (!userContract) return;
-  //     const response = await userContract.methods
-  //       .signUp("test", "1234")
-  //       .send({ from: address });
-  //     if (response) {
-  //       console.log("가입완료");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const signUp = async () => {
+    try {
+      if (!userContract) return;
+      const response = await userContract.methods
+        .signUp("test", "1234")
+        .send({ from: address });
+      if (response) {
+        console.log("가입완료");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const signIn = async () => {
     try {
@@ -106,7 +70,7 @@ function App() {
             <NavBar
               // currentVisibleIndex={currentVisibleIndex}
               // onClickNavLink={handleClickNavLink}
-              // signUp={signUp}
+              signUp={signUp}
               signIn={signIn}
               address={address}
               account={account}

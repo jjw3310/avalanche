@@ -27,7 +27,6 @@ export default function NavBar({
 }) {
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
-  // const history = useHistory();
   
   const navigate = useNavigate();
   const navigateToPurchase = () => {

@@ -18,7 +18,27 @@ import rocket from "@assets/images/rocket.png";
 import mainPageClock from "@assets/images/mainPageClock.png";
 import { BsArrowRight } from "react-icons/bs"; // react-icons 패키지에서 사용할 화살표 아이콘 가져오기
 
+
+
+
+
+
 const Introduce = forwardRef((props, ref) => {
+
+  async function requestAccount() {
+    console.log("Requesting account...")
+  }
+
+  // check if metamask extension is exist
+  if(window.ethereum){
+    console.log('detected')
+
+    
+
+  } else {
+    console.log("meta mask not detected")
+  }
+
   return (
     <>
       <Box
@@ -138,6 +158,7 @@ const Introduce = forwardRef((props, ref) => {
                 w={"160px"}
                 borderRadius={"50px"}
                 _hover={{ bg: "purple.500" }} // hover 시 배경색 변경
+                onClick={requestAccount}
               >
                 <Text
                   fontWeight={"500"}
