@@ -26,10 +26,10 @@ model Nft {
   tokenId String
   buy Boolean
   user User @relation(fields: [userId], references: [id])
-  review Review[]
+  // review Review[]
   userId Int
   createAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // updatedAt DateTime @updatedAt
 
 //mysql의 경우 검색 효율을 증가시키는 방식
   @@index([userId])
@@ -44,5 +44,5 @@ model Review {
   like Int
   createAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  @@index([nftId])
+  // @@index([nftId])
 }

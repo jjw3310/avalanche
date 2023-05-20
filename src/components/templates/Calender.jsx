@@ -16,6 +16,8 @@ import { useState, useEffect } from "react";
 // import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import axios from "axios";
 import TodayNftCard from "@components/atoms/TodayNftCard";
+import { render } from "@testing-library/react";
+import { PINATA_JSON_BASE_URL } from "src/web3.config";
 const Calender = ({
   // selected,
   // onSelectDate,
@@ -40,10 +42,13 @@ const Calender = ({
   const [value, onChange] = useState(new Date());
   const monthOfActiveDate = moment(value).format("YYYYMMDD");
   const [activeMonth, setActiveMonth] = useState(monthOfActiveDate);
+  const [startDate, setStartDate] = useState();
   // const activeDate = moment(value).format("YYYY-MM-DD");
-  useEffect(() => {
-    if (todayNftImg) setTodayNftUrl(todayNftImg);
-  }, [todayNftImg]);
+  // useEffect(() => {
+  //   if (todayNftImg) setTodayNftUrl(todayNftImg);
+  // }, [todayNftImg]);
+
+  const [checkDate, setCheckDate] = useState();
 
   var year = selectedDate.getFullYear();
   var month = ("0" + (1 + selectedDate.getMonth())).slice(-2);
@@ -69,8 +74,16 @@ const Calender = ({
   });
   useEffect(() => {
     setFormatDate(formattedDate);
-  }, [formatDate]);
-  console.log(formattedDate);
+    console.log("value:" + value);
+
+    const year = value.getFullYear().toString();
+    const month = (value.getMonth() + 1).toString().padStart(2, "0");
+    const day = value.getDate().toString().padStart(2, "0");
+
+    const outputValue = `${year}${month}${day}`;
+    console.log(outputValue); // '20230605'
+    setCheckDate(outputValue);
+  }, [value]);
 
   const CalendarContainer = styled.div`
     /* ~~~ container styles ~~~ */
@@ -102,7 +115,7 @@ const Calender = ({
   // useEffect(() => {
   //   getNfts();
   // }, []);
-  const getNfts = async (p) => {
+  const getNfts = async () => {
     try {
       let nftArray = [];
 
@@ -111,15 +124,21 @@ const Calender = ({
       let tokenIdjson = [20230518, 20230519, 20230520];
       for (let i = 0; i < 35; i++) {
         //   for (let i = 0; i < 10; i++) {
-        const tokenId = i + 1 + (p - 1) * 3;
-        // console.log(tokenId);
+        // const tokenId = i + 1 + (p - 1) * 3;
+        // const tokenId = checkDate + i;
+        // const tokenId = activeMonth + i;
+        const tokenId = startDate + i;
+        console.log("hello~~~~~~~~~~~~~~~~~~~~~~~~:" + tokenId);
 
         let response = await axios.get(
           // `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
           // `https://olbm.mypinata.cloud/ipfs/QmU52T5t4bXtoUqQYStgx39DdXy3gLQq7KDuF1F9g3E9Qy/${tokenId}.json`
 
           // `https://gateway.pinata.cloud/ipfs/QmWYSG9jiQAo4qKchB75tHuX9cefMHDB99Kq9KF4ZyMaue/${tokenIdjson[i]}.json`
-          `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
+          // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenIdjson[i]}`
+
+          // `https://gateway.pinata.cloud/ipfs/QmSHAYfKX9XHpEC3Uc7rK6bVLW7UzQReSd5xhJHA3Lg7oo/${tokenId[i]}`
+          `${PINATA_JSON_BASE_URL}/${tokenId[i]}`
         );
         console.log("heheheheeh" + response);
         console.log("tooooo" + tokenId);
@@ -157,8 +176,7 @@ const Calender = ({
   useEffect(() => {
     if (!nfts) return;
     getNftImg();
-  }, [nfts]);
-
+  }, [nfts, startDate]);
   useEffect(() => {
     if (todayNftMinted) {
       setIsMinted(todayNftMinted.minted);
@@ -238,8 +256,28 @@ const Calender = ({
   };
 
   const getActiveMonth = (activeStartDate) => {
+    // console.log(
+    //   "activeStartDateactiveStartDateactiveStartDateactiveStartDateactiveStartDate" +
+    //     activeStartDate
+    // );
+
+    const year2 = activeStartDate.getFullYear().toString();
+    const month2 = (activeStartDate.getMonth() + 1).toString().padStart(2, "0");
+    const day2 = activeStartDate.getDate().toString().padStart(2, "0");
+
+    const outputValue2 = `${year2}${month2}${day2}`;
+    console.log(
+      "activeStartDateactiveStartDateactiveStartDateactiveStartDateactiveStartDate" +
+        outputValue2
+    );
+    setStartDate(outputValue2);
+
     const newActiveMonth = moment(activeStartDate).format("YYYYMMDD");
     setActiveMonth(newActiveMonth);
+  };
+
+  const getImg = () => {
+    return <img src={getNfts()} />;
   };
 
   return (
@@ -280,13 +318,14 @@ const Calender = ({
                   onActiveStartDateChange={({ activeStartDate }) =>
                     getActiveMonth(activeStartDate)
                   }
+                  // tileContent={() => {getNft}
                   // formatDay={(locale, date) => moment(date).format("D")}
                   // tileContent={addContent}
                   // style={{ "background-color": "black" }}
                 />
               </CalendarContainer>
               <div className="max-w-screen-xl mx-auto pt-4">
-                <div>{pageComp()}</div>
+                {/* <div>{pageComp()}</div> */}
                 <ul className="mt-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8">
                   {nfts ? (
                     nfts.map((v, i) => {
@@ -324,7 +363,8 @@ const Calender = ({
                       );
                     })
                   ) : (
-                    <div>로딩중입니다...</div>
+                    // <div>로딩중입니다...</div>
+                    <div></div>
                   )}
                 </ul>
               </div>

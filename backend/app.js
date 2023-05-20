@@ -4,8 +4,7 @@ const userRouter = require("./routes/user");
 const todoRouter = require("./routes/nft");
 const app = express();
 
-const port = 3010;
-
+const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use("/user", userRouter);

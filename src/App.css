@@ -101,3 +101,14 @@
 .change_header {
   display: none;
 }
+
+.react-calendar__tile--now {
+  background: lime;
+  border-radius: 14px;
+}
+/*hover, focus 시 */
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: blue;
+  border-radius: 14px;
+}
