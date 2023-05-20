@@ -231,24 +231,27 @@ const Calender = ({
   return (
     <>
       <Box
-        // ref={ref}
-        w={"100%"}
+        // w={"1620px"}
         h={"600px"}
+        pl={"5%"}
+        // pr={"5%"}
+        gap={"5%"}
+        paddingRight={"190px"}
         // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
         {/* scrollIntoView용 Box(계속 제목을 가려서 breakpoint 만듬) */}
         <Flex
-          alignItems={"flex-start"}
           direction={{ base: "column-reverse", md: "row" }}
-          justify={"flex-end"}
-          px={{ base: "20px", sm: "30px", lg: "50px" }}
           align={"center"}
-          h="100%"
+          justify={"flex-start"}
+          px={{ base: "20px", sm: "30px", lg: "50px" }}
+          h="800px"
           pt={5}
           pb={5}
+          gap="6%"
         >
-          <Box borderRadius={"30px"} h="100%" bg="tomato" mr={"20px"} flex="2">
+          <Box borderRadius={"30px"} h="100%" bg="tomato" flex="2">
             <div style={{ height: "100%" }}>
               <CalendarContainer
                 style={{ height: "100%", backgroundColor: "white" }}

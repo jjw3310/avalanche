@@ -10,24 +10,20 @@ import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 export default function MintedCard() {
   return (
     <Link to="/guestBook">
-      <Box overflow={"hidden"} borderRadius={"30px"} w="340px" h="100%" bg="white" ml={"20px"}>
+      <Box overflow={"hidden"} borderRadius={"30px"} w="440px" h="580px" bg="white" >
         {/* #upper box */}
         <Box
-          w="100%"
-          h="100%"
-          position={"relative"}
           bg={`url(${todayDateNFT})`}
           backgroundColor={"rgba(0, 0, 0, 0.5)"}
           bgSize="cover"
           object-fit={"contain"}
           backgroundBlendMode={"multiply"}
+          
         >
           <Flex
             direction={"column"}
             justify={"flex-start"}
             align={"space-around"}
-            w={"100%"}
-            h="200px"
             position={"relative"}
             overflow={"hidden"}
           >
@@ -44,7 +40,7 @@ export default function MintedCard() {
               <Text ml={"10px"}>buyyourdate</Text>
               <Button
                 // position={"relative"}
-                ml={"120px"}
+                ml={"200px"}
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
@@ -139,9 +135,9 @@ export default function MintedCard() {
           borderBottomRightRadius="30px"
           borderBottomLeftRadius="30px"
           w={"100%"}
-          h={"360px"}
+          
         >
-          <Flex direction={"column"} justify={"center"} align={"center"}>
+          <Flex direction={"column"} justify={"center"} align={"center"} >
             <Box mt={"10px"} mb={"10px"}>
               <Text
                 fontFamily={"Raleway"}

@@ -26,6 +26,8 @@ const Introduce = forwardRef((props, ref) => {
         w={"100%"}
         h={"550px"}
         py={"50px"}
+        pl={"5%"}
+        pr={"5%"}
         // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >
@@ -52,12 +54,11 @@ const Introduce = forwardRef((props, ref) => {
               <Text
                 fontWeight={"400"}
                 fontStyle={"normal"}
-                fontSize={{ base: "30px", md: "70px" }}
+                fontSize={{ base: "30px", md: "80px" }}
                 lineHeight={"94px"}
                 color={"#FFFFFF"}
                 mt={"30px"}
                 position={"relative"}
-                // font-family="Roboto"
                 fontFamily="Roboto"
               >
                 Own the Moments <br />
@@ -65,20 +66,10 @@ const Introduce = forwardRef((props, ref) => {
                 <Image
                   width={"200px"}
                   height={"200px"}
-                  left={"480px"}
-                  bottom={"60px"}
+                  left={"500px"}
+                  bottom={"70px"}
                   src={mainPageClock}
                   position={"absolute"}
-                  // backgroundColor={"tomato"}
-                  // width={"40px"}
-                  // height={"20px"}
-                  // borderRadius={"10px"}
-                  // display={"flex"}
-                  // justifyContent={"center"}
-                  // alignItems={"center"}
-                  // color={"white"}
-                  // fontWeight={"600"}
-                  // fontSize={"10px"}
                 />
               </Text>
             </Flex>
@@ -87,9 +78,7 @@ const Introduce = forwardRef((props, ref) => {
           <Box
             borderRadius={"30px"}
             h="100%"
-            // bg="white"
             ml={"20px"}
-            flex="1"
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
@@ -98,11 +87,8 @@ const Introduce = forwardRef((props, ref) => {
               <Text
                 fontWeight={"400"}
                 fontStyle={"normal"}
-                fontSize={{ base: "10px", md: "16px" }}
+                fontSize={{ base: "10px", md: "24px" }}
                 lineHeight={"28px"}
-                // font-weight={"400"}
-                // position: absolute;
-                // font-family={"Raleway"}
                 fontFamily={"Raleway"}
                 color={"white"}
                 mb={"58px"}
@@ -122,11 +108,12 @@ const Introduce = forwardRef((props, ref) => {
                 />
                 <Text
                   fontWeight={"500"}
+                  fontFamily={"Raleway"}
                   fontStyle={"normal"}
-                  fontSize={{ base: "10px", md: "16px" }}
-                  // lineHeight={"30px"}
+                  fontSize={{ base: "10px", md: "20px" }}
                   mb={"58px"}
                   ml={"20px"}
+                  inline-height={"23px"}
                   justifyContent={"center"}
                   alignItems={"center"}
                   color={"white"}
@@ -135,15 +122,15 @@ const Introduce = forwardRef((props, ref) => {
                 </Text>
               </Flex>
               <Button
-                w={"160px"}
+                w={"190px"}
                 borderRadius={"50px"}
                 _hover={{ bg: "purple.500" }} // hover 시 배경색 변경
               >
                 <Text
-                  fontWeight={"500"}
+                  fontWeight={"700"}
                   fontStyle={"normal"}
-                  fontSize={{ base: "10px", md: "16px" }}
-                  lineHeight={"30px"}
+                  fontSize={{ base: "10px", md: "20px" }}
+                  lineHeight={"23px"}
                   justifyContent={"center"}
                   alignItems={"center"}
                   color={"black"}
@@ -154,7 +141,7 @@ const Introduce = forwardRef((props, ref) => {
                   Buy Your Date
                 </Text>
                 <Box ml={2}>
-                  <BsArrowRight color="black" />
+                  <BsArrowRight size={20} color="black" />
                 </Box>
               </Button>
             </Flex>
