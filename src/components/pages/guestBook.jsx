@@ -15,39 +15,48 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
-import NavBar from "@components/templates/NavBar";
+// import NavBar from "@components/templates/NavBar";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImages } from "@fortawesome/free-regular-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faImages } from "@fortawesome/free-regular-svg-icons";
 import React, { useState, useEffect } from "react";
-import previousMonth from "@assets/images/previousMonth.svg";
-import nextMonth from "@assets/images/nextMonth.svg";
+// import previousMonth from "@assets/images/previousMonth.svg";
+// import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
-import editPictureIcon from "@assets/images/editPictureIcon.png";
+// import editPictureIcon from "@assets/images/editPictureIcon.png";
 import { Link, useParams } from "react-router-dom";
-import { Calendar, CalendarDay, CalendarMonth } from "react-calendar";
+// import { Calendar, CalendarDay, CalendarMonth } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import styled from "styled-components";
-import emptyHeart from "@assets/images/emptyHeart.png";
-import todayDateNFT from "@assets/images/todayDateNFT.png";
+// import styled from "styled-components";
+// import emptyHeart from "@assets/images/emptyHeart.png";
+// import todayDateNFT from "@assets/images/todayDateNFT.png";
 import logoHeart from "@assets/images/logoHeart.png";
-import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
+// import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import celebrateIcon from "@assets/images/celebrateIcon.png";
 import guestBookEnterArrow from "@assets/images/guestBookEnterArrow.png";
 import glitch from "@assets/images/glitch.png";
 import backIMG from "@assets/images/DistanceStars.png";
 import { useWeb3 } from "@hooks/useAvax";
+import GuestComment from "@components/atoms/GuestComment";
 
 const GuestBook = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const [comment, setComment] = useState("");
+  const [inputComment, setInputComment] = useState("");
+  const [comments, setComments] = useState("");
   const { commentContract, getContracts } = useWeb3();
   const { yyyymmdd, address } = useParams();
 
   useEffect(() => {
-    getContracts();
+    if (!commentContract) getContracts();
+    if (comments) return;
+    const getComments = async () => {
+      const res = await commentContract.methods.getComments(yyyymmdd).call();
+      console.log("COMMENTS : ", res);
+      setComments(res);
+    };
+    getComments();
   }, [commentContract]);
 
   const handleMouseEnter = () => {
@@ -67,7 +76,7 @@ const GuestBook = forwardRef((props, ref) => {
   };
 
   const handleChange = (e) => {
-    setComment(e.target.value);
+    setInputComment(e.target.value);
   };
 
   const handleBlur = () => {
@@ -76,7 +85,7 @@ const GuestBook = forwardRef((props, ref) => {
 
   const sendComment = async function () {
     const res = await commentContract.methods
-      .writeComment(yyyymmdd, "TITLE", comment)
+      .writeComment(yyyymmdd, "TITLE", inputComment)
       .send({ from: address });
   };
 
@@ -198,7 +207,7 @@ const GuestBook = forwardRef((props, ref) => {
                         color={"#FFFFFF"}
                         // position={"relative"}
                       >
-                        20230522
+                        {yyyymmdd}
                       </Text>
                     </Flex>
                   </Flex>
@@ -246,7 +255,7 @@ const GuestBook = forwardRef((props, ref) => {
                       lineHeight={"21px"}
                       color={"#000000"}
                     >
-                      Today’s top 4 comments
+                      Today’s top {comments.length} comments
                     </Text>
                     <Button
                       // position={"relative"}
@@ -278,75 +287,16 @@ const GuestBook = forwardRef((props, ref) => {
 
                 {/* #section2 방명록 댓글 부분 */}
                 <Box h={"390px"}>
-                  <Flex
-                    mt={"10px"}
-                    direction={"row"}
-                    ml={"20px"}
-                    justify={"flex-start"}
-                    align={"flex-start"}
-                    w={"650px"}
-                  >
-                    <IoPersonCircleOutline size={30} color="black" />
-                    <Flex
-                      ml={"10px"}
-                      mt={"2px"}
-                      fontSize={"16px"}
-                      lineHeight={["23px", null, "23px"]}
-                      color={"black"}
-                      fontWeight={"bold"}
-                      justify={"center"}
-                      align={"center"}
-                    >
-                      73elliot
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    direction={"column"}
-                    justify={"space-between"}
-                    align={"center"}
-                    w={"100%"}
-                  >
-                    <Flex
-                      direction={"row"}
-                      justify={"space-between"}
-                      align={"center"}
-                      w={"100%"}
-                    >
-                      <Text
-                        ml={"50px"}
-                        fontFamily="Raleway"
-                        fontStyle="normal"
-                        fontWeight={700}
-                        fontSize={["12px", null, "12px"]}
-                        lineHeight={["23px", null, "23px"]}
-                        color="#747474"
-                      >
-                        Today is our anniversary :)
-                      </Text>
-                      <Box
-                        display="flex"
-                        flexDirection="row"
-                        alignItems="center"
-                        justifyContent="center"
-                        padding="5px 12px"
-                        // gap="10px"
-                        width="66px"
-                        height="30px"
-                        borderRadius="50px"
-                        flex="none"
-                        order={1}
-                        flexGrow={0}
-                        mr={"30px"}
-                      >
-                        <Image src={logoHeart} />
-                        <Text color={"black"} ml={"5px"}>
-                          42
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Flex>
+                  {comments
+                    ? comments.map((v, i) => {
+                        return (
+                          <div key={i}>
+                            <GuestComment comment={v} />
+                          </div>
+                        );
+                      })
+                    : ""}
                 </Box>
-
                 {/* #section3 방명록 댓글 쓰는 기능 */}
                 <Box w={"650px"}>
                   <Flex>
@@ -393,10 +343,10 @@ const GuestBook = forwardRef((props, ref) => {
                           onMouseLeave={handleMouseLeave}
                           onClick={handleClick}
                         >
-                          {comment ? (
+                          {inputComment ? (
                             <input
                               type="text"
-                              value={comment}
+                              value={inputComment}
                               onChange={handleChange}
                               onBlur={handleBlur}
                               autoFocus
@@ -409,7 +359,7 @@ const GuestBook = forwardRef((props, ref) => {
                           ) : (
                             <input
                               type="text"
-                              value={comment}
+                              value={inputComment}
                               onChange={handleChange}
                               onBlur={handleBlur}
                               placeholder="One comment only.."
@@ -430,7 +380,7 @@ const GuestBook = forwardRef((props, ref) => {
                           height="auto"
                           style={{ opacity: 4 }}
                           onClick={() => {
-                            setComment("");
+                            setInputComment("");
                             sendComment();
                           }}
                         />

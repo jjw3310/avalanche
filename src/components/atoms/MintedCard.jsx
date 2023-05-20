@@ -184,15 +184,23 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                   color={"#000000"}
                 >
                   {comments
-                    ? `Today’s top ${comments.length} comments`
+                    ? `Today’s top ${
+                        comments.length >= 4 ? 4 : comments.length
+                      } comments`
                     : "Let's write comments"}
                 </Text>
               </Box>
 
               {comments
-                ? comments.map((v) => {
+                ? comments.map((v, i) => {
+                    if (i === 4) return;
                     return (
-                      <InCardComments yyyymmdd={selectedYYYYMMDD} comment={v} />
+                      <div key={i}>
+                        <InCardComments
+                          yyyymmdd={selectedYYYYMMDD}
+                          comment={v}
+                        />
+                      </div>
                     );
                   })
                 : ""}

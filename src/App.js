@@ -50,6 +50,8 @@ import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
+import SignUp from "@components/pages/SignUp";
+
 function App() {
   const [account, setAccount] = useState("");
 
@@ -108,9 +110,7 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<MainPage account={account} />} />
-              <Route path="/purchaseDetail" element={<PurchaseDetail />}>
-                {" "}
-              </Route>
+              <Route path="/purchaseDetail" element={<PurchaseDetail />} />
               <Route
                 path="/GuestBook/:yyyymmdd/:address"
                 element={
@@ -121,9 +121,8 @@ function App() {
                     account={account}
                   />
                 }
-              >
-                {" "}
-              </Route>
+              />
+              <Route path="/signup" element={<SignUp />} />
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}
             </Routes>
           </div>
