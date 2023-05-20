@@ -67,8 +67,9 @@ const PurchaseDetail = forwardRef((props, ref) => {
   }, [address, dateContract]);
 
   useEffect(() => {
-    console.log(ownList);
-  }, [ownList]);
+    console.log("ownList : ", ownList);
+    console.log("isSelected : ", isSelected);
+  }, [ownList, isSelected]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -410,7 +411,16 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 >
                   {ownList
                     ? ownList.map((v, i) => {
-                        return <option value={v}>{v}</option>;
+                        return (
+                          <option
+                            onClick={(e) => {
+                              setIsSelected(e.target.value);
+                            }}
+                            value={v}
+                          >
+                            {v}
+                          </option>
+                        );
                       })
                     : ""}
                 </Select>
