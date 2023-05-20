@@ -27,10 +27,12 @@ import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
 import editPictureIcon from "@assets/images/editPictureIcon.png";
 import backIMG from "@assets/images/DistanceStars.png";
+import { useDropzone } from "react-dropzone";
 
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -43,6 +45,23 @@ const PurchaseDetail = forwardRef((props, ref) => {
   const toggleInfo = () => {
     setIsOpen(!isOpen);
   };
+
+  const onDrop = (acceptedFiles) => {
+    // 파일을 업로드하고 이미지 URL 또는 Blob 등을 얻는 로직을 추가해야 합니다.
+    // 이 예시에서는 단순히 첫 번째 파일만 사용합니다.
+    const file = acceptedFiles[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setUploadedImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/*",
+  });
 
   return (
     <>
@@ -83,14 +102,14 @@ const PurchaseDetail = forwardRef((props, ref) => {
               justify={"center"}
               align={"center"}
               borderRadius={"30px"}
-              h="530px"
+              h="630px"
               bg="white"
               flex="1"
               mt={"30px"}
             >
               <Box mt={"30px"}>
                 {/* 1번째 줄 기능 */}
-                <Flex justify={"space-around"} align={"center"}>
+                <Flex  justify={"space-around"} align={"center"}>
                   <Image src={previousMonth} />
                   <Flex
                     py={3}
@@ -107,121 +126,143 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 </Flex>
               </Box>
 
-              {/* 2번째 줄 기능 */}
-              <Box
-                position={"relative"}
+              {/* 사진 넣을 수 있는 기능 */}
+              <Flex
+                direction={"column"}
                 justify={"center"}
                 align={"center"}
-                borderRadius={"30px"}
-                borderColor="#ADADAD"
-                borderWidth="1px"
-                borderStyle="solid"
-                w="300px"
-                h="300px"
-                mt={"39px"}
-                bg="white"
-                boxShadow="base"
-                p={4}
-                filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
+                gap={7}
               >
-                <Image
-                  position={"absolute"}
-                  top={"130px"}
-                  left={"130px"}
-                  src={editPictureIcon}
-                />
-              </Box>
-
-              {/* 3번째 줄 기능 */}
-              <Box
-                background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
-                position="relative"
-                boxSizing="border-box"
-                left="0px"
-                top="48px"
-                border="1px solid #ADADAD"
-                borderTopLeftRadius="0px"
-                borderTopRightRadius="0px"
-                borderBottomRightRadius="30px"
-                borderBottomLeftRadius="30px"
-                w={"100%"}
-                h={"80px"}
-              >
-                <Flex
-                  direction={"column"}
-                  justify={"flex-start"}
-                  align={"flex-start"}
+                <Box
+                  position={"relative"}
+                  borderRadius={"30px"}
+                  borderColor="#ADADAD"
+                  borderWidth="1px"
+                  borderStyle="solid"
+                  w="300px"
+                  h="420px"
+                  mt={"39px"}
+                  bg="white"
+                  boxShadow="base"
+                  filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
                 >
-                  <Box
-                    mt={"10px"}
-                    ml={"20px"}
-                    fontFamily={"Raleway"}
-                    fontStyle={"normal"}
-                    fontWeight={"700"}
-                    fontSize={"16px"}
-                    lineHeight={"23px"}
-                    color={"#FFFFFF"}
-                    justify={"center"}
-                    align={"center"}
+                  <Image
+                    position={"absolute"}
+                    top={"190px"}
+                    left={"130px"}
+                    src={editPictureIcon}
+                  />
+                  <Text
+                    position="absolute"
+                    left="24.26%"
+                    right="24.26%"
+                    top="80%"
+                    bottom="29.35%"
+                    fontFamily="Raleway"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    fontSize="12.8034px"
+                    lineHeight="15px"
+                    color="#747474"
                   >
-                    Date
+                    Upload your artwork
+                  </Text>
+                </Box>
+                {/* 3번째 기능 */}
+                <Flex >
+                  <Box
+                    background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
+                    boxSizing="border-box"
+                    left="0px"
+                    top="60px"
+                    border="1px solid #ADADAD"
+                    borderTopLeftRadius="0px"
+                    borderTopRightRadius="0px"
+                    borderBottomRightRadius="30px"
+                    borderBottomLeftRadius="30px"
+                    w={"100%"}
+                    h={"80px"}
+                  >
+                    <Flex
+                      direction={"column"}
+                      justify={"flex-start"}
+                      align={"flex-start"}
+                    >
+                      <Box
+                        mt={"10px"}
+                        ml={"20px"}
+                        fontFamily={"Raleway"}
+                        fontStyle={"normal"}
+                        fontWeight={"700"}
+                        fontSize={"16px"}
+                        lineHeight={"23px"}
+                        color={"#FFFFFF"}
+                        justify={"center"}
+                        align={"center"}
+                      >
+                        Date
+                      </Box>
+
+                      <Flex position={"relative"}>
+                        <Image
+                          src={littleStar}
+                          position={"absolute"}
+                          left={"-20px"}
+                          bottom={"-30px"}
+                          width={"100px"}
+                          height={"100px"}
+                        />
+                        <Text
+                          ml={"50px"}
+                          mb={"2px"}
+                          fontFamily={"Raleway"}
+                          fontStyle={"normal"}
+                          fontWeight={"700"}
+                          fontSize={"20px"}
+                          lineHeight={"38px"}
+                          color={"#FFFFFF"}
+                          // position={"relative"}
+                        >
+                          20230522
+                        </Text>
+
+                        <Button
+                          mt={"5px"}
+                          ml={"120px"}
+                          mr={"30px"}
+                          w={"100%"}
+                          h={"30px"}
+                          borderRadius={"20px"}
+                          _hover={{ bg: "purple.500" }}
+                        >
+                          <Popover trigger={"hover"} placement={"bottom-start"}>
+                            <PopoverTrigger>
+                              <Box
+                                fontWeight={"500"}
+                                color="black"
+                                fontStyle={"normal"}
+                                fontSize={{ base: "10px", md: "15px" }}
+                                lineHeight={"30px"}
+                                _hover={{
+                                  textDecoration: "none",
+                                  color: "linkHoverColor",
+                                }}
+                                href="/"
+                                target="_blank"
+                              >
+                                Mint the date
+                              </Box>
+                            </PopoverTrigger>
+                          </Popover>
+                        </Button>
+                      </Flex>
+                    </Flex>
                   </Box>
-
-                  <Flex position={"relative"}>
-                    <Image
-                      src={littleStar}
-                      position={"absolute"}
-                      left={"-20px"}
-                      bottom={"-30px"}
-                      width={"100px"}
-                      height={"100px"}
-                    />
-                    <Text
-                      ml={"50px"}
-                      mb={"2px"}
-                      fontFamily={"Raleway"}
-                      fontStyle={"normal"}
-                      fontWeight={"700"}
-                      fontSize={"20px"}
-                      lineHeight={"38px"}
-                      color={"#FFFFFF"}
-                      // position={"relative"}
-                    >
-                      20230522
-                    </Text>
-
-                    <Button
-                      mt={"5px"}
-                      ml={"120px"}
-                      mr={"30px"}
-                      w={"100%"}
-                      h={"30px"}
-                      borderRadius={"20px"}
-                      _hover={{ bg: "purple.500" }}
-                    >
-                      <Popover trigger={"hover"} placement={"bottom-start"}>
-                        <PopoverTrigger>
-                          <Box
-                            fontWeight={"500"}
-                            color="black"
-                            fontStyle={"normal"}
-                            fontSize={{ base: "10px", md: "15px" }}
-                            lineHeight={"30px"}
-                            _hover={{
-                              textDecoration: "none",
-                              color: "linkHoverColor",
-                            }}
-                            href="/"
-                            target="_blank"
-                          >
-                            Mint the date
-                          </Box>
-                        </PopoverTrigger>
-                      </Popover>
-                    </Button>
-                  </Flex>
                 </Flex>
-              </Box>
+
+
+              </Flex>
+
             </Box>
           </Box>
 
