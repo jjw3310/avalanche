@@ -14,6 +14,9 @@ import {
   Button,
   Popover,
   PopoverTrigger,
+  ListItem,
+  List,
+  Select,
 } from "@chakra-ui/react";
 import { forwardRef, useEffect } from "react";
 import React, { useState } from "react";
@@ -37,11 +40,36 @@ const PurchaseDetail = forwardRef((props, ref) => {
   const { address, getAddress } = useWallet();
 
   const [imgHash, setImgHash] = useState();
+  const [ownCount, setOwnCount] = useState();
+  const [ownList, setOwnList] = useState();
+  const [isSelected, setIsSelected] = useState();
 
   useEffect(() => {
     getContracts();
     getAddress();
+  }, []);
+
+  useEffect(() => {
+    if (!dateContract) return;
+    const balance = async () => {
+      const bal = await dateContract.methods.balanceOf(address).call();
+      setOwnCount(bal);
+      let arr = [];
+      for (let i = 0; i < bal; i++) {
+        const list = await dateContract.methods
+          .tokenOfOwnerByIndex(address, i)
+          .call();
+        arr.push(list);
+      }
+      setOwnList(arr);
+    };
+    if (address) balance();
   }, [address, dateContract]);
+
+  useEffect(() => {
+    console.log("ownList : ", ownList);
+    console.log("isSelected : ", isSelected);
+  }, [ownList, isSelected]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -126,7 +154,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
         const result = async () => {
           const isDone = await dateContract.methods
             .setNftInfo(
-              props.yyyymmdd,
+              ownList[0],
               "",
               "",
               true,
@@ -135,6 +163,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
             .send({ from: address });
         };
         await result();
+        window.location.href = "/";
       }
     } catch (error) {
       console.log(error);
@@ -369,58 +398,33 @@ const PurchaseDetail = forwardRef((props, ref) => {
               >
                 <label for="input">My date</label>
               </Text>
-
               {/* 1번째 input tag */}
               <Box position="relative" width="283px">
-                <Input
+                <Select
                   mt="20px"
                   color="black"
                   type="text"
                   placeholder="Select a date"
                   background="rgba(226, 226, 226, 0.96)"
                   borderRadius="10px"
-                  paddingRight={isOpen ? "2.5rem" : "0.75rem"}
                   onClick={toggleInfo}
-                />
-                <Box
-                  position="absolute"
-                  right={isOpen ? "0.75rem" : "1.25rem"}
-                  top="50%"
-                  fontSize="16px"
-                  color="blue.500"
-                  cursor="pointer"
-                  transition="transform 0.3s"
-                  transform={isOpen ? "rotate(180deg)" : "rotate(0)"}
-                  zIndex={1}
                 >
-                  &#9660;
-                </Box>
-                {isOpen && (
-                  <Box
-                    position="absolute"
-                    width="100%"
-                    top="calc(100%)"
-                    left="0"
-                    zIndex={2}
-                  >
-                    <Box
-                      bg="white"
-                      borderRadius="10px"
-                      boxShadow="0px 4px 10px rgba(0, 0, 0, 0.1)"
-                      p="10px"
-                    >
-                      <Text color="black">May 1, 2023</Text>
-                      <Text color="black" mt="10px">
-                        May 10, 2023
-                      </Text>
-                      <Text color="black" mt="10px">
-                        May 17, 2023
-                      </Text>
-                    </Box>
-                  </Box>
-                )}
+                  {ownList
+                    ? ownList.map((v, i) => {
+                        return (
+                          <option
+                            onClick={(e) => {
+                              setIsSelected(e.target.value);
+                            }}
+                            value={v}
+                          >
+                            {v}
+                          </option>
+                        );
+                      })
+                    : ""}
+                </Select>
               </Box>
-
               <Text
                 mt={"150px"}
                 fontFamily="sans-serif"
@@ -452,7 +456,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
               >
                 0/30
               </Text>
-
               <Text
                 mt={"80px"}
                 fontFamily="sans-serif"
