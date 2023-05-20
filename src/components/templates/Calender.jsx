@@ -18,6 +18,7 @@ import axios from "axios";
 import TodayNftCard from "@components/atoms/TodayNftCard";
 import { render } from "@testing-library/react";
 import { PINATA_JSON_BASE_URL, PINATA_IMG_BASE_URL } from "src/web3.config";
+import glitchImg from "@assets/images/glitch.png";
 const Calender = ({
   // selected,
   // onSelectDate,
@@ -172,8 +173,10 @@ const Calender = ({
     }
   };
 
+  //img
   const getNftImg = () => {
     let nftImgArray = [];
+    // let dates = document.querySelectorAll(".react-calendar__tile");
     let dates = document.querySelectorAll(".react-calendar__tile");
     console.log(dates);
     for (let i = 0; i < dates.length; i++) {
@@ -182,26 +185,28 @@ const Calender = ({
       // if (i === nfts[i].metadata.edition)
 
       // 20230521
-      if (todayYYYYMMDD.toString() == startDate) {
+      // if (todayYYYYMMDD.toString() == startDate) {
+      if (dates.length / 21 === 1) {
         // dates[i].style.backgroundImage = `url(${nfts[i].metadata.image}`;
+        // dates[i].style.backgroundImage = `url(${nfts[i].metadata.properties.image.description})`;
         dates[
           i
-        ].style.backgroundImage = `url(${nfts[i].metadata.properties.image.description})`;
+        ].style.backgroundImage = `url("https://previews.123rf.com/images/subjob/subjob1711/subjob171100050/90140290-%EC%95%84%EC%9D%B4%EC%BD%98-%EA%B7%B8%EB%9E%98%ED%94%BD-%EA%B7%B8%EB%A6%BC-sign-plus-medicine-%EC%9B%B9-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%84%EC%9C%84%ED%95%9C-%ED%9D%91%EB%B0%B1-%EA%B7%B8%EB%A6%BC%EC%9E%85%EB%8B%88%EB%8B%A4-%EB%B2%A1%ED%84%B0-%ED%94%8C%EB%9E%AB-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8.jpg") !important;`;
         console.log("trueture");
       }
     }
-
-    // for (let i = 0; i < nfts.length; i++) {
-    //   let el = document.querySelector(".react-calendar__tile").style
-    //     .backgroundImage;
-    //   console.log("===========el============");
-    //   console.log();
-    //   el = `url(${nfts[i].metadata.image}) !important`;
-    //   console.log("elelelel:" + `${nfts[i].metadata.image}`);
-    //   nftImgArray.push(i);
-    // }
-    // setNftImg(nftImgArray);
   };
+  // for (let i = 0; i < nfts.length; i++) {
+  //   let el = document.querySelector(".react-calendar__tile").style
+  //     .backgroundImage;
+  //   console.log("===========el============");
+  //   console.log();
+  //   el = `url(${nfts[i].metadata.image}) !important`;
+  //   console.log("elelelel:" + `${nfts[i].metadata.image}`);
+  //   nftImgArray.push(i);
+  // }
+  // setNftImg(nftImgArray);
+  // };
   useEffect(() => {
     // if (!nfts) return;
     getNftImg();
@@ -353,23 +358,22 @@ const Calender = ({
                   // tileContent={addContent}
                   // style={{ "background-color": "black" }}
                 />
+                {/* <Button
+                  position={"relative"}
+                  borderRadius={"50%"}
+                  borderColor={"#ADADAD"}
+                  borderWidth={"3px"}
+                  bg={"white"}
+                  _hover={{ bg: "purple.500" }}
+                >
+                  <Flex position={"absolute"} fontWeight="bold" color="#ADADAD">
+                    ＋
+                  </Flex>
+                </Button> */}
               </CalendarContainer>
               <div className="max-w-screen-xl mx-auto pt-4">
                 {/* <div>{pageComp()}</div> */}
-                  <Button
-                    position={"relative"}
-                    borderRadius={"50%"}
-                    borderColor={"#ADADAD"}
-                    borderWidth={"3px"}
-                    bg={"white"}
-                    _hover={{ bg: "purple.500" }}
-                    >
-                    <Flex
-                      position={"absolute"}
-                      fontWeight="bold"
-                      color="#ADADAD"
-                    >＋</Flex>
-                  </Button>
+
                 <ul className="mt-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8">
                   {nfts ? (
                     nfts.map((v, i) => {
@@ -412,7 +416,7 @@ const Calender = ({
                   )}
                 </ul>
               </div>
-              <div className="text-gray-500 mt-4">{formattedDate}</div>
+              {/* <div className="text-gray-500 mt-4">{formattedDate}</div> */}
               {/* <MyCalendar /> */}
             </div>
           </Box>
