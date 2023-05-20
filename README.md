@@ -72,3 +72,4 @@ npm i @fortawesome/fontawesome-svg-core
 npm i @fortawesome/react-fontawesome
 npm install @fortawesome/free-regular-svg-icons
 npm i react-dropzone
+npm i react-rnd

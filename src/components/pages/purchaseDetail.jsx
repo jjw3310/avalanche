@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import NavBar from "@components/templates/NavBar";
-// import editPictureSection from "@assets/images/editPictureSection.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImages } from "@fortawesome/free-regular-svg-icons";
@@ -28,11 +27,18 @@ import littleStar from "@assets/images/littleStar.png";
 import editPictureIcon from "@assets/images/editPictureIcon.png";
 import backIMG from "@assets/images/DistanceStars.png";
 import { useDropzone } from "react-dropzone";
+import { Rnd } from "react-rnd";
+import { DraggableCore } from "react-draggable";
+import editPictureSection from "@assets/images/editPictureSection.png";
+
 
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [size, setSize] = useState({ width: 200, height: 200 });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -46,22 +52,54 @@ const PurchaseDetail = forwardRef((props, ref) => {
     setIsOpen(!isOpen);
   };
 
-  const onDrop = (acceptedFiles) => {
-    // 파일을 업로드하고 이미지 URL 또는 Blob 등을 얻는 로직을 추가해야 합니다.
-    // 이 예시에서는 단순히 첫 번째 파일만 사용합니다.
-    const file = acceptedFiles[0];
-
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      setUploadedImage(reader.result);
+      setSelectedImage(reader.result);
+      const imageDataURL = reader.result;
     };
-    reader.readAsDataURL(file);
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    // reader.readAsDataURL(file);
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: "image/*",
-  });
+  const handleDrag = (e, ui) => {
+    const { x, y } = ui.deltaXY;
+    setPosition((prevPosition) => ({
+      x: prevPosition.x + x,
+      y: prevPosition.y + y,
+    }));
+  };
+
+  const handleResize = (e, direction, ref, delta, position) => {
+    setSize((prevSize) => ({
+      width: prevSize.width + delta.width,
+      height: prevSize.height + delta.height,
+    }));
+    setPosition((prevPosition) => ({
+      x: position.x,
+      y: position.y,
+    }));
+  };
+  
+  // const onDrop = (acceptedFiles) => {
+  //   / 파일을 업로드하고 이미지 URL 또는 Blob 등을 얻는 로직을 추가해야 합니다.
+  //   / 이 예시에서는 단순히 첫 번째 파일만 사용합니다.
+  //   const file = acceptedFiles[0];
+
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setUploadedImage(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
+
+  // const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  //   onDrop,
+  //   accept: "image/*",
+  // });
 
   return (
     <>
@@ -104,7 +142,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               justify={"center"}
               align={"center"}
               borderRadius={"30px"}
-              h="630px"
+              h="618px"
               bg="white"
               flex="1"
               mt={"30px"}
@@ -133,7 +171,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 direction={"column"}
                 justify={"center"}
                 align={"center"}
-                gap={7}
+                gap={14}
               >
                 <Box
                   position={"relative"}
@@ -147,18 +185,73 @@ const PurchaseDetail = forwardRef((props, ref) => {
                   bg="white"
                   boxShadow="base"
                   filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
+
+                  // 사진 업로드용
+                  // {...getRootProps()}
+                  border="1px dashed gray"
+                  p={4}
+                  textAlign="center"
+                  cursor="pointer"
+                  width={300} // 원하는 고정된 너비 설정
+                  height={380} // 원하는 고정된 높이 설정
                 >
-                  <Image
-                    position={"absolute"}
-                    top={"190px"}
-                    left={"130px"}
-                    src={editPictureIcon}
-                  />
+                        <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: "none" }}
+        id="upload-input"
+      />
+      <label htmlFor="upload-input">
+        {selectedImage ? (
+          <Image
+            alt="Uploaded Image"
+            src={selectedImage}
+            maxW="100%"
+            maxH="700px"
+            width={300} // Box의 너비와 동일한 크기로 설정
+            height={300} // Box의 높이와 동일한 크기로 설정
+            // objectFit="contain"
+
+            // position="absolute"
+            // top="50%"
+            // left="50%"
+            // transform="translate(-50%, -50%)"
+          />
+        ) : (
+          <Image
+            alt="Edit Picture Icon"
+            position="absolute"
+            bgSize="cover"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            object-fit={"contain"}
+            // backgroundBlendMode={"multiply"}
+            src={editPictureIcon}
+          />
+        )}
+      </label>
+                  {/* <input {...getInputProps()} />
+                    {isDragActive ? (
+                      <p>여기에 이미지를 드롭하세요!</p>
+                    ) : (
+                      <p>이미지를 업로드하려면 클릭하거나 여기로 드래그하세요.</p>
+                    )}
+                    {uploadedImage && (
+                    <Image
+                      alt="Uploaded Image"
+                      position={"absolute"}
+                      top={"190px"}
+                      left={"130px"}
+                      src={editPictureIcon}
+                    /> 
+                  )}*/}
                   <Text
                     position="absolute"
                     left="24.26%"
                     right="24.26%"
-                    top="80%"
+                    top="90%"
                     bottom="29.35%"
                     fontFamily="Raleway"
                     fontStyle="normal"
