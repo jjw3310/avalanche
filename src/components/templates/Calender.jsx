@@ -234,9 +234,9 @@ const Calender = ({
         // w={"1620px"}
         h={"600px"}
         pl={"5%"}
+        paddingRight={"190px"}
         // pr={"5%"}
         gap={"5%"}
-        paddingRight={"190px"}
         // bgGradient={"linear(to-l,#8c1eaa,#272842)"}
         // paddingBottom={"200px"}
       >

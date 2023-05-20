@@ -67,6 +67,8 @@ const PurchaseDetail = forwardRef((props, ref) => {
     <>
       {/* <NavBar /> */}
       <Box
+        paddingLeft={"190px"}
+        paddingRight={"190px"}
         ref={ref}
         w={"100%"}
         h={"1000px"}
