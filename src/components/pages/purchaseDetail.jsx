@@ -148,7 +148,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
         paddingLeft={"190px"}
         paddingRight={"190px"}
         ref={ref}
-        w={"100%"}
+        w={"100vh"}
         h={"1000px"}
         // paddingBottom={"200px"}
       >
@@ -157,7 +157,8 @@ const PurchaseDetail = forwardRef((props, ref) => {
           direction={{ base: "column-reverse", md: "row" }}
           justify={"flex-start"}
           align={"center"}
-          px={{ base: "10%", sm: "15%", lg: "25%" }}
+          // px={{ base: "10%", sm: "15%", lg: "25%" }}
+          px={{ base: "10%" }}
           h="100%"
           pt={100}
           pb={5}
