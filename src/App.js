@@ -78,7 +78,7 @@ function App() {
     try {
       if (!userContract) return;
       const response = await userContract.methods
-        .login(inputAcnt, "1234")
+        .login("jj", "jjj")
         .call()
         .then((res) => {
           if (res) {
