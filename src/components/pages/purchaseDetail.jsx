@@ -15,22 +15,33 @@ import {
   Popover,
   PopoverTrigger,
 } from "@chakra-ui/react";
-import { forwardRef } from "react";
-import NavBar from "@components/templates/NavBar";
-// import editPictureSection from "@assets/images/editPictureSection.png";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImages } from "@fortawesome/free-regular-svg-icons";
+import { forwardRef, useEffect } from "react";
 import React, { useState } from "react";
 import previousMonth from "@assets/images/previousMonth.svg";
 import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
 import editPictureIcon from "@assets/images/editPictureIcon.png";
 import backIMG from "@assets/images/DistanceStars.png";
+import axios from "axios";
+import { useWallet, useWeb3 } from "@hooks/useAvax";
 
 const PurchaseDetail = forwardRef((props, ref) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [size, setSize] = useState({ width: 200, height: 200 });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const { dateContract, getContracts } = useWeb3();
+  const { address, getAddress } = useWallet();
+
+  const [imgHash, setImgHash] = useState();
+
+  useEffect(() => {
+    getContracts();
+    getAddress();
+  }, [address, dateContract]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -44,10 +55,98 @@ const PurchaseDetail = forwardRef((props, ref) => {
     setIsOpen(!isOpen);
   };
 
+  const handleImageChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSelectedImage(reader.result);
+      const imageDataURL = reader.result;
+      console.log(reader);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    // reader.readAsDataURL(file);
+  };
+
+  const handleDrag = (e, ui) => {
+    const { x, y } = ui.deltaXY;
+    setPosition((prevPosition) => ({
+      x: prevPosition.x + x,
+      y: prevPosition.y + y,
+    }));
+  };
+
+  const handleResize = (e, direction, ref, delta, position) => {
+    setSize((prevSize) => ({
+      width: prevSize.width + delta.width,
+      height: prevSize.height + delta.height,
+    }));
+    setPosition((prevPosition) => ({
+      x: position.x,
+      y: position.y,
+    }));
+  };
+
+  const JWT = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJkNTNjYjY4NS0yMDYyLTQ3MWQtOWMwZi05NjUyYzRiYjg0ZDEiLCJlbWFpbCI6Inl5eWxqeUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYzZkODk0YjBlYzI1M2YxNDAyZTkiLCJzY29wZWRLZXlTZWNyZXQiOiJmZTVhY2EyZTFjMDQ0ZjRiNGIyYWI0NTI0MzM4ZmNhYzY3OWQyYWM3ZmQ2ZDYwNjFhZDMyODU3NmRjZDcyODIxIiwiaWF0IjoxNjg0NDY1MTc2fQ.t0Xm1Blz8Oj3qz-2fdQ-BUlWagqV0vkILbfOI-l8VTI`;
+
+  const [selectedFile, setSelectedFile] = useState();
+
+  const handleSubmission = async () => {
+    const formData = new FormData();
+
+    formData.append("file", selectedFile);
+
+    const metadata = JSON.stringify({
+      name: "File name",
+    });
+    formData.append("pinataMetadata", metadata);
+
+    const options = JSON.stringify({
+      cidVersion: 0,
+    });
+    formData.append("pinataOptions", options);
+
+    try {
+      const res = await axios.post(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        formData,
+        {
+          maxBodyLength: "Infinity",
+          headers: {
+            "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+            Authorization: JWT,
+          },
+        }
+      );
+      console.log(res.data);
+      if (res.data.IpfsHash) {
+        await setImgHash(res.data.IpfsHash);
+        const result = async () => {
+          const isDone = await dateContract.methods
+            .setNftInfo(
+              props.yyyymmdd,
+              "",
+              "",
+              true,
+              `https://gateway.pinata.cloud/ipfs/${imgHash}`
+            )
+            .send({ from: address });
+        };
+        await result();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* <NavBar /> */}
       <Box
+        paddingLeft={"190px"}
+        paddingRight={"190px"}
         ref={ref}
         w={"100%"}
         h={"1000px"}
@@ -84,7 +183,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
               justify={"center"}
               align={"center"}
               borderRadius={"30px"}
-              h="530px"
+              h="618px"
               bg="white"
               flex="1"
               mt={"30px"}
@@ -108,91 +207,143 @@ const PurchaseDetail = forwardRef((props, ref) => {
                 </Flex>
               </Box>
 
-              {/* 2번째 줄 기능 */}
-              <Box
-                position={"relative"}
+              {/* 사진 넣을 수 있는 기능 */}
+              <Flex
+                direction={"column"}
                 justify={"center"}
                 align={"center"}
-                borderRadius={"30px"}
-                borderColor="#ADADAD"
-                borderWidth="1px"
-                borderStyle="solid"
-                w="300px"
-                h="300px"
-                mt={"39px"}
-                bg="white"
-                boxShadow="base"
-                p={4}
-                filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
+                gap={14}
               >
-                <Image
-                  position={"absolute"}
-                  top={"130px"}
-                  left={"130px"}
-                  src={editPictureIcon}
-                />
-              </Box>
-
-              {/* 3번째 줄 기능 */}
-              <Box
-                background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
-                position="relative"
-                boxSizing="border-box"
-                left="0px"
-                top="48px"
-                border="1px solid #ADADAD"
-                borderTopLeftRadius="0px"
-                borderTopRightRadius="0px"
-                borderBottomRightRadius="30px"
-                borderBottomLeftRadius="30px"
-                w={"100%"}
-                h={"80px"}
-              >
-                <Flex
-                  direction={"column"}
-                  justify={"flex-start"}
-                  align={"flex-start"}
+                <Box
+                  position={"relative"}
+                  borderRadius={"30px"}
+                  borderColor="#ADADAD"
+                  borderWidth="1px"
+                  borderStyle="solid"
+                  w="300px"
+                  h="420px"
+                  mt={"39px"}
+                  bg="white"
+                  boxShadow="base"
+                  filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))"
+                  // 사진 업로드용
+                  // {...getRootProps()}
+                  border="1px dashed gray"
+                  p={4}
+                  textAlign="center"
+                  cursor="pointer"
+                  width={300} // 원하는 고정된 너비 설정
+                  height={380} // 원하는 고정된 높이 설정
                 >
-                  <Box
-                    mt={"10px"}
-                    ml={"20px"}
-                    fontFamily={"Raleway"}
-                    fontStyle={"normal"}
-                    fontWeight={"700"}
-                    fontSize={"16px"}
-                    lineHeight={"23px"}
-                    color={"#FFFFFF"}
-                    justify={"center"}
-                    align={"center"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                    id="upload-input"
+                  />
+                  <label htmlFor="upload-input">
+                    {selectedImage ? (
+                      <Image
+                        alt="Uploaded Image"
+                        src={selectedImage}
+                        maxW="100%"
+                        maxH="700px"
+                        width={300} // Box의 너비와 동일한 크기로 설정
+                        height={300} // Box의 높이와 동일한 크기로 설정
+                      />
+                    ) : (
+                      <Image
+                        alt="Edit Picture Icon"
+                        position="absolute"
+                        bgSize="cover"
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                        object-fit={"contain"}
+                        // backgroundBlendMode={"multiply"}
+                        src={editPictureIcon}
+                      />
+                    )}
+                  </label>
+                  <Text
+                    position="absolute"
+                    left="24.26%"
+                    right="24.26%"
+                    top="90%"
+                    bottom="29.35%"
+                    fontFamily="Raleway"
+                    fontStyle="normal"
+                    fontWeight={400}
+                    fontSize="12.8034px"
+                    lineHeight="15px"
+                    color="#747474"
                   >
-                    Date
-                  </Box>
-
-                  <Flex position={"relative"}>
-                    <Image
-                      src={littleStar}
-                      position={"absolute"}
-                      left={"-20px"}
-                      bottom={"-30px"}
-                      width={"100px"}
-                      height={"100px"}
-                    />
-                    <Text
-                      ml={"50px"}
-                      mb={"2px"}
-                      fontFamily={"Raleway"}
-                      fontStyle={"normal"}
-                      fontWeight={"700"}
-                      fontSize={"20px"}
-                      lineHeight={"38px"}
-                      color={"#FFFFFF"}
-                      // position={"relative"}
+                    Upload your artwork
+                  </Text>
+                </Box>
+                {/* 3번째 기능 */}
+                <Flex>
+                  <Box
+                    background="linear-gradient(180deg, rgba(52, 71, 88, 0.9) 0%, rgba(56, 89, 120, 0) 100%)"
+                    boxSizing="border-box"
+                    left="0px"
+                    top="60px"
+                    border="1px solid #ADADAD"
+                    borderTopLeftRadius="0px"
+                    borderTopRightRadius="0px"
+                    borderBottomRightRadius="30px"
+                    borderBottomLeftRadius="30px"
+                    w={"400px"}
+                    h={"80px"}
+                  >
+                    <Flex
+                      direction={"column"}
+                      justify={"flex-start"}
+                      align={"flex-start"}
                     >
-                      20230522
-                    </Text>
-                  </Flex>
+                      <Box
+                        mt={"10px"}
+                        ml={"20px"}
+                        fontFamily={"Raleway"}
+                        fontStyle={"normal"}
+                        fontWeight={"700"}
+                        fontSize={"16px"}
+                        lineHeight={"23px"}
+                        color={"#FFFFFF"}
+                        justify={"center"}
+                        align={"center"}
+                      >
+                        Date
+                      </Box>
+
+                      <Flex width={"300px"} position={"relative"}>
+                        <Image
+                          src={littleStar}
+                          position={"absolute"}
+                          left={"-20px"}
+                          bottom={"-30px"}
+                          width={"100px"}
+                          height={"100px"}
+                        />
+                        <Text
+                          ml={"50px"}
+                          mb={"2px"}
+                          fontFamily={"Raleway"}
+                          fontStyle={"normal"}
+                          fontWeight={"700"}
+                          fontSize={"20px"}
+                          lineHeight={"38px"}
+                          color={"#FFFFFF"}
+                          // position={"relative"}
+                        >
+                          20230522
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Box>
                 </Flex>
-              </Box>
+              </Flex>
             </Box>
           </Box>
 
@@ -314,8 +465,8 @@ const PurchaseDetail = forwardRef((props, ref) => {
             <Textarea
               mt="20px"
               color="black"
-              placeholder="Share the magic of your special date. Describe the cherished moments, emotions, and significance  that 
-                  make it unforgettable. Tell the story, highlight the meaning, and bring your memories to life in a lasting tribute 
+              placeholder="Share the magic of your special date. Describe the cherished moments, emotions, and significance  that
+                  make it unforgettable. Tell the story, highlight the meaning, and bring your memories to life in a lasting tribute
                   to your treasured experience.      "
               width="600px"
               height="200px"
@@ -354,8 +505,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
                         textDecoration: "none",
                         color: "linkHoverColor",
                       }}
-                      href="/"
-                      target="_blank"
+                      onClick={handleSubmission}
                     >
                       Submit
                     </Box>

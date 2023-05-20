@@ -14,14 +14,6 @@ import backIMG from "../../assets/images/DistanceStars.png";
 import Web3 from "web3";
 import axios from "axios";
 
-// import {
-//   CONTRACT_ABI,
-//   CONTRACT_ADDRESS,
-// } from "../../web3.config.js";
-
-// const web3 = new Web3(window.ethereum);
-// const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-
 export default function MainPage({ account }) {
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
@@ -37,6 +29,7 @@ export default function MainPage({ account }) {
   const [nftInfo, setNftInfo] = useState();
   const [todayNftImg, setTodayNftImg] = useState();
 
+  
   // const getTotalNft = async () => {
   //   try {
   //     if (!contract) return;
