@@ -161,9 +161,10 @@ const PurchaseDetail = forwardRef((props, ref) => {
               `https://gateway.pinata.cloud/ipfs/${imgHash}`
             )
             .send({ from: address });
+          console.log("isDone: ", isDone);
         };
         await result();
-        window.location.href = "/";
+        // window.location.href = "/";
       }
     } catch (error) {
       console.log(error);

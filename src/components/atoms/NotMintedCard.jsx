@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Image,
-  Popover,
-  PopoverTrigger,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
@@ -19,30 +12,27 @@ export default function NotMintedCard({ selectedYYYYMMDD }) {
   useEffect(() => {
     getContracts();
     getAddress();
-    if (selectedYYYYMMDD) {
-      setImgSrc(selectedYYYYMMDD);
-      console.log("imgSrc : ", imgSrc);
-    }
-  }, [selectedYYYYMMDD]);
+  }, []);
 
   useEffect(() => {
-    if (dateContract) {
-      console.log(dateContract.methods);
+    if (selectedYYYYMMDD) {
+      setImgSrc(selectedYYYYMMDD);
+      // console.log("imgSrc : ", imgSrc);
     }
-  }, [dateContract]);
+  }, [selectedYYYYMMDD]);
 
   const mintNft = async function () {
     let res = await dateContract.methods
       .mintCommon("2023", selectedYYYYMMDD, address)
       .send({ from: address });
-    console.log("mintNft:", res);
+    // console.log("mintNft:", res);
   };
   return (
     <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
       <Box w="350px" position={"relative"}>
         <Image
           h={"556px"}
-          src={`${PINATA_IMG_BASE_URL + imgSrc + ".png"}`}
+          src={imgSrc ? `${PINATA_IMG_BASE_URL + imgSrc + ".png"}` : ""}
         ></Image>
         <Button
           w={"160px"}

@@ -11,7 +11,7 @@ export default function SignUp() {
   useEffect(() => {
     getContracts();
     getAddress();
-  }, [userContract]);
+  }, []);
 
   const callSignUp = async function (_id, _pass) {
     const res = await userContract.methods
