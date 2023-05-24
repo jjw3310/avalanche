@@ -92,7 +92,7 @@ export default function NavBar({
                 borderRadius={"50px"}
                 _hover={{ bg: "purple.500" }}
                 mt={"20px"}
-                href={"/signup"}
+                onClick={signUp}
               >
                 <Popover trigger={"hover"} placement={"bottom-start"}>
                   <PopoverTrigger>

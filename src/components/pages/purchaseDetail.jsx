@@ -39,7 +39,6 @@ const PurchaseDetail = forwardRef((props, ref) => {
   const { dateContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
 
-  const [imgHash, setImgHash] = useState();
   const [ownCount, setOwnCount] = useState();
   const [ownList, setOwnList] = useState();
   const [isSelected, setIsSelected] = useState();
@@ -150,20 +149,19 @@ const PurchaseDetail = forwardRef((props, ref) => {
       );
       console.log(res.data);
       if (res.data.IpfsHash) {
-        await setImgHash(res.data.IpfsHash);
-        const result = async () => {
+        const result = async (_imgHash) => {
           const isDone = await dateContract.methods
             .setNftInfo(
               ownList[0],
               "",
               "",
               true,
-              `https://gateway.pinata.cloud/ipfs/${imgHash}`
+              `https://gateway.pinata.cloud/ipfs/${_imgHash}`
             )
             .send({ from: address });
           console.log("isDone: ", isDone);
         };
-        await result();
+        await result(res.data.IpfsHash);
         // window.location.href = "/";
       }
     } catch (error) {

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "@components/templates/NavBar";
 import {
@@ -14,7 +13,8 @@ import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
-// import SignUp from "@components/pages/SignUp";
+import SignUp from "@components/pages/SignUp";
+import SignIn from "@components/pages/SignIn";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -23,39 +23,12 @@ function App() {
   const { userContract, dateContract, commentContract, getContracts } =
     useWeb3();
 
-  const [inputAcnt, setInputAcnt] = useState("test");
   const signUp = async () => {
-    try {
-      if (!userContract) return;
-      const response = await userContract.methods
-        .signUp("test", "1234")
-        .send({ from: address });
-      if (response) {
-        console.log("가입완료");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    window.location.href = "/signup";
   };
 
   const signIn = async () => {
-    try {
-      if (!userContract) return;
-      const response = await userContract.methods
-        .login("jj", "jjj")
-        .call()
-        .then((res) => {
-          if (res) {
-            setAccount(inputAcnt);
-            alert("로그인 성공");
-          } else {
-            alert("로그인 실패");
-          }
-        });
-    } catch (error) {
-      console.error(error);
-      alert("로그인 실패");
-    }
+    window.location.href = "/signin";
   };
   return (
     <>
@@ -86,7 +59,8 @@ function App() {
                   />
                 }
               />
-              <Route path="/signup" />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}
             </Routes>
           </div>
