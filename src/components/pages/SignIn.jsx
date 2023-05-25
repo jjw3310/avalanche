@@ -2,18 +2,20 @@ import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "@components/templates/NavBar";
 
 export default function SignIn() {
   const [inputId, setInputId] = useState();
   const [inputPass, setInputPass] = useState();
   const { userContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
+  const [account, setAccount] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
     getContracts();
     getAddress();
-  }, []);
+  }, [account]);
 
   const callSignIn = async function (_id, _pass) {
     const res = await userContract.methods
@@ -24,6 +26,7 @@ export default function SignIn() {
       });
     if (res) {
       alert("로그인 성공");
+      setAccount(_id);
       navigate({
         pathname: "/",
         state: { account: _id },
@@ -33,6 +36,12 @@ export default function SignIn() {
 
   return (
     <Box>
+      <NavBar
+        // signUp={signUp}
+        signIn={callSignIn}
+        address={address}
+        account={account}
+      />
       <Box pt={"100px"}>
         <Flex direction="column">
           <Input

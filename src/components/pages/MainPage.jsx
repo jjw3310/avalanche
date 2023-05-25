@@ -14,7 +14,7 @@ import backIMG from "../../assets/images/DistanceStars.png";
 import Web3 from "web3";
 import axios from "axios";
 
-export default function MainPage({ account }) {
+export default function MainPage({ account, signUp, signIn }) {
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
   const [myNft, setMyNft] = useState(0);
@@ -92,6 +92,7 @@ export default function MainPage({ account }) {
 
   return (
     // <>
+
     <Box bg={`url(${backIMG})`} bgSize={"100%"}>
       {/* <NavBar
         // currentVisibleIndex={currentVisibleIndex}
@@ -101,6 +102,12 @@ export default function MainPage({ account }) {
         address={address}
         account={account}
       /> */}
+      <NavBar
+        signUp={signUp}
+        signIn={signIn}
+        address={address}
+        account={account}
+      />
       <Introduce mintDate={mintDate} />
       <Calender
         selected={selectedDate}

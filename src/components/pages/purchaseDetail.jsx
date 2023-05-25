@@ -28,7 +28,7 @@ import backIMG from "@assets/images/DistanceStars.png";
 import axios from "axios";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 
-const PurchaseDetail = forwardRef((props, ref) => {
+export default function PurchaseDetail({ account, signUp, signIn }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -176,7 +176,7 @@ const PurchaseDetail = forwardRef((props, ref) => {
         <Box
           paddingLeft={"190px"}
           paddingRight={"190px"}
-          ref={ref}
+          // ref={ref}
           w={"100vh"}
           h={"1000px"}
           // paddingBottom={"200px"}
@@ -523,6 +523,4 @@ const PurchaseDetail = forwardRef((props, ref) => {
       </Box>
     </>
   );
-});
-
-export default PurchaseDetail;
+}

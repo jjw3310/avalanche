@@ -17,6 +17,7 @@ export default function SignUp() {
     const res = await userContract.methods
       .signUp(_id, _pass)
       .send({ from: address });
+
     if (res) alert("가입 성공");
   };
 

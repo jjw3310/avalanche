@@ -37,17 +37,29 @@ function App() {
           <div className="min-h-screen bg-gray-950 text-white">
             {/* <Header account={account} setAccount={setAccount} /> */}
 
-            <NavBar
-              // currentVisibleIndex={currentVisibleIndex}
-              // onClickNavLink={handleClickNavLink}
-              signUp={signUp}
-              signIn={signIn}
-              address={address}
-              account={account}
-            />
             <Routes>
-              <Route path="/" element={<MainPage account={account} />} />
-              <Route path="/purchaseDetail" element={<PurchaseDetail />} />
+              <Route
+                path="/"
+                element={
+                  <MainPage
+                    account={account}
+                    signUp={signUp}
+                    signIn={signIn}
+                    address={address}
+                  />
+                }
+              />
+              <Route
+                path="/purchaseDetail"
+                element={
+                  <PurchaseDetail
+                    account={account}
+                    signUp={signUp}
+                    signIn={signIn}
+                    address={address}
+                  />
+                }
+              />
               <Route
                 path="/GuestBook/:yyyymmdd/:address"
                 element={
@@ -56,6 +68,9 @@ function App() {
                     // signIn={signIn}
                     // address={address}
                     account={account}
+                    signUp={signUp}
+                    signIn={signIn}
+                    address={address}
                   />
                 }
               />
