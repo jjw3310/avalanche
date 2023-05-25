@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function NavBar({
   currentVisibleIndex,
@@ -23,10 +23,13 @@ export default function NavBar({
   signUp,
   signIn,
   address,
-  account,
+  // account,
 }) {
+  const location = useLocation();
+  const location2 = useLocation();
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
+  const account = location.state?.account;
   // const history = useHistory();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -60,7 +63,7 @@ export default function NavBar({
   };
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
-  });
+  }, [account]);
 
   return (
     <Box
