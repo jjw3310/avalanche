@@ -168,6 +168,7 @@ function App() {
                     inputId={inputId}
                     setInputPass={setInputPass}
                     inputPass={inputPass}
+                    account={account}
                   />
                 }
               />

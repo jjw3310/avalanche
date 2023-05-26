@@ -50,6 +50,10 @@ export default function NavBar({
     window.addEventListener("scroll", updateScroll);
   }, []);
 
+  useEffect(() => {
+    updateScroll();
+    console.log("hello1@!!@" + account);
+  }, [account]);
   return (
     <Box
       z-index={"999"}
