@@ -2,25 +2,13 @@ import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import React, { useEffect, useState } from "react";
 
-export default function SignUp() {
-  const [inputId, setInputId] = useState();
-  const [inputPass, setInputPass] = useState();
-  const { userContract, getContracts } = useWeb3();
-  const { address, getAddress } = useWallet();
-
-  useEffect(() => {
-    getContracts();
-    getAddress();
-  }, []);
-
-  const callSignUp = async function (_id, _pass) {
-    const res = await userContract.methods
-      .signUp(_id, _pass)
-      .send({ from: address });
-
-    if (res) alert("가입 성공");
-  };
-
+export default function SignUp({
+  setInputId,
+  inputId,
+  setInputPass,
+  inputPass,
+  callSignUp,
+}) {
   return (
     <Box>
       <Box pt={"100px"}>

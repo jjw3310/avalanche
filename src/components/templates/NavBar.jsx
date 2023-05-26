@@ -18,44 +18,29 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function NavBar({
+  callSignUp,
+  handleClick,
+
+  setInputId,
+  inputId,
+  setInputPass,
+  inputPass,
+  // account,
   currentVisibleIndex,
   onClickNavLink,
   signUp,
   signIn,
   address,
+  setAccount,
+  account,
   // account,
 }) {
-  const location = useLocation();
-  const location2 = useLocation();
+  // const location = useLocation();
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
-  const account = location.state?.account;
+  // const account = location.state?.account;
   // const history = useHistory();
   const navigate = useNavigate();
-  const handleClick = () => {
-    // 클릭 시 이동할 페이지 경로
-    // 예시: "/profile"
-    console.log("helloacount:" + account);
-    const destination1 = {
-      pathname: "/purchaseDetail",
-      state: { account: account },
-    };
-    const destination2 = {
-      pathname: "/guestBook",
-      state: { account: account },
-    };
-    // const destination1 = "/purchaseDetail";
-    // const destination2 = "/guestBook";
-    // 페이지 이동
-
-    if (account) {
-      // window.location.href = destination1;
-      navigate(destination1);
-    } else {
-      // window.location.href = destination2;
-      navigate(destination2);
-    }
-  };
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
@@ -63,7 +48,7 @@ export default function NavBar({
   };
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
-  }, [account]);
+  }, []);
 
   return (
     <Box
@@ -123,9 +108,7 @@ export default function NavBar({
                 _hover={{ bg: "purple.500" }}
                 ml={"20px"}
                 mt={"20px"}
-                onClick={() => {
-                  signIn();
-                }}
+                onClick={() => navigate("/signup")}
               >
                 <Popover trigger={"hover"} placement={"bottom-start"}>
                   <PopoverTrigger>
@@ -144,6 +127,7 @@ export default function NavBar({
                       }}
                       href="/"
                       target="_blank"
+                      onClick={() => navigate("/signin")}
                     >
                       Sign in
                     </Box>

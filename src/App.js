@@ -2,40 +2,113 @@ import "./App.css";
 import NavBar from "@components/templates/NavBar";
 import {
   ChakraProvider,
+  useDisclosure,
   // Box,
   // Heading,
   // Text,
   // Button
 } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import SignUp from "@components/pages/SignUp";
 import SignIn from "@components/pages/SignIn";
-
+import { useLocation, useNavigate } from "react-router-dom";
 function App() {
-  const [account, setAccount] = useState("");
-
+  const [inputId, setInputId] = useState();
+  const [inputPass, setInputPass] = useState();
+  const { userContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
-  const { userContract, dateContract, commentContract, getContracts } =
-    useWeb3();
+  // const location = useLocation();
+  // const location2 = useLocation();
+  const { isOpen, onToggle } = useDisclosure();
+  const [isHovered, setIsHovered] = useState(false);
+  const [account, setAccount] = useState();
+  // const account = location.state?.account;
+  // const history = useHistory();
+  // const navigate = useNavigate();
+  const handleClick = () => {
+    // 클릭 시 이동할 페이지 경로
+    // 예시: "/profile"
+    console.log("helloacount:" + account);
+    const destination1 = {
+      pathname: "/purchaseDetail",
+      state: { account: account },
+    };
+    const destination2 = {
+      pathname: "/guestBook",
+      state: { account: account },
+    };
+    // const destination1 = "/purchaseDetail";
+    // const destination2 = "/guestBook";
+    // 페이지 이동
 
-  const signUp = async () => {
-    window.location.href = "/signup";
+    if (account) {
+      // window.location.href = destination1;
+      // navigate(destination1);
+    } else {
+      // window.location.href = destination2;
+      // navigate(destination2);
+    }
   };
 
-  const signIn = async () => {
-    window.location.href = "/signin";
+  const callSignIn = async function (_id, _pass) {
+    const res = await userContract.methods
+      .login(_id, _pass)
+      .call()
+      .catch((err) => {
+        alert("로그인 실패");
+      });
+    if (res) {
+      alert("로그인 성공");
+      setAccount(_id);
+      // navigate({
+      //   pathname: "/",
+      //   state: { account: _id },
+      // });
+    }
+  };
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+  }, []);
+
+  useEffect(() => {
+    getContracts();
+    getAddress();
+  }, []);
+
+  const callSignUp = async function (_id, _pass) {
+    const res = await userContract.methods
+      .signUp(_id, _pass)
+      .send({ from: address });
+
+    if (res) alert("가입 성공");
   };
   return (
     <>
       <BrowserRouter>
         <ChakraProvider>
           <div className="min-h-screen bg-gray-950 text-white">
-            {/* <Header account={account} setAccount={setAccount} /> */}
+            <NavBar
+              callSignUp={callSignUp}
+              handleClick={handleClick}
+              scrollPosition={scrollPosition}
+              setInputId={setInputId}
+              inputId={inputId}
+              setInputPass={setInputPass}
+              inputPass={inputPass}
+              callSignIn={callSignIn}
+              setAccount={setAccount}
+              account={account}
+            />
 
             <Routes>
               <Route
@@ -43,8 +116,8 @@ function App() {
                 element={
                   <MainPage
                     account={account}
-                    signUp={signUp}
-                    signIn={signIn}
+                    // signUp={signUp}
+                    // signIn={signIn}
                     address={address}
                   />
                 }
@@ -54,8 +127,8 @@ function App() {
                 element={
                   <PurchaseDetail
                     account={account}
-                    signUp={signUp}
-                    signIn={signIn}
+                    // signUp={signUp}
+                    // signIn={signIn}
                     address={address}
                   />
                 }
@@ -68,14 +141,36 @@ function App() {
                     // signIn={signIn}
                     // address={address}
                     account={account}
-                    signUp={signUp}
-                    signIn={signIn}
+                    // signUp={signUp}
+                    // signIn={signIn}
                     address={address}
                   />
                 }
               />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
+              <Route
+                path="/signup"
+                element={
+                  <SignUp
+                    setInputId={setInputId}
+                    inputId={inputId}
+                    setInputPass={setInputPass}
+                    inputPass={inputPass}
+                    callSignUp={callSignUp}
+                  />
+                }
+              />
+              <Route
+                path="/signin"
+                element={
+                  <SignIn
+                    callSignIn={callSignIn}
+                    setInputId={setInputId}
+                    inputId={inputId}
+                    setInputPass={setInputPass}
+                    inputPass={inputPass}
+                  />
+                }
+              />
               {/* <Route path="/:tokenId" element={<Customizing />} /> */}
             </Routes>
           </div>

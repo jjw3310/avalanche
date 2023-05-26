@@ -102,12 +102,12 @@ export default function MainPage({ account, signUp, signIn }) {
         address={address}
         account={account}
       /> */}
-      <NavBar
+      {/* <NavBar
         signUp={signUp}
         signIn={signIn}
         address={address}
         account={account}
-      />
+      /> */}
       <Introduce mintDate={mintDate} />
       <Calender
         selected={selectedDate}
