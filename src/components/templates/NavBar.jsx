@@ -97,6 +97,7 @@ export default function NavBar({
                         textDecoration: "none",
                         color: "linkHoverColor",
                       }}
+                      onClick={() => navigate("/signup")}
                     >
                       Sign Up
                     </Box>
@@ -108,7 +109,6 @@ export default function NavBar({
                 _hover={{ bg: "purple.500" }}
                 ml={"20px"}
                 mt={"20px"}
-                onClick={() => navigate("/signup")}
               >
                 <Popover trigger={"hover"} placement={"bottom-start"}>
                   <PopoverTrigger>
