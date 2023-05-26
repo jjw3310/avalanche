@@ -71,6 +71,7 @@ export default function SignIn({
             w={"300px"}
             onClick={() => {
               callSignIn(inputId, inputPass);
+              navigate("/");
             }}
           >
             로그인
