@@ -26,6 +26,7 @@ const Calender = ({
   const { dateContract, getContracts } = useWeb3();
   const [className, setClassName] = useState("react-calendar");
 
+  const [imgurl, setImgurl] = useState("");
   useEffect(() => {
     getContracts();
   }, []);
@@ -70,6 +71,8 @@ const Calender = ({
         img.src = imgurl;
         dates[i].append(img);
         console.log("DATEs[i] : ", dates[i]);
+        // setImgurl(dates[i]);
+        console.log("asd");
       }
     }
   };
@@ -158,7 +161,7 @@ const Calender = ({
                   onChange={onChange}
                   value={value}
                   formatDay={(locale, date) => moment(date).format("D")}
-                  // tileContent={this.tileHandler}
+                  // tileContent={getNftImg()}
                 />
               </CalendarContainer>
             </div>

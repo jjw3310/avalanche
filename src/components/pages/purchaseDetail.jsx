@@ -156,7 +156,7 @@ export default function PurchaseDetail({ account, signUp, signIn }) {
               "",
               "",
               true,
-              `https://gateway.pinata.cloud/ipfs/${_imgHash}`
+              `https://ipfs.io/ipfs/${_imgHash}`
             )
             .send({ from: address });
           console.log("isDone: ", isDone);

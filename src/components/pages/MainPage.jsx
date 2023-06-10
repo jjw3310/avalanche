@@ -66,7 +66,7 @@ export default function MainPage({ account, signUp, signIn }) {
         console.log("변경한 url이 존재함");
         setTodayNftImg(todayNftInfo.imgUrl);
       } else {
-        console.log("기본 이미지 출력");
+        console.log("기본 이미지 출력 ");
         let jsonUrl = await dateContract.methods.tokenURI(_yyyymmdd).call();
         const res = await axios.get(jsonUrl, {
           headers: {
