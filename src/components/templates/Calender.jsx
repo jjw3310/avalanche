@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Img } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Calendar } from "react-calendar";
@@ -24,6 +24,7 @@ const Calender = ({
   const [isMinted, setIsMinted] = useState();
   const [todayNftUrl, setTodayNftUrl] = useState();
   const { dateContract, getContracts } = useWeb3();
+  const [className, setClassName] = useState("react-calendar");
 
   useEffect(() => {
     getContracts();
@@ -65,12 +66,35 @@ const Calender = ({
       // console.log("imgurl : ", imgurl);
       if (imgurl.length > 1) {
         console.log("imgurl.length > 1");
-        var img = new Image(100, 100);
+        var img = new Image(80, 80);
         img.src = imgurl;
         dates[i].append(img);
         console.log("DATEs[i] : ", dates[i]);
       }
     }
+  };
+
+  // const tileHandler = this.handleDayColors.bind(this);
+  const addImg = ({ date }) => {
+    if (!dateContract) return;
+    const contents = [];
+    const _yyyymmdd =
+      date.getFullYear().toString() +
+      (date.getMonth() >= 10
+        ? date.getMonth().toString()
+        : "0" + date.getMonth()) +
+      (date.getDate() >= 10 ? date.getDate().toString() : "0" + date.getDate());
+    // const imgurl = await chkMinted(_yyyymmdd);
+    const imgurl = "";
+    // console.log("imgurl : ", imgurl);
+    if (imgurl.length > 1) {
+      contents.push(
+        <div>
+          <image src={imgurl} width={"80px"} height={"80px"} />
+        </div>
+      );
+    }
+    return <div>{contents}</div>;
   };
 
   const chkMinted = async (_yyyymmdd) => {
@@ -83,7 +107,9 @@ const Calender = ({
   };
 
   useEffect(() => {
-    if (dateContract) getNftImg();
+    if (dateContract) {
+      getNftImg();
+    }
   }, [dateContract]);
 
   useEffect(() => {
@@ -127,11 +153,12 @@ const Calender = ({
                   calendarType="US"
                   minDetail="decade"
                   onSelectDate={setSelectedDate}
-                  className="react-calendar"
+                  className={className}
                   style={{ backgroundColor: "white" }}
                   onChange={onChange}
                   value={value}
                   formatDay={(locale, date) => moment(date).format("D")}
+                  // tileContent={this.tileHandler}
                 />
               </CalendarContainer>
             </div>
