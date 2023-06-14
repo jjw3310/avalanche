@@ -27,6 +27,7 @@ const Calender = ({
   const [className, setClassName] = useState("react-calendar");
 
   const [imgurl, setImgurl] = useState("");
+  const [rerender, setRerender] = useState(false);
   useEffect(() => {
     getContracts();
   }, []);
@@ -72,6 +73,7 @@ const Calender = ({
         dates[i].append(img);
         console.log("DATEs[i] : ", dates[i]);
         // setImgurl(dates[i]);
+        setRerender(true);
         console.log("asd");
       }
     }
@@ -113,7 +115,7 @@ const Calender = ({
     if (dateContract) {
       getNftImg();
     }
-  }, [dateContract]);
+  }, [dateContract, rerender]);
 
   useEffect(() => {
     if (todayNftMinted) {
