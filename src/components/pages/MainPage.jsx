@@ -55,7 +55,6 @@ export default function MainPage({ account, signUp, signIn }) {
 
   const getTodayNft = async (_yyyymmdd) => {
     try {
-      if (!dateContract) return;
       const todayNftInfo = await dateContract.methods
         .getDayNftInfo(_yyyymmdd)
         .call();
@@ -82,6 +81,7 @@ export default function MainPage({ account, signUp, signIn }) {
   };
 
   useEffect(() => {
+    if (!dateContract) return;
     getTodayNft(todayYYYYMMDD);
     // console.log("NFT DATA", nftInfo);
   }, [dateContract]);
