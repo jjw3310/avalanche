@@ -124,7 +124,7 @@ const Calender = ({
                   style={{ height: "100%", backgroundColor: "white" }}
                 >
                   <Calendar
-                    selected={selectedDate}
+                    selected={setSelectedDate}
                     calendarType="US"
                     minDetail="decade"
                     onSelectDate={setSelectedDate}
@@ -132,6 +132,9 @@ const Calender = ({
                     style={{ backgroundColor: "white" }}
                     onChange={onChange}
                     value={value}
+                    // formatLongDate={(locale, date) =>
+                    //   date.formatDate(date, "dd MMM YYYY")
+                    // }
                     formatDay={(locale, date) => moment(date).format("D")}
                     tileContent={(i) => {
                       // console.log(imgObj);
