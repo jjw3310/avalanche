@@ -48,36 +48,6 @@ const Calender = ({
     height: 100%;
   `;
 
-  const getNftImg = async () => {
-    let dates = document.querySelectorAll(".react-calendar__tile");
-    for (let i = 0; i < dates.length; i++) {
-      // console.log(dates[i]);
-      let korDate = dates[i].innerHTML.split('"')[1];
-      let divided = korDate.split(" ");
-      let numYear = divided[0].split("년")[0];
-      let numMonth =
-        divided[1].split("월")[0].length > 1
-          ? divided[1].split("월")[0]
-          : "0" + divided[1].split("월")[0];
-      let numDay =
-        divided[2].split("일")[0].length > 1
-          ? divided[2].split("일")[0]
-          : "0" + divided[2].split("일")[0];
-      const _yyyymmdd = numYear + numMonth + numDay;
-      const imgurl = await chkMinted(_yyyymmdd);
-      // console.log("imgurl : ", imgurl);
-      if (imgurl.length > 1) {
-        // console.log("imgurl.length > 1");
-        var img = new Image(60, 60);
-        img.src = imgurl;
-        dates[i].append(img);
-        // console.log("DATEs[i] : ", dates[i]);
-        // setImgurl(dates[i]);
-        // console.log("asd");
-      }
-    }
-  };
-
   useEffect(() => {
     let obj = Object();
     const getImgData = async () => {
@@ -107,29 +77,8 @@ const Calender = ({
       setIsLoading(false);
     };
     if (dateContract) getImgData();
-  }, [value]);
-
-  // const tileContent = this.AddImg.bind(this);
-
-  // const AddImg = (date) => {
-  //   let contents = [];
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       if (!dateContract) return;
-  //       const _yyyymmdd =
-  //         date.getFullYear() +
-  //         String(date.getMonth() + 1).padStart(2, "0") +
-  //         String(date.getDate()).padStart(2, "0");
-  //       const imgurl = await chkMinted(_yyyymmdd);
-  //       if (imgurl.length > 1) {
-  //         contents.push(<image src={imgurl} width={"80px"} height={"80px"} />);
-  //       }
-  //       console.log("imgurl : ", imgurl);
-  //     };
-  //     fetchData();
-  //   }, []);
-  //   return <div>{contents}</div>;
-  // };
+    console.log(value);
+  }, [dateContract, value]);
 
   const chkMinted = async (_yyyymmdd) => {
     const result = await dateContract.methods.getDayNftInfo(_yyyymmdd).call();
@@ -137,10 +86,6 @@ const Calender = ({
       return result.imgUrl;
     } else return "";
   };
-
-  useEffect(() => {
-    if (dateContract) getNftImg();
-  }, [dateContract]);
 
   useEffect(() => {
     if (todayNftMinted) setIsMinted(todayNftMinted.minted);
@@ -186,16 +131,21 @@ const Calender = ({
                     className={className}
                     style={{ backgroundColor: "white" }}
                     onChange={onChange}
+                    onViewChange={({ action, activeStartDate, value, view }) =>
+                      alert("New view is: ", view)
+                    }
+                    // onChangeMonth={console.log("MONTH")}
                     value={value}
                     formatDay={(locale, date) => moment(date).format("D")}
                     tileContent={(i) => {
                       // console.log(imgObj);
                       // if (imgObj) console.log(i.date);
                       // console.log("getTime() : ", new Date(i.date.getTime()));
+                      if (!imgObj[i.date.getTime()]) return;
                       if (imgObj[i.date.getTime()].length > 1) {
                         let img = imgObj[i.date.getTime()];
-                        console.log("imgObj[] : ", img);
-                        return <img src={img} />;
+                        // console.log("imgObj[] : ", img);
+                        return <img width="60px" height="60px" src={img} />;
                       }
                     }}
                   />
