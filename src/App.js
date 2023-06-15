@@ -1,22 +1,15 @@
 import "./App.css";
 import NavBar from "@components/templates/NavBar";
-import {
-  ChakraProvider,
-  useDisclosure,
-  // Box,
-  // Heading,
-  // Text,
-  // Button
-} from "@chakra-ui/react";
+import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import MainPage from "./components/pages/MainPage";
 import PurchaseDetail from "@components/pages/purchaseDetail";
 import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import SignUp from "@components/pages/SignUp";
 import SignIn from "@components/pages/SignIn";
-import { useLocation, useNavigate } from "react-router-dom";
+
 function App() {
   const [inputId, setInputId] = useState();
   const [inputPass, setInputPass] = useState();

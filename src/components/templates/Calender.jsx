@@ -66,39 +66,38 @@ const Calender = ({
       const imgurl = await chkMinted(_yyyymmdd);
       // console.log("imgurl : ", imgurl);
       if (imgurl.length > 1) {
-        console.log("imgurl.length > 1");
+        // console.log("imgurl.length > 1");
         var img = new Image(80, 80);
         img.src = imgurl;
         dates[i].append(img);
-        console.log("DATEs[i] : ", dates[i]);
+        // console.log("DATEs[i] : ", dates[i]);
         // setImgurl(dates[i]);
-        console.log("asd");
+        // console.log("asd");
       }
     }
   };
 
-  // const tileHandler = this.handleDayColors.bind(this);
-  const addImg = ({ date }) => {
-    if (!dateContract) return;
-    const contents = [];
-    const _yyyymmdd =
-      date.getFullYear().toString() +
-      (date.getMonth() >= 10
-        ? date.getMonth().toString()
-        : "0" + date.getMonth()) +
-      (date.getDate() >= 10 ? date.getDate().toString() : "0" + date.getDate());
-    // const imgurl = await chkMinted(_yyyymmdd);
-    const imgurl = "";
-    // console.log("imgurl : ", imgurl);
-    if (imgurl.length > 1) {
-      contents.push(
-        <div>
-          <image src={imgurl} width={"80px"} height={"80px"} />
-        </div>
-      );
-    }
-    return <div>{contents}</div>;
-  };
+  // const tileContent = this.AddImg.bind(this);
+
+  // const AddImg = (date) => {
+  //   let contents = [];
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       if (!dateContract) return;
+  //       const _yyyymmdd =
+  //         date.getFullYear() +
+  //         String(date.getMonth() + 1).padStart(2, "0") +
+  //         String(date.getDate()).padStart(2, "0");
+  //       const imgurl = await chkMinted(_yyyymmdd);
+  //       if (imgurl.length > 1) {
+  //         contents.push(<image src={imgurl} width={"80px"} height={"80px"} />);
+  //       }
+  //       console.log("imgurl : ", imgurl);
+  //     };
+  //     fetchData();
+  //   }, []);
+  //   return <div>{contents}</div>;
+  // };
 
   const chkMinted = async (_yyyymmdd) => {
     const result = await dateContract.methods.getDayNftInfo(_yyyymmdd).call();
@@ -161,7 +160,7 @@ const Calender = ({
                   onChange={onChange}
                   value={value}
                   formatDay={(locale, date) => moment(date).format("D")}
-                  // tileContent={getNftImg()}
+                  // tileContent={this.tileContent}
                 />
               </CalendarContainer>
             </div>

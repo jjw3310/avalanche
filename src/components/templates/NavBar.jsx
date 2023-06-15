@@ -52,7 +52,7 @@ export default function NavBar({
 
   useEffect(() => {
     updateScroll();
-    console.log("hello1@!!@" + account);
+    // console.log("hello1@!!@" + account);
   }, [account]);
   return (
     <Box

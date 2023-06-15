@@ -34,7 +34,7 @@ export default function MainPage({ account, signUp, signIn }) {
   var month = ("0" + (1 + date.getMonth())).slice(-2);
   var day = ("0" + date.getDate()).slice(-2);
   let todayYYYYMMDD = year + month + day;
-  console.log(todayYYYYMMDD);
+  // console.log(todayYYYYMMDD);
 
   useEffect(() => {
     getContracts();
