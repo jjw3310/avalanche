@@ -9,7 +9,8 @@ import GuestBook from "@components/pages/guestBook";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
 import SignUp from "@components/pages/SignUp";
 import SignIn from "@components/pages/SignIn";
-
+import { Connect } from "./components/connect";
+import { useWeb3ConnectionContext } from "./components/context/web3Connection.context";
 function App() {
   const [inputId, setInputId] = useState();
   const [inputPass, setInputPass] = useState();
@@ -20,9 +21,16 @@ function App() {
   const { isOpen, onToggle } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
   const [account, setAccount] = useState();
+  const { provider, hooks } = useWeb3ConnectionContext();
   // const account = location.state?.account;
   // const history = useHistory();
   // const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("provider : ", provider);
+    console.log("hooks:" + hooks);
+  });
+
   const handleClick = () => {
     // 클릭 시 이동할 페이지 경로
     // 예시: "/profile"
@@ -89,6 +97,7 @@ function App() {
       <BrowserRouter>
         <ChakraProvider>
           <div className="min-h-screen bg-gray-950 text-white">
+            <Connect />
             <NavBar
               callSignUp={callSignUp}
               handleClick={handleClick}
@@ -100,6 +109,7 @@ function App() {
               callSignIn={callSignIn}
               setAccount={setAccount}
               account={account}
+              // Connect={Connect}
             />
 
             <Routes>
