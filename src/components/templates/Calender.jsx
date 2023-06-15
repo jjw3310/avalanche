@@ -131,10 +131,6 @@ const Calender = ({
                     className={className}
                     style={{ backgroundColor: "white" }}
                     onChange={onChange}
-                    onViewChange={({ action, activeStartDate, value, view }) =>
-                      alert("New view is: ", view)
-                    }
-                    // onChangeMonth={console.log("MONTH")}
                     value={value}
                     formatDay={(locale, date) => moment(date).format("D")}
                     tileContent={(i) => {
