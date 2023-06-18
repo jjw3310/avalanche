@@ -17,6 +17,9 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { Connect } from "../connect";
+import { useWeb3ConnectionContext } from "../context/web3Connection.context";
+
 export default function NavBar({
   callSignUp,
   handleClick,
@@ -43,6 +46,14 @@ export default function NavBar({
   const navigate = useNavigate();
 
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const { provider, hooks } = useWeb3ConnectionContext();
+
+  useEffect(() => {
+    console.log("provider : ", provider);
+    console.log("hooks:" + hooks);
+  });
+
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
@@ -78,7 +89,8 @@ export default function NavBar({
             </Box>
           </Flex>
           {/* {account ? `Welcome!\t"${account}"` : ""} */}
-          {!account ? (
+          <Connect />
+          {/* {!account ? (
             <>
               <Button
                 borderRadius={"50px"}
@@ -197,7 +209,7 @@ export default function NavBar({
                 </Link>
               </Flex>
             </>
-          )}
+          )} */}
         </Flex>
       </div>
       <Collapse in={isOpen} animateOpacity></Collapse>
