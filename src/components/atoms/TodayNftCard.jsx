@@ -4,7 +4,7 @@ import NotMintedCard from "./NotMintedCard";
 
 export default function TodayNftCard({
   isMinted,
-  todayNftUrl,
+  todayNftInfo,
   selectedYYYYMMDD,
 }) {
   const [minted, setIsMinted] = useState();
@@ -18,16 +18,16 @@ export default function TodayNftCard({
 
   useEffect(() => {
     if (isMinted) {
-      console.log("MintedImgUrl : ", todayNftUrl);
+      console.log("MintedImgUrl : ", todayNftInfo.imgUrl);
     } else {
-      console.log("Not Minted Yet : ", todayNftUrl);
+      console.log("Not Minted Yet : ", todayNftInfo);
     }
-  }, [todayNftUrl]);
+  }, [todayNftInfo]);
   return (
     <>
       {isMinted ? (
         <MintedCard
-          todayNftUrl={todayNftUrl}
+          todayNftInfo={todayNftInfo}
           selectedYYYYMMDD={selectedYYYYMMDD}
         />
       ) : (

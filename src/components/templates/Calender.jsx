@@ -14,7 +14,7 @@ const Calender = ({
   mintedNft,
   // myNft,
   page,
-  todayNftImg,
+  todayNftInfo,
   todayNftMinted,
 }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -77,12 +77,12 @@ const Calender = ({
       setIsLoading(false);
     };
     if (dateContract) getImgData();
-    console.log(value);
+    // console.log(value);
   }, [dateContract, value]);
 
   const chkMinted = async (_yyyymmdd) => {
     const result = await dateContract.methods.getDayNftInfo(_yyyymmdd).call();
-    if (result.showDefaultImg) {
+    if (!result.showDefaultImg) {
       return result.imgUrl;
     } else return "";
   };
@@ -155,7 +155,7 @@ const Calender = ({
 
             <TodayNftCard
               isMinted={isMinted}
-              todayNftUrl={todayNftUrl}
+              todayNftInfo={todayNftInfo}
               selectedYYYYMMDD={todayYYYYMMDD}
             />
           </Flex>
@@ -202,7 +202,7 @@ const Calender = ({
 
             <TodayNftCard
               isMinted={isMinted}
-              todayNftUrl={todayNftUrl}
+              todayNftInfo={todayNftInfo}
               selectedYYYYMMDD={todayYYYYMMDD}
             />
           </Flex>

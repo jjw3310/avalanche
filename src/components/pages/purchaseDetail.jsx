@@ -155,7 +155,7 @@ export default function PurchaseDetail({ account, signUp, signIn }) {
               ownList[0],
               "",
               "",
-              true,
+              false,
               `https://ipfs.io/ipfs/${_imgHash}`
             )
             .send({ from: address });

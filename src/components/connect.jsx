@@ -36,6 +36,8 @@ export function Connect() {
   const activeAccount = useAccount();
   const [activationError, setActivationError] = useState();
 
+  // console.log(connector);
+
   if (activationError instanceof NoCoreWalletError) {
     return <CoreNotFoundError />;
   }

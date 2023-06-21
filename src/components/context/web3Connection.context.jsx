@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { initializeConnector, Web3ReactHooks } from "@web3-react/core";
 import { CoreWallet } from "@avalabs/web3-react-core-connector";
 

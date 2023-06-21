@@ -9,14 +9,16 @@ import { useWallet, useWeb3 } from "@hooks/useAvax";
 import { useEffect, useState } from "react";
 import InCardComments from "./InCardComments";
 
-export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
-  const { commentContract, getContracts } = useWeb3();
+export default function MintedCard({ todayNftInfo, selectedYYYYMMDD }) {
+  const { commentContract, dateContract, getContracts } = useWeb3();
   const { address, getAddress } = useWallet();
   const [comments, setComments] = useState();
+  const [owner, setOwner] = useState();
 
   useEffect(() => {
     getContracts();
     getAddress();
+    console.log("todayNftInfo : ", todayNftInfo);
   }, []);
 
   useEffect(() => {
@@ -26,25 +28,52 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
       const res = await commentContract.methods
         .getComments(selectedYYYYMMDD)
         .call();
-      // console.log("COMMENTS : ", res);
+      console.log("COMMENTS : ", res);
       setComments(res);
     };
     getComments();
   }, [commentContract, selectedYYYYMMDD]);
 
+  useEffect(() => {
+    if (!dateContract) return;
+    const getOwner = async () => {
+      const ownerAddr = await dateContract.methods
+        .ownerOf(selectedYYYYMMDD)
+        .call();
+      // console.log(ownerAddr);
+      setOwner(ownerAddr);
+    };
+    getOwner();
+  }, [dateContract]);
+
   return (
     <>
       <Link to={`/guestBook/${selectedYYYYMMDD}/${address}`}>
-        <Box borderRadius={"30px"} h="100%" bg="white" ml={"20px"}>
+        <Box
+          borderRadius={"30px"}
+          h="100%"
+          bg="white"
+          ml={"20px"}
+          bgImage={
+            todayNftInfo
+              ? todayNftInfo.imgUrl
+              : "https://gateway.pinata.cloud/ipfs/QmNmkuE5unrYNEFNApLAEC2K3kciZ6QiiKUTxUrirvpLxt/dates/202305/basic.png"
+          }
+          bgSize="100% 100%"
+          bgRepeat={"no-repeat"}
+          bgPosition={"center"}
+          backgroundBlendMode={"multiply"}
+          backgroundColor={"rgba(0, 0, 0, 0.5)"}
+        >
           {/* #upper box */}
           <Box
             w="350px"
             position={"relative"}
             // bg={`url(${todayNftImg})`}
-            bg={`url(${glitchImg})`}
-            bgSize={"100%"}
-            backgroundBlendMode={"multiply"}
-            backgroundColor={"rgba(0, 0, 0, 0.5)"}
+            // bg={`url(${glitchImg})`}
+            // bgSize={"100%"}
+            // backgroundBlendMode={"multiply"}
+            // backgroundColor={"rgba(0, 0, 0, 0.5)"}
           >
             <Flex
               direction={"column"}
@@ -57,7 +86,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
             >
               {/* #1 */}
               <Flex
-                ml={"20px"}
+                ml={"30px"}
                 mt={"15px"}
                 direction={"row"}
                 justify={"flex-start"}
@@ -65,7 +94,11 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                 w={"100%"}
               >
                 <IoPersonCircleOutline size={30} />
-                <Text ml={"10px"}>buyyourdate</Text>
+                <Text ml={"10px"}>
+                  {owner
+                    ? owner.slice(0, 4) + "..." + owner.slice(-4)
+                    : "Loading"}
+                </Text>
                 <Button
                   // position={"relative"}
                   ml={"120px"}
@@ -107,7 +140,7 @@ export default function MintedCard({ todayNftImg, selectedYYYYMMDD }) {
                 // lineHeight={["23px", null, "47px"]}
                 color="#FFFFFF"
               >
-                My birthday
+                {todayNftInfo ? todayNftInfo.title : ""}
               </Flex>
               <Flex
                 ml={"25px"}

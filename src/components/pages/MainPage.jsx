@@ -9,15 +9,11 @@ import Footer from "@components/templates/Footer";
 
 import { useState, useEffect } from "react";
 import { useWallet, useWeb3 } from "@hooks/useAvax";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import backIMG from "../../assets/images/DistanceStars.png";
-import Web3 from "web3";
 import axios from "axios";
 
 export default function MainPage({ account, signUp, signIn }) {
-  const [totalNft, setTotalNft] = useState(0);
-  const [mintedNft, setMintedNft] = useState(0);
-  const [myNft, setMyNft] = useState(0);
   const [page, setPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -27,7 +23,7 @@ export default function MainPage({ account, signUp, signIn }) {
   // const [account, setAccount] = useState();
   const [inputAcnt, setInputAcnt] = useState("test");
   const [nftInfo, setNftInfo] = useState();
-  const [todayNftImg, setTodayNftImg] = useState();
+  const [todayNftInfo, setTodayNftInfo] = useState();
 
   var date = new Date();
   var year = date.getFullYear();
@@ -59,11 +55,11 @@ export default function MainPage({ account, signUp, signIn }) {
         .getDayNftInfo(_yyyymmdd)
         .call();
       setNftInfo(todayNftInfo);
-      console.log("TODAY NFT INFO:", todayNftInfo);
+      // console.log("TODAY NFT INFO:", todayNftInfo);
       if (!todayNftInfo) return;
-      if (todayNftInfo.showDefaultImg) {
+      if (!todayNftInfo.showDefaultImg) {
         console.log("변경한 url이 존재함");
-        setTodayNftImg(todayNftInfo.imgUrl);
+        setTodayNftInfo(todayNftInfo);
       } else {
         console.log("기본 이미지 출력 ");
         let jsonUrl = await dateContract.methods.tokenURI(_yyyymmdd).call();
@@ -73,7 +69,7 @@ export default function MainPage({ account, signUp, signIn }) {
           },
         });
         const tnimg = res.data.properties.image.description;
-        setTodayNftImg(tnimg);
+        setTodayNftInfo(tnimg);
       }
     } catch (error) {
       console.error(error);
@@ -112,11 +108,8 @@ export default function MainPage({ account, signUp, signIn }) {
       <Calender
         selected={selectedDate}
         onSelectDate={setSelectedDate}
-        totalNft={totalNft}
-        mintedNft={mintedNft}
-        myNft={myNft}
         page={page}
-        todayNftImg={todayNftImg}
+        todayNftInfo={todayNftInfo}
         todayNftMinted={nftInfo}
       />
       <Description />

@@ -50,8 +50,8 @@ export default function NavBar({
   const { provider, hooks } = useWeb3ConnectionContext();
 
   useEffect(() => {
-    console.log("provider : ", provider);
-    console.log("hooks:" + hooks);
+    // console.log("provider : ", provider);
+    // console.log("hooks:" + hooks);
   });
 
   const updateScroll = () => {

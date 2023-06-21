@@ -1,37 +1,11 @@
-import {
-  Box,
-  Flex,
-  Divider,
-  Text,
-  Image,
-  Input,
-  Stack,
-  Heading,
-  VStack,
-  label,
-  Textarea,
-  Button,
-  Popover,
-  PopoverTrigger,
-} from "@chakra-ui/react";
+import { Box, Flex, Divider, Text, Image, Button } from "@chakra-ui/react";
 import { forwardRef } from "react";
-// import NavBar from "@components/templates/NavBar";
 import { IoPersonCircleOutline } from "react-icons/io5";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faImages } from "@fortawesome/free-regular-svg-icons";
 import React, { useState, useEffect } from "react";
-// import previousMonth from "@assets/images/previousMonth.svg";
-// import nextMonth from "@assets/images/nextMonth.svg";
 import littleStar from "@assets/images/littleStar.png";
-// import editPictureIcon from "@assets/images/editPictureIcon.png";
-import { Link, useParams } from "react-router-dom";
-// import { Calendar, CalendarDay, CalendarMonth } from "react-calendar";
+import { useParams } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
-// import styled from "styled-components";
-// import emptyHeart from "@assets/images/emptyHeart.png";
-// import todayDateNFT from "@assets/images/todayDateNFT.png";
 import logoHeart from "@assets/images/logoHeart.png";
-// import DescriptionStarLight2 from "@assets/images/DescriptionStarLight2.png";
 import celebrateIcon from "@assets/images/celebrateIcon.png";
 import guestBookEnterArrow from "@assets/images/guestBookEnterArrow.png";
 import glitch from "@assets/images/glitch.png";
@@ -45,11 +19,17 @@ const GuestBook = forwardRef((props, ref) => {
   const [isClicked, setIsClicked] = useState(false);
   const [inputComment, setInputComment] = useState("");
   const [comments, setComments] = useState("");
-  const { commentContract, getContracts } = useWeb3();
+  const { commentContract, dateContract, getContracts } = useWeb3();
   const { yyyymmdd, address } = useParams();
+  const [owner, setOwner] = useState();
+  const [nftInfo, setNftInfo] = useState();
 
   useEffect(() => {
-    if (!commentContract) getContracts();
+    getContracts();
+  }, []);
+
+  useEffect(() => {
+    if (!commentContract) return;
     if (comments) return;
     const getComments = async () => {
       const res = await commentContract.methods.getComments(yyyymmdd).call();
@@ -58,6 +38,22 @@ const GuestBook = forwardRef((props, ref) => {
     };
     getComments();
   }, [commentContract]);
+
+  useEffect(() => {
+    if (!dateContract) return;
+    const getData = async () => {
+      const ownerAddr = await dateContract.methods.ownerOf(yyyymmdd).call();
+      // console.log(ownerAddr);
+      setOwner(ownerAddr);
+
+      const todayNftInfo = await dateContract.methods
+        .getDayNftInfo(yyyymmdd)
+        .call();
+      setNftInfo(todayNftInfo);
+      console.log(todayNftInfo);
+    };
+    getData();
+  }, [dateContract]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -120,7 +116,7 @@ const GuestBook = forwardRef((props, ref) => {
                 lineHeight="47px"
                 color="#FFFFFF"
               >
-                Edit your day
+                GuestBook
               </Text>
 
               {/* 왼쪽 가장 큰 카드 */}
@@ -131,10 +127,15 @@ const GuestBook = forwardRef((props, ref) => {
                 align="space-around"
                 w="400px"
                 h="530px"
-                bg={`url(${glitch})`}
+                bgSize="100% 100%"
+                bgRepeat={"no-repeat"}
+                bgPosition={"center"}
                 backgroundBlendMode={"multiply"}
                 backgroundColor={"rgba(0, 0, 0, 0.5)"}
-                bgSize="cover"
+                bgImage={nftInfo ? nftInfo.imgUrl : `url(${glitch})`}
+                // backgroundBlendMode={"multiply"}
+                // backgroundColor={"rgba(0, 0, 0, 0.5)"}
+                // bgSize="cover"
                 borderTopLeftRadius="30px"
                 borderTopRightRadius="0px"
                 borderBottomLeftRadius="30px"
@@ -152,7 +153,11 @@ const GuestBook = forwardRef((props, ref) => {
                     w={"300px"}
                   >
                     <IoPersonCircleOutline size={30} />
-                    <Text ml={"10px"}>buyyourdate</Text>
+                    <Text ml={"10px"}>
+                      {owner
+                        ? owner.slice(0, 4) + "..." + owner.slice(-4)
+                        : "Loading"}
+                    </Text>
                   </Flex>
                 </Box>
 
